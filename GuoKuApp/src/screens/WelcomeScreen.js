@@ -7,6 +7,7 @@ var {
   Image,
   StyleSheet,
   View,
+  Text,
   PropTypes
 } = React
 
@@ -14,7 +15,8 @@ class WelcomePage extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={require('../assets/welcome.png')} style={styles.img} />
+        <Text>果库</Text>
+        <Image source={{uri: 'http://192.168.6.5:8888/getImage?imgName=welcome.png'}} style={styles.img} />
       </View>
     )
   }
@@ -24,7 +26,32 @@ class WelcomePage extends React.Component {
       navigator.replace({
         id: 'MainScreen'
       })
-    }, 2000)
+    }, 5000)
+  }
+
+  fetchData(un,pw) {
+    fetch(REQUEST_URL, {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userName: un,
+      password: pw
+    })
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+        this.setState({
+          result: responseData,
+        })
+    })
+    .done()
+  }
+  
+  responseData(response){
+    return response.result.data
   }
 }
 
@@ -33,13 +60,13 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F8F8FA'
   },
   img: {
-    width: null,
-    alignSelf: 'stretch',
+    width: 300,
+    height: 300,
     resizeMode: 'contain'
   }
 })
 
 module.exports = WelcomePage
+
