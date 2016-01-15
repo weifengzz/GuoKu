@@ -26,7 +26,7 @@ class WelcomePage extends React.Component {
       navigator.replace({
         id: 'MainScreen'
       })
-    }, 5000)
+    }, 1000)
   }
 
   fetchData(un,pw) {

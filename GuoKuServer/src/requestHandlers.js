@@ -1,6 +1,9 @@
 var querystring = require("querystring"),
     fs = require("fs"),
     formidable = require("formidable");
+var url = require("url");
+var getGraphics = require("./getGraphic");
+
 function start(response) {
   console.log("Request handler 'start' was called.");
   var body = '<html>'+
@@ -44,8 +47,34 @@ function show(response) {
       response.writeHead(200, {"Content-Type": "image/png"});
       response.write(file, "binary");
       response.end();
-} });
+    }
+  });
 }
+
+//这里是获取图片的方法
+var filePath = "/Users/songximing/Desktop/GuoKu/GuoKuServer/";
+function getImage(response,request,pathName){
+  var query = url.parse(request.url).query;
+  var imgName = querystring.parse(query)["imgName"];
+  fs.readFile(filePath+"/files/images/"+imgName, function(error,file){
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/png"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+}
+
+function getGraphic(response,request,pathName){
+  getGraphics.getGraphics(response);
+}
+
 exports.start = start;
 exports.upload = upload;
 exports.show = show;
+exports.getImage = getImage;
+exports.getGraphic = getGraphic;
