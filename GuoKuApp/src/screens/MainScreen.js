@@ -5,6 +5,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Commodity from './Commodity'
 import Graphic from './Graphic'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import RecommendScreen from './RecommendScreen'
 
 var {
   Image,
@@ -16,8 +17,14 @@ var {
 } = React
 
 class MainScreen extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+       component:RecommendScreen,
+    }
+  }
   render () {
-    return (
+     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <ScrollableTabView>
@@ -28,27 +35,37 @@ class MainScreen extends React.Component {
         <View style={styles.bottom}>
           <View style={styles.bottomButton}>
             <TouchableHighlight >
-              <Icon name='star' size={30} style={styles.Icon}/>
+              <Icon name='star' size={25} style={styles.Icon}/>
             </TouchableHighlight>
           </View>
           <View style={styles.bottomButton}>
             <TouchableHighlight>
-              <Icon name='compass' size={30} style={styles.Icon}/>
+              <Icon name='compass' size={25} style={styles.Icon}/>
             </TouchableHighlight>
           </View>
           <View style={styles.bottomButton}>
             <TouchableHighlight>
-              <Icon name='bell' size={30} style={styles.Icon}/>
+              <Icon name='bell' size={25} style={styles.Icon}/>
             </TouchableHighlight>
           </View>
           <View style={styles.bottomButton}>
             <TouchableHighlight>
-              <Icon name='user' size={30} style={styles.Icon}/>
+              <Icon name='user' size={25} style={styles.Icon}/>
             </TouchableHighlight>
           </View>
         </View>
       </View>
     )
+  }
+  mainToRecommend(){
+    return (
+      <RecommendScreen/>
+    )
+  }
+  toRecommendScreen(){
+    this.setState({
+      dataSource: this.mainToRecommend(),
+    })
   }
 }
 

@@ -18,7 +18,7 @@ var PAGE_SIZE = 20;
 var PARAMS = '?apikey=' + API_KEY + '&page_limit=' + PAGE_SIZE;
 var REQUEST_URL = API_URL + PARAMS;
 
-var Graphic = React.createClass({
+var Commodity = React.createClass({
   getInitialState: function() {
     return {
       dataSource: new ListView.DataSource({
@@ -146,4 +146,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = Graphic
+module.exports = Commodity
