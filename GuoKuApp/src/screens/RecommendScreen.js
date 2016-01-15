@@ -76,10 +76,28 @@ class RecommendScreen extends React.Component{
         <View style={styles.viewRecommendTop}/>
         <Text style={styles.txtRecommend}>热门图文</Text>
         <View style={styles.graphicRecommend}>
+          <View style={styles.viewGraphicLeft}>
+            <Text style={styles.textGraphic}>总结2015年度值得你用钱包去深爱的100家好店</Text>
+          </View>
+          <View style={styles.viewGraphicRight}>
+            <Image style={styles.imgGraphic} source={require('../assets/graphthj3.png')}/>
+          </View>
         </View>
-        <View style={styles.graphicRecommend}>
+          <View style={styles.graphicRecommend}>
+          <View style={styles.viewGraphicLeft}>
+            <Text style={styles.textGraphic}>Noritake用插画为写真Monocle年刊御用</Text>
+          </View>
+          <View style={styles.viewGraphicRight}>
+            <Image style={styles.imgGraphic} source={require('../assets/graphthj1.png')}/>
+          </View>
         </View>
-        <View style={styles.graphicRecommend}>
+          <View style={styles.graphicRecommend}>
+          <View style={styles.viewGraphicLeft}>
+            <Text style={styles.textGraphic}>感谢这八本2016日离，让我们把日子过成段</Text>
+          </View>
+          <View style={styles.viewGraphicRight}>
+            <Image style={styles.imgGraphic} source={require('../assets/graphthj2.png')}/>
+          </View>
         </View>
       </ScrollView>
     )
@@ -150,9 +168,26 @@ var styles = StyleSheet.create({
     borderRadius: 40
   },
   graphicRecommend: {
-    height: 100,
-    flexDirection: 'column',
-    backgroundColor: 'yellow'
+    height: 120,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0'
+  },
+  viewGraphicLeft: {
+    margin: 10,
+    flex: 2,
+  },
+  viewGraphicRight: {
+    margin: 10,
+    flex: 1,
+  },
+  textGraphic: {
+    fontSize: 17,
+  },
+  imgGraphic: {
+    resizeMode: 'stretch',
+    width: null,
+    height: 100
   }
 });
 
