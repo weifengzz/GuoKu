@@ -88,9 +88,6 @@ var Commodity = React.createClass({
     );
   },
 
-  getImagPath: function(graphics){
-    return Image_URL+graphics.imgPath;
-  }
 });
 
 var styles = StyleSheet.create({

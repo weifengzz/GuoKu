@@ -12,6 +12,9 @@ let SCREENS = [
  ReacoomendViewPager
 ].map((Page, index) => <Page />)
 
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
+var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+
 let {
   AppRegistry,
   Image,
@@ -31,8 +34,28 @@ class RecommendScreen extends React.Component{
       pageHasChanged: (p1, p2) => p1 !== p2
     })
     this.state = {
-      dataSource: dataSource.cloneWithPages(SCREENS)
+      dataSource: dataSource.cloneWithPages(SCREENS),
+      dataSource1: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false,
     }
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          dataSource1: this.state.dataSource1.cloneWithRows(responseData),
+          loaded: true,
+        });
+      })
+      .done();
   }
 
   render () {
@@ -56,7 +79,7 @@ class RecommendScreen extends React.Component{
             autoPlay={true} />
         </View>
         <View style={styles.viewRecommendTop}/>
-        <Text style={styles.txtRecommend}>推荐品类</Text>
+        <Text style={styles.txtTitle}>推荐品类</Text>
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
           <View style={styles.svRecommend}>
             <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
@@ -74,7 +97,7 @@ class RecommendScreen extends React.Component{
           </View>
         </ScrollView>
         <View style={styles.viewRecommendTop}/>
-        <Text style={styles.txtRecommend}>热门图文</Text>
+        <Text style={styles.txtTitle}>热门图文</Text>
         <View style={styles.graphicRecommend}>
           <View style={styles.viewGraphicLeft}>
             <Text style={styles.textGraphic}>总结2015年度值得你用钱包去深爱的100家好店</Text>
@@ -99,8 +122,25 @@ class RecommendScreen extends React.Component{
             <Image style={styles.imgGraphic} source={require('../assets/graphthj2.png')}/>
           </View>
         </View>
+        <View style={styles.viewRecommendTop}/>
+        <Text style={styles.txtTitle}>热门商品</Text>
+        <View style={styles.viewList}>
+          <ListView
+            initialListSize={20}
+            dataSource={this.state.dataSource1}
+            renderRow={this.renderGraphic}
+            contentContainerStyle={styles.listView}/>
+        </View>
       </ScrollView>
     )
+  }
+
+  renderGraphic(graphics) {
+    return (
+        <View style={styles.item}>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+        </View>
+    );
   }
 
    _renderPage (
@@ -148,7 +188,7 @@ var styles = StyleSheet.create({
     height: 10,
     backgroundColor: '#F0F0F0'
   },
-  txtRecommend: {
+  txtTitle: {
     fontSize: 15,
     marginLeft: 20,
     marginTop: 5,
@@ -188,7 +228,33 @@ var styles = StyleSheet.create({
     resizeMode: 'stretch',
     width: null,
     height: 100
-  }
+  },
+  listView: {
+    width: 348,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0'
+  },
+  item: {
+    justifyContent: 'center',
+    margin: 3,
+    width: 110,
+    height: 110,
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: '#CCC'
+  },
+  viewList: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+   imgList: {
+    height: 110,
+    width: 110,
+    resizeMode: 'cover'
+  },
 });
 
 module.exports = RecommendScreen
