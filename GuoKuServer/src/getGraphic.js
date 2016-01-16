@@ -1,17 +1,26 @@
 var mongoose = require('mongoose'); 
-var GraphicSchema = require("./GraphicModel");
+mongoose.connect('mongodb://192.168.6.5:27017/GuoKuDB');
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'连接错误:'));
+db.once('open',function(){
+  console.log('opened db');
+});
+
+var Graphic = require("./GraphicModel");
 
 function getGraphics(response){
-  var db = mongoose.createConnection('192.168.6.5','GuoKuDb','27017'); 
-  db.on('error',console.error.bind(console,'连接错误:'));
-  db.once('open',function(){
-    GraphicSchema.find(function(err, graphics) {
-      if (err) return console.error(err);
-      console.dir(graphics);
-      response.writeHead(200, {"Content-Type": "text/plain"});
-      response.write("OK");
-      response.end();
-    });
+  // var db = mongoose.createConnection('127.0.0.1','GuoKuDB','27017'); 
+  // Graphic.save(function(err){
+  //   if(err) handleError(err);
+  //   console.log('Success');
+  // });
+  Graphic.find(function(err, graphics) {
+    console.log("in callback")
+    if (err) return console.error(err);
+    console.dir(graphics);
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write(graphics.toString());
+    response.end();
   });
 }
 
@@ -19,7 +28,6 @@ exports.getGraphics = getGraphics;
 
 
 /**
-
   var db = mongoose.createConnection('192.168.6.5','GuoKuDb','27017'); 
   db.on('error',console.error.bind(console,'连接错误:'));
   db.once('open',function(){
