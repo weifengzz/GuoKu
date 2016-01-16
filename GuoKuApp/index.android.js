@@ -5,4 +5,4 @@ var RecommendScreen = require('./src/screens/RecommendScreen')
 
 var GuoKuRunner = require('./src/GuoKuRunner')
 
-React.AppRegistry.registerComponent('GuoKuApp', () => RecommendScreen)
+React.AppRegistry.registerComponent('GuoKuApp', () => GuoKuRunner)

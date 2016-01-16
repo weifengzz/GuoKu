@@ -18,8 +18,8 @@ function getGraphics(response){
     console.log("in callback")
     if (err) return console.error(err);
     console.dir(graphics);
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write(graphics.toString());
+    response.writeHead(200, {"Content-Type": "text/json"});
+    response.write(JSON.stringify(graphics));
     response.end();
   });
 }

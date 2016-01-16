@@ -12,11 +12,8 @@ var {
   View,
 } = React;
 
-var API_KEY = '7waqfqbprs7pajbz28mqf6vz';
-var API_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json';
-var PAGE_SIZE = 20;
-var PARAMS = '?apikey=' + API_KEY + '&page_limit=' + PAGE_SIZE;
-var REQUEST_URL = API_URL + PARAMS;
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
+var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
 
 var Graphic = React.createClass({
   getInitialState: function() {
@@ -37,7 +34,7 @@ var Graphic = React.createClass({
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData),
           loaded: true,
         });
       })
@@ -51,6 +48,7 @@ var Graphic = React.createClass({
 
     return (
       <ListView
+        initialListSize={5}
         dataSource={this.state.dataSource}
         renderRow={this.renderMovie}
         style={styles.listView}/>
@@ -67,14 +65,17 @@ var Graphic = React.createClass({
     );
   },
 
-  renderMovie: function(movie) {
+  renderMovie: function(graphics) {
     return (
       <View style={styles.container}>
-        <Image style={styles.topImage} source={{uri: movie.posters.thumbnail}}/>
-        <Text style={styles.txtTitle}>{movie.title}</Text>
-        <Text style={styles.txtContent}>{movie.title}</Text>
-        <View style={styles.viewBottom}>
-          <Text style={styles.txtContent}>时间：{movie.year}</Text>
+        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+        <Text style={styles.txtTitle}>{graphics.title}</Text>
+        <Text style={styles.txtContent}>{graphics.title}</Text>
+        <View style={styles.viewBottomContent}>
+          <View style={styles.viewBottom}>
+            <Icon name='clock-o' size={20} />
+            <Text style={styles.txtContent}>{graphics.date}</Text>
+          </View>
         </View>
         <Image source={require('../assets/splite.png')} style={styles.imageSplit}/>
       </View>
@@ -96,7 +97,7 @@ var styles = StyleSheet.create({
     height: 300,
     flex: 1,
     margin: 10,
-    resizeMode: 'stretch'
+    resizeMode: 'cover'
   },
   txtTitle: {
     marginLeft: 10,
@@ -118,17 +119,20 @@ var styles = StyleSheet.create({
     fontSize: 12,
   },
   viewBottom: {
+    flex:1,
+    flexDirection: 'row'
+  },
+  imageSplit: {
+    flex:0.3,
+    backgroundColor: 'gray'
+  },
+  viewBottomContent: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
     flex:1,
     alignItems: 'flex-end'
-  },
-  imageSplit: {
-    flex:0.3,
-    backgroundColor: 'gray'
   }
-
 });
 
 module.exports = Graphic

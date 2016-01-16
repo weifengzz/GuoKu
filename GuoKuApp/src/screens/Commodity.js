@@ -12,11 +12,9 @@ var {
   View,
 } = React;
 
-var API_KEY = '7waqfqbprs7pajbz28mqf6vz';
-var API_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json';
-var PAGE_SIZE = 20;
-var PARAMS = '?apikey=' + API_KEY + '&page_limit=' + PAGE_SIZE;
-var REQUEST_URL = API_URL + PARAMS;
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
+var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+
 
 var Commodity = React.createClass({
   getInitialState: function() {
@@ -37,7 +35,7 @@ var Commodity = React.createClass({
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData),
           loaded: true,
         });
       })
@@ -51,8 +49,9 @@ var Commodity = React.createClass({
 
     return (
       <ListView
+        initialListSize={5}
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderGraphic}
         style={styles.listView}/>
     );
   },
@@ -67,20 +66,20 @@ var Commodity = React.createClass({
     );
   },
 
-  renderMovie: function(movie) {
+  renderGraphic: function(graphics) {
     return (
       <View style={styles.container}>
-        <Image style={styles.topImage} source={{uri: movie.posters.thumbnail}}/>
-        <Text style={styles.txtContent}>{movie.title}</Text>
+        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+        <Text style={styles.txtContent}>{graphics.title}</Text>
         <View style={styles.viewBottom}>
           <View style={styles.viewBottomLeft}>
             <Icon name='heart-o' size={20} />
-            <Text style={styles.txtContent} >3</Text>
+            <Text style={styles.txtContent} >{graphics.love}</Text>
           </View>
           <View style={styles.viewBottomRight}>
             <View style={styles.viewBottomRightContainer}>
               <Icon name='clock-o' size={20} />
-              <Text style={styles.txtContent} >{movie.year}</Text>
+              <Text style={styles.txtContent} >{graphics.date}</Text>
             </View>
           </View>
         </View>
@@ -88,6 +87,10 @@ var Commodity = React.createClass({
       </View>
     );
   },
+
+  getImagPath: function(graphics){
+    return Image_URL+graphics.imgPath;
+  }
 });
 
 var styles = StyleSheet.create({
@@ -101,7 +104,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   topImage: {
-    height: 400,
+    height: 200,
     flex: 1,
     margin: 10,
     resizeMode: 'stretch'
