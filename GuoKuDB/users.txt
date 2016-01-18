@@ -1,0 +1,7 @@
+db.users.insert({userName: 'weifengzz', 
+    password: '123456',
+    by: '',
+    url: 'http://www.runoob.com',
+    tags: ['mongodb', 'database', 'NoSQL'],
+    likes: 100
+})

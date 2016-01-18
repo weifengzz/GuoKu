@@ -1,54 +1,138 @@
-import React from 'react-native'
+'use strict';
+
+var React = require('react-native');
+var FileUpload = require('NativeModules').FileUpload;
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-
-let {
-  Image,
+var {
   StyleSheet,
-  View,
   Text,
-  ListView,
-  TouchableHighlight
-} = React
+  View,
+  TouchableOpacity,
+  Animated,
+  Image,
+  ToastAndroid,
+} = React;
 
-class LoginScreen extends React.Component{
-    render () {
-      return (
-        <View style={styles.container}>
-          <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
-            <View style={styles.viewTop}>
-              <View style={styles.viewClose}>
-                <Icon name='times' size={30} style={styles.icon}/>
-              </View>
-              <View style={styles.viewRegisterleft}>
-                <Text style={styles.textRegister}>注册</Text>
-              </View>
-              <View style={styles.viewRegisterRight}>
-                <Icon name='chevron-right' size={30} style={styles.icon}/>
-              </View>
+var t = require('tcomb-form-native');
+var {
+  AppRegistry, 
+  StyleSheet,
+  Text, 
+  View, 
+  TouchableHighlight 
+} = React;
+
+
+
+var REQUEST_URL = 'http://192.168.6.5:1314/GetJson';
+
+var Form = t.form.Form;
+var Person = t.struct({
+  userName: t.String,              
+  password: t.String,  
+});
+
+var options = {
+  fields: {
+    password: {
+      placeholder: '密码',
+      password: true,
+    },
+    userName: {
+      placeholder: 'example@xx.com',
+      label: '邮箱',
+    }
+  }
+};
+
+var LoginScreen = React.createClass({
+  getInitialState: function() {
+    return {
+      value: {
+        userName: null,
+        password: null,
+        result: null,
+      } 
+    };
+  },
+  onPress: function () {
+    var value = this.refs.form.getValue();
+    if (value) { 
+      
+    }
+  },
+
+  render: function() {
+    return (
+      <View style={styles.container}>
+        <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
+          <View style={styles.viewTop}>
+            <View style={styles.viewClose}>
+              <Icon name='times' size={30} style={styles.icon}/>
             </View>
-            <View style={styles.viewTitle}>
-              <Text style={styles.txtTitile}>果库</Text>
+            <View style={styles.viewRegisterleft}>
+              <Text style={styles.textRegister}>注册</Text>
             </View>
-            <View style={styles.viewLogin}>
+            <View style={styles.viewRegisterRight}>
+              <Icon name='chevron-right' size={30} style={styles.icon}/>
             </View>
-            <View style={styles.viewLoginBtn}>
+          </View>
+          <View style={styles.viewTitle}>
+            <Text style={styles.txtTitile}>果库</Text>
+          </View>
+          <View style={styles.viewLogin}>
+           <Form
+            ref="form"
+            type={Person}
+            value={this.state.value}
+            options={options} />
+          </View>
+          <View style={styles.viewLoginBtn}>
+            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
               <View style={styles.viewbtn}>
                 <Text style={styles.txtLogin}>登录</Text>
               </View>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.viewLogin3}>
+            <View style={styles.viewLogin3Container}>
+              <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
+              <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
+              <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
             </View>
-            <View style={styles.viewLogin3}>
-              <View style={styles.viewLogin3Container}>
-                <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
-                <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
-                <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
-              </View>
-            </View>
-          </Image>
-        </View>
-      )
-    }
-};
+          </View>
+        </Image>
+      </View>
+    );
+  },
+  componentDidMount: function() {
+      //this.fetchData('weifengzz','123');
+  },
+  fetchData: function(un,pw) {
+    fetch(REQUEST_URL, {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userName: un,
+      password: pw,
+    })
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+        this.setState({
+          result: responseData,
+        });
+    })
+    .done();
+  },
+  responseData: function(response){
+    return response.result.data;
+  }
+});
 
 let styles = StyleSheet.create({
   container: {
@@ -101,8 +185,9 @@ let styles = StyleSheet.create({
     color: '#ffffff'
   },
   viewLogin: {
-    height: 150,
-    backgroundColor: 'yellow'
+    marginLeft: 10,
+    marginRight: 10,
+    height: 200
   },
   viewLoginBtn: {
     height:100,
