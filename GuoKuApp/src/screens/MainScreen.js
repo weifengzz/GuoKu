@@ -32,40 +32,8 @@ class MainScreen extends React.Component {
             <Graphic tabLabel='图文' />
           </ScrollableTabView>
         </View>
-        <View style={styles.bottom}>
-          <View style={styles.bottomButton}>
-            <TouchableHighlight >
-              <Icon name='star' size={25} style={styles.Icon}/>
-            </TouchableHighlight>
-          </View>
-          <View style={styles.bottomButton}>
-            <TouchableHighlight>
-              <Icon name='compass' size={25} style={styles.Icon}/>
-            </TouchableHighlight>
-          </View>
-          <View style={styles.bottomButton}>
-            <TouchableHighlight>
-              <Icon name='bell' size={25} style={styles.Icon}/>
-            </TouchableHighlight>
-          </View>
-          <View style={styles.bottomButton}>
-            <TouchableHighlight>
-              <Icon name='user' size={25} style={styles.Icon}/>
-            </TouchableHighlight>
-          </View>
-        </View>
       </View>
     )
-  }
-  mainToRecommend(){
-    return (
-      <RecommendScreen/>
-    )
-  }
-  toRecommendScreen(){
-    this.setState({
-      dataSource: this.mainToRecommend(),
-    })
   }
 }
 
@@ -76,24 +44,6 @@ var styles = StyleSheet.create({
   },
   content: {
     flex: 8
-  },
-  bottom: {
-    flex:0.8,
-    height:40,
-    backgroundColor: 'black',
-    flexDirection: 'row'
-  },
-  buttonImage: {
-    height: 30,
-    width: 50
-  },
-  bottomButton: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  Icon: {
-    color: 'white',
   }
 })
 

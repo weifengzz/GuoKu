@@ -13,7 +13,7 @@ var {
 } = React;
 
 
-var SetUpScreen = React.createClass({
+var SettingScreen = React.createClass({
 
   render: function() {
     return(
@@ -117,4 +117,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = SetUpScreen
+module.exports = SettingScreen
