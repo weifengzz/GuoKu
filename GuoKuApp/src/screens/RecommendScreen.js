@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 import ViewPager from 'react-native-viewpager'
 import ReacoomendViewPager from './ReacoomendViewPager'
 
