@@ -4,6 +4,9 @@ var React = require('react-native');
 var FileUpload = require('NativeModules').FileUpload;
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
+var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+
 var {
   StyleSheet,
   Text,
@@ -22,10 +25,6 @@ var {
   View, 
   TouchableHighlight 
 } = React;
-
-
-
-var REQUEST_URL = 'http://192.168.6.5:1314/GetJson';
 
 var Form = t.form.Form;
 var Person = t.struct({

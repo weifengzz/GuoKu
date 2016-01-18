@@ -69,9 +69,16 @@ function getImage(response,request,pathName){
   });
 }
 
+//的到图文
 function getGraphic(response,request,pathName){
   getGraphics.getGraphics(response);
 }
+//登录功能验证
+function getUser(response){
+  
+}
+
+
 
 exports.start = start;
 exports.upload = upload;
