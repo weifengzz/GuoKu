@@ -1,0 +1,125 @@
+
+db.commidities.insert({
+	title: '', 
+    content: '',
+    price:'',
+    url: '',
+    date: '',
+    comment : '',
+    commentAuthor: '',
+    address:'',
+    imgPath: ''
+})
+
+
+
+
+db.commidities.insert({
+	title: '乳木果保湿霜', 
+    content: '乳木果保湿霜。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    commentAuthor: ['明天','一行为光','你瞅啥'],
+    imgPath1: 'c03.png',
+    imgPath2: 'c04.png',
+    imgPath3: 'c05.png',
+    love:1
+})
+
+
+db.commidities.insert({
+	title: '解压重启足踏', 
+    content: '解压重启足踏。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    imgPath1: 'c02.png',
+    imgPath2: 'c06.png',
+    imgPath3: 'c04.png',
+    love:3
+})
+
+
+db.commidities.insert({
+	title: '魔兽世界', 
+    content: '魔兽世界。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    commentAuthor: ['明天','一行为光','你瞅啥'],
+    imgPath1: 'c01.png',
+    imgPath2: 'c02.png',
+    imgPath3: 'c03.png',
+    love:10
+})
+
+
+
+db.commidities.insert({
+	title: '魔兽世界', 
+    content: '魔兽世界。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    commentAuthor: ['明天','一行为光','你瞅啥'],
+    imgPath1: 'c01.png',
+    imgPath2: 'c02.png',
+    imgPath3: 'c03.png',
+    love:10
+})
+
+
+db.commidities.insert({
+	title: '解压重启足踏', 
+    content: '解压重启足踏。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    imgPath1: 'c02.png',
+    imgPath2: 'c06.png',
+    imgPath3: 'c04.png',
+    love:3
+})
+
+db.commidities.insert({
+	title: '魔兽世界', 
+    content: '魔兽世界。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    commentAuthor: ['明天','一行为光','你瞅啥'],
+    imgPath1: 'c01.png',
+    imgPath2: 'c02.png',
+    imgPath3: 'c03.png',
+    love:10
+})
+
+
+db.commidities.insert({
+	title: '解压重启足踏', 
+    content: '解压重启足踏。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    imgPath1: 'c02.png',
+    imgPath2: 'c06.png',
+    imgPath3: 'c04.png',
+    love:3
+})
+
+db.commidities.insert({
+	title: '魔兽世界', 
+    content: '魔兽世界。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。蕴含丰富乳木果油以及向日葵籽油。',
+    price:'122',
+    date: '2016-8-13',
+    comment : ['还行吧','hehehe','什么东西啊这是'],
+    commentAuthor: ['明天','一行为光','你瞅啥'],
+    imgPath1: 'c01.png',
+    imgPath2: 'c02.png',
+    imgPath3: 'c03.png',
+    love:10
+})
+
+
+
