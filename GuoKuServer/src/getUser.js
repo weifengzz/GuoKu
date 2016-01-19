@@ -1,23 +1,20 @@
-var mongoose = require('mongoose'); 
-mongoose.connect('mongodb://192.168.6.5:27017/GuoKuDB');
-var db = mongoose.connection;
-db.on('error',console.error.bind(console,'连接错误:'));
-db.once('open',function(){
-  console.log('opened db');
-});
-
-var Graphic = require("./GraphicModel");
-
-function getUser(response){
-
-  Graphic.find(function(err, User) {
-    console.log("in callback")
+var User = require("./UserModel");
+function getOneUser(response,userName,passWord){
+  var query = { 'email':userName, 'passWord':passWord}
+  User.find(query,function(err, User) {
+    var result = null;
     if (err) return console.error(err);
     console.dir(User);
+    if(JSON.stringify(User)==="[]"){
+      console.log("no");
+      result = '{"isOK":"no"}'
+    }else{
+      result = '{"isOK":"ok"}'
+    }
     response.writeHead(200, {"Content-Type": "text/json"});
-    response.write(JSON.stringify(User));
+    response.write(result);
     response.end();
   });
 }
 
-exports.getUser = getUser;
+exports.getOneUser = getOneUser;

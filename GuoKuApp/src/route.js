@@ -1,6 +1,6 @@
 import React from 'react-native'
 import WelcomeScreen from './screens/WelcomeScreen'
-import MainScreen from './screens/MainScreen'
+import MainRoute from './screens/MainRoute'
 
 var {
   Text,
@@ -18,7 +18,7 @@ class Route extends React.Component {
   render () {
     return (
       <Navigator
-        initialRoute={{id: Platform.OS === 'ios' ? 'MainScreen' : 'WelcomeScreen', name: 'Index'}}
+        initialRoute={{id: Platform.OS === 'ios' ? 'MainRoute' : 'WelcomeScreen', name: 'Index'}}
         renderScene={ this.renderScene }
         configureScene={(route) => {
           return Navigator.SceneConfigs.FloatFromRight
@@ -34,21 +34,15 @@ class Route extends React.Component {
           navigator={navigator} />
       )
     }
-    if (routeId === 'MainScreen') {
+    if (routeId === 'MainRoute') {
       return (
-        <MainScreen
+        <MainRoute
           navigator={navigator} />
       )
     }
     if (routeId === 'LoginScreen') {
       return (
         <LoginScreen
-          navigator={navigator} />
-      )
-    }
-    if (routeId === 'MainScreen') {
-      return (
-        <MainScreen
           navigator={navigator} />
       )
     }

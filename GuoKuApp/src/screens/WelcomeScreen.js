@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react-native'
-import MainScreen from './MainScreen'
+import MainRoute from './MainRoute'
 
 var {
   Image,
@@ -24,7 +24,7 @@ class WelcomePage extends React.Component {
     var navigator = this.props.navigator
     setTimeout(() => {
       navigator.replace({
-        id: 'MainScreen'
+        id: 'MainRoute'
       })
     }, 1000)
   }

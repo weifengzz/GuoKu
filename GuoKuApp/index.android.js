@@ -10,4 +10,4 @@ var SetUpScreen = require('./src/screens/SettingScreen')
 var SearchScreen = require('./src/screens/SearchScreen')
 var MainRoute = require('./src/screens/MainRoute')
 
-React.AppRegistry.registerComponent('GuoKuApp', () => LoginScreen)
+React.AppRegistry.registerComponent('GuoKuApp', () => GuoKuRunner)
