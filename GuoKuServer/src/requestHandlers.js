@@ -29,10 +29,24 @@ function getGraphic(response){
 }
 //登录功能验证
 function getUser(response,request){
-  var query = url.parse(request.url).query;
-  var userName = querystring.parse(query)["email"];
-  var passWord = querystring.parse(query)["passWord"];
-  getAUser.getOneUser(response,userName,passWord);
+  var info ="";
+  if(request.method != 'POST'){
+    var query = url.parse(request.url).query;
+    var userName = querystring.parse(query)["email"];
+    var passWord = querystring.parse(query)["password"];
+    getAUser.getOneUser(response,userName,passWord);
+  }else{
+    request.addListener('data', function(chunk){  
+        info += chunk;
+    })  
+    .addListener('end', function(){
+        var result = JSON.parse(info);
+        var userName = result['email'];
+        var passWord = result['password'];
+        console.log(userName+"-------------"+passWord);
+        getAUser.getOneUser(response,userName,passWord);
+    })
+  }
 }
 
 exports.getImage = getImage;

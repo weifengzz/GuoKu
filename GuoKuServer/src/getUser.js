@@ -1,6 +1,6 @@
 var User = require("./UserModel");
 function getOneUser(response,userName,passWord){
-  var query = { 'email':userName, 'passWord':passWord}
+  var query = { 'email':userName, 'password':passWord}
   User.find(query,function(err, User) {
     var result = null;
     if (err) return console.error(err);
@@ -11,7 +11,7 @@ function getOneUser(response,userName,passWord){
     }else{
       result = '{"isOK":"ok"}'
     }
-    response.writeHead(200, {"Content-Type": "text/json"});
+    response.writeHead(200, {"Content-Type": "application/json"});
     response.write(result);
     response.end();
   });

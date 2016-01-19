@@ -4,7 +4,7 @@ var React = require('react-native');
 var FileUpload = require('NativeModules').FileUpload;
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
+var REQUEST_URL = 'http://192.168.6.5:8888/getUser';
 var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
 
 var {
@@ -58,10 +58,9 @@ var LoginScreen = React.createClass({
   onPress: function () {
     var value = this.refs.form.getValue();
     if (value) { 
-      
+      this.fetchData(value['userName'],value['password'])
     }
   },
-
   render: function() {
     return (
       <View style={styles.container}>
@@ -105,9 +104,6 @@ var LoginScreen = React.createClass({
       </View>
     );
   },
-  componentDidMount: function() {
-      //this.fetchData('weifengzz','123');
-  },
   fetchData: function(un,pw) {
     fetch(REQUEST_URL, {
     method: 'POST',
@@ -116,15 +112,18 @@ var LoginScreen = React.createClass({
     'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userName: un,
+      email: un,
       password: pw,
     })
   })
     .then((response) => response.json())
     .then((responseData) => {
-        this.setState({
-          result: responseData,
-        });
+      ToastAndroid.show(responseData['isOK'].toString(), ToastAndroid.SHORT)
+      if(responseData['isOK']==='ok'){
+        ToastAndroid.show('登录成功', ToastAndroid.SHORT)
+      }else{
+        ToastAndroid.show('登录失败', ToastAndroid.SHORT)
+      }
     })
     .done();
   },
