@@ -2,28 +2,19 @@
 
 var React = require('react-native');
 var FileUpload = require('NativeModules').FileUpload;
-import Icon from 'react-native-vector-icons/FontAwesome'
+var Icon = require('react-native-vector-icons/FontAwesome')
+var t = require('tcomb-form-native');
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getUser';
-var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+const REQUEST_URL = 'http://192.168.6.5:8888/getUser';
 
 var {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  TouchableHighlight,
   Animated,
   Image,
-  ToastAndroid,
-} = React;
-
-var t = require('tcomb-form-native');
-var {
-  AppRegistry, 
-  StyleSheet,
-  Text, 
-  View, 
-  TouchableHighlight 
+  ToastAndroid
 } = React;
 
 var Form = t.form.Form;
@@ -118,7 +109,6 @@ var LoginScreen = React.createClass({
   })
     .then((response) => response.json())
     .then((responseData) => {
-      ToastAndroid.show(responseData['isOK'].toString(), ToastAndroid.SHORT)
       if(responseData['isOK']==='ok'){
         ToastAndroid.show('登录成功', ToastAndroid.SHORT)
       }else{

@@ -4,7 +4,7 @@ var formidable = require("formidable");
 var url = require("url");
 var getGraphics = require("./getGraphic");
 var getAUser = require("./getUser");
-
+var Register = require("./register");
 //这里是获取图片的方法
 var filePath = "/Users/songximing/Desktop/GuoKu/GuoKuServer/";
 function getImage(response,request,pathName){
@@ -48,10 +48,24 @@ function getUser(response,request){
     })
   }
 }
-
+//注册功能验证
+function register(response,request){
+  var info = "";
+  request.addListener('data',function(chunk){
+    info += chunk;
+  })
+  .addListener('end',function(){
+    var result = JSON.parse(info);
+    var userName = result['email'];
+    var passWord = result['password'];
+    var nm = result['name'];
+    Register.register(response,userName,passWord,nm);
+  })
+}
 exports.getImage = getImage;
 exports.getGraphic = getGraphic;
 exports.getUser = getUser;
+exports.register = register;
 // exports.start = start;
 // exports.upload = upload;
 // exports.show = show;

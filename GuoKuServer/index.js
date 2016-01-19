@@ -10,4 +10,5 @@ handle["/show"] = requestHandlers.show;
 handle["/getImage"] = requestHandlers.getImage;
 handle["/getGraphic"] = requestHandlers.getGraphic;
 handle["/getUser"] = requestHandlers.getUser;
+handle["/register"] = requestHandlers.register;
 server.start(router.route, handle);
