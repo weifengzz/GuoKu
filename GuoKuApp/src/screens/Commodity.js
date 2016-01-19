@@ -1,94 +1,91 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 var {
-  AppRegistry,
   Image,
   ListView,
   StyleSheet,
   Text,
-  View,
-} = React;
+  View
+} = React
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
-var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
-
+var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
 var Commodity = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false,
-    };
+      loaded: false
+    }
   },
 
-  componentDidMount: function() {
-    this.fetchData();
+  componentDidMount: function () {
+    this.fetchData()
   },
 
-  fetchData: function() {
+  fetchData: function () {
     fetch(REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData),
-          loaded: true,
-        });
+          loaded: true
+        })
       })
-      .done();
+      .done()
   },
 
-  render: function() {
+  render: function () {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return this.renderLoadingView()
     }
 
     return (
       <ListView
         initialListSize={5}
         dataSource={this.state.dataSource}
-        renderRow={this.renderGraphic}
+        renderRow={this.renderCommidity}
         style={styles.listView}/>
-    );
+    )
   },
 
-  renderLoadingView: function() {
+  renderLoadingView: function () {
     return (
       <View style={styles.txtContainer}>
         <Text>
-           正在加载图文。。。
+          正 在加载图文。。。
         </Text>
       </View>
-    );
+    )
   },
 
-  renderGraphic: function(graphics) {
+  renderCommidity: function (commidities) {
     return (
       <View style={styles.container}>
-        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
-        <Text style={styles.txtContent}>{graphics.title}</Text>
+        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+        <Text style={styles.txtContent}>{commidities.title}</Text>
         <View style={styles.viewBottom}>
           <View style={styles.viewBottomLeft}>
             <Icon name='heart-o' size={20} />
-            <Text style={styles.txtContent} >{graphics.love}</Text>
+            <Text style={styles.txtContent} >{commidities.love}</Text>
           </View>
           <View style={styles.viewBottomRight}>
             <View style={styles.viewBottomRightContainer}>
               <Icon name='clock-o' size={20} />
-              <Text style={styles.txtContent} >{graphics.date}</Text>
+              <Text style={styles.txtContent} >{commidities.date}</Text>
             </View>
           </View>
         </View>
         <Image source={require('../assets/splite.png')} style={styles.imageSplit}/>
       </View>
-    );
-  },
+    )
+  }
 
-});
+})
 
 var styles = StyleSheet.create({
   container: {
@@ -101,39 +98,39 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   topImage: {
-    height: 200,
+    height: 300,
     flex: 1,
     margin: 10,
-    resizeMode: 'stretch'
+    resizeMode: 'contain'
   },
   txtContent: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex:1,
+    flex: 1,
     fontSize: 16
   },
   txtBottom: {
-    flex:1,
-    fontSize: 12,
+    flex: 1,
+    fontSize: 12
   },
   viewBottom: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex:1,
-    flexDirection: 'row',
+    flex: 1,
+    flexDirection: 'row'
   },
   imageSplit: {
-    flex:0.3,
+    flex: 0.3,
     backgroundColor: 'gray'
   },
   numberText: {
     fontSize: 15,
-    marginLeft:20
+    marginLeft: 20
   },
   viewBottomLeft: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row'
   },
   viewBottomRight: {
@@ -144,6 +141,6 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   }
-});
+})
 
 module.exports = Commodity

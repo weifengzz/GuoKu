@@ -17,6 +17,13 @@ let {
 
 
 class SearchScreen extends React.Component{
+   constructor (props) {
+    super(props)
+    this.state = {
+      screen: this.initScreen(),
+      txtValue:''
+    }
+  }
   render () {
     return(
       <View style={styles.container}>
@@ -25,35 +32,47 @@ class SearchScreen extends React.Component{
             <Icon name='search' size={30}/>
           </View>
           <View style={styles.viewText}>
-            <TextInput />
+            <TextInput 
+            selectTextOnFocus={true}
+            value={this.state.txtValue}
+            onBlur = {this.getContent}
+            onChange = {this.getContent}
+            />
           </View>
           <View style={styles.viewCancel}>
             <Text >取消</Text>
           </View>
         </View>
-        <View style={styles.viewContent}>
-          <View style={styles.viewContentTop}>
-            <Text style={styles.txtSearch}>搜你想要的</Text>
+        {this.state.screen}
+      </View>
+    )
+  }
+
+  initScreen() {
+    return(
+      <View style={styles.viewContent}>
+        <View style={styles.viewContentTop}>
+          <Text style={styles.txtSearch}>搜你想要的</Text>
+        </View>
+        <View style={styles.viewContentBottom}>
+          <View style={styles.viewContentBottomContainer}>
+            <Icon name='bag' size={50} />
+            <Text>商品</Text>
           </View>
-          <View style={styles.viewContentBottom}>
-            <View style={styles.viewContentBottomContainer}>
-              <Icon name='bag' size={50} />
-              <Text>商品</Text>
-            </View>
-            <View style={styles.viewContentBottomContainer}>
-              <Icon name='android-apps' size={50} />
-              <Text>品类</Text>
-            </View>
-            <View style={styles.viewContentBottomContainer}>
-              <Icon name='android-contacts' size={50} />
-              <Text>用户</Text>
-            </View>
+          <View style={styles.viewContentBottomContainer}>
+            <Icon name='android-apps' size={50} />
+            <Text>品类</Text>
+          </View>
+          <View style={styles.viewContentBottomContainer}>
+            <Icon name='android-contacts' size={50} />
+            <Text>用户</Text>
           </View>
         </View>
       </View>
     )
-  },
-  initScreen() {
+  }
+
+  getContent(){
 
   }
 }

@@ -11,4 +11,5 @@ handle["/getImage"] = requestHandlers.getImage;
 handle["/getGraphic"] = requestHandlers.getGraphic;
 handle["/getUser"] = requestHandlers.getUser;
 handle["/register"] = requestHandlers.register;
+handle["/getCommidity"] = requestHandlers.getCommidity;
 server.start(router.route, handle);

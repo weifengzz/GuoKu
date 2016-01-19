@@ -5,6 +5,9 @@ var url = require("url");
 var getGraphics = require("./getGraphic");
 var getAUser = require("./getUser");
 var Register = require("./register");
+var Search = require("./search");
+var getCommidities = require('./getCommidities')
+
 //这里是获取图片的方法
 var filePath = "/Users/songximing/Desktop/GuoKu/GuoKuServer/";
 function getImage(response,request,pathName){
@@ -27,6 +30,11 @@ function getImage(response,request,pathName){
 function getGraphic(response){
   getGraphics.getGraphics(response);
 }
+//得到商品
+function getCommidity(response){
+  getCommidities.getCommiditys(response);
+}
+
 //登录功能验证
 function getUser(response,request){
   var info ="";
@@ -62,10 +70,51 @@ function register(response,request){
     Register.register(response,userName,passWord,nm);
   })
 }
+//搜索功能
+function search(response,request){
+  var info ="";
+  if(request.method != 'POST'){
+    var query = url.parse(request.url).query;
+    var key = querystring.parse(query)["key"];
+    Search.search(response,request,key);
+  }else{
+    request.addListener('data', function(chunk){  
+        info += chunk;
+    })  
+    .addListener('end', function(){
+        var result = JSON.parse(info);
+        var key = result['key'];
+        console.log(userName+"-------------"+passWord);
+        Search.search(response,request,key);
+    })
+  }
+}
+
 exports.getImage = getImage;
 exports.getGraphic = getGraphic;
 exports.getUser = getUser;
 exports.register = register;
+exports.search = search;
+exports.getCommidity = getCommidity;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // exports.start = start;
 // exports.upload = upload;
 // exports.show = show;
