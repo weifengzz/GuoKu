@@ -52,6 +52,9 @@ class SearchScreen extends React.Component{
         </View>
       </View>
     )
+  },
+  initScreen() {
+
   }
 }
 
