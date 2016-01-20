@@ -1,8 +1,7 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 import Icon from 'react-native-vector-icons/Ionicons'
-import ReacoomendViewPager from './ReacoomendViewPager'
 
 let {
   AppRegistry,
@@ -12,31 +11,41 @@ let {
   Text,
   View,
   TextInput,
-  TouchableHighlight
-} = React;
+  TouchableHighlight,
+  ToastAndroid
+} = React
 
+let REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
 class SearchScreen extends React.Component{
-   constructor (props) {
-    super(props)
+  constructor (props) {
+    super (props)
     this.state = {
       screen: this.initScreen(),
-      txtValue:''
+      txtValue: null,
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      }),
+      loaded: false
     }
   }
   render () {
-    return(
+    var textValue=this.state.txtValue;
+    return (
       <View style={styles.container}>
         <View style={styles.viewSearch}>
           <View style={styles.viewIcon}>
             <Icon name='search' size={30}/>
           </View>
           <View style={styles.viewText}>
-            <TextInput 
-            selectTextOnFocus={true}
-            value={this.state.txtValue}
+            <TextInput
+            selectTextOnFocus = {true}
+            onChangeText={(text) => {
+              this.state.txtValue = text
+              this.getContent()
+            }}
+            value={textValue}
             onBlur = {this.getContent}
-            onChange = {this.getContent}
             />
           </View>
           <View style={styles.viewCancel}>
@@ -48,8 +57,8 @@ class SearchScreen extends React.Component{
     )
   }
 
-  initScreen() {
-    return(
+  initScreen () {
+    return (
       <View style={styles.viewContent}>
         <View style={styles.viewContentTop}>
           <Text style={styles.txtSearch}>搜你想要的</Text>
@@ -72,8 +81,35 @@ class SearchScreen extends React.Component{
     )
   }
 
-  getContent(){
+  getContent () {
+    ToastAndroid.show(this.state.txtValue, ToastAndroid.LONG)
+  }
 
+  fetchData (un, pw) {
+    fetch(REQUEST_URL, {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: un,
+      password: pw
+    })
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+      if (responseData['isOK']==='ok') {
+        ToastAndroid.show('登录成功', ToastAndroid.SHORT)
+      } else {
+        ToastAndroid.show('登录失败', ToastAndroid.SHORT)
+      }
+    })
+    .done()
+  }
+
+  responseData (response) {
+    return response.result.data
   }
 }
 
@@ -88,21 +124,21 @@ var styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 5,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#F0F0F0'
   },
   viewIcon: {
-    flex:1,
+    flex: 1,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center'
   },
   viewText: {
-    flex:5,
+    flex: 5,
     height: 50,
     justifyContent: 'center'
   },
   viewCancel: {
-    flex:1,
+    flex: 1,
     height: 50,
     justifyContent: 'center'
   },
@@ -119,20 +155,20 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   txtSearch: {
-    fontSize: 25,
+    fontSize: 25
   },
   viewContentBottom: {
     height: 200,
     flexDirection: 'row',
     marginLeft: 50,
-    marginRight: 50,
+    marginRight: 50
   },
   viewContentBottomContainer: {
     height: 200,
     flex: 1,
-    flexDirection : 'column',
+    flexDirection: 'column',
     alignItems: 'center'
   }
-});
+})
 
 module.exports = SearchScreen

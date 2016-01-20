@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 var {
@@ -10,10 +10,10 @@ var {
   StyleSheet,
   Text,
   View,
-} = React;
+} = React
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
-var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
+var Image_URL = 'http://192.168.6.5:8888/getImage?imgName='
 
 var Graphic = React.createClass({
   getInitialState: function() {
@@ -22,11 +22,11 @@ var Graphic = React.createClass({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
-    };
+    }
   },
 
   componentDidMount: function() {
-    this.fetchData();
+    this.fetchData()
   },
 
   fetchData: function() {
@@ -36,14 +36,14 @@ var Graphic = React.createClass({
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData),
           loaded: true,
-        });
+        })
       })
-      .done();
+      .done()
   },
 
   render: function() {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return this.renderLoadingView()
     }
 
     return (
@@ -52,7 +52,7 @@ var Graphic = React.createClass({
         dataSource={this.state.dataSource}
         renderRow={this.renderMovie}
         style={styles.listView}/>
-    );
+    )
   },
 
   renderLoadingView: function() {
@@ -62,7 +62,7 @@ var Graphic = React.createClass({
            正在加载图文。。。
         </Text>
       </View>
-    );
+    )
   },
 
   renderMovie: function(graphics) {
@@ -79,9 +79,9 @@ var Graphic = React.createClass({
         </View>
         <Image source={require('../assets/splite.png')} style={styles.imageSplit}/>
       </View>
-    );
+    )
   },
-});
+})
 
 var styles = StyleSheet.create({
   container: {
@@ -133,6 +133,6 @@ var styles = StyleSheet.create({
     flex:1,
     alignItems: 'flex-end'
   }
-});
+})
 
 module.exports = Graphic

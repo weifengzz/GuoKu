@@ -1,24 +1,23 @@
 import React from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import t from 'tcomb-form-native'
-const REQUEST_URL = 'http://192.168.6.5:8888/register';
+const REQUEST_URL = 'http://192.168.6.5:8888/register'
 
 let {
   Image,
   StyleSheet,
   View,
   Text,
-  ListView,
   TouchableHighlight,
   ToastAndroid
 } = React
 
-var Form = t.form.Form;
+var Form = t.form.Form
 var Person = t.struct({
-  userName: t.String,              
+  userName: t.String,
   password: t.String,
-  name: t.String 
-});
+  name: t.String
+})
 var options = {
   fields: {
     password: {
@@ -28,14 +27,14 @@ var options = {
     },
     userName: {
       placeholder: 'example@xx.com',
-      label: '邮箱',
+      label: '邮箱'
     },
     name: {
       placeholder: '昵称',
       label: '昵称'
     }
   }
-};
+}
 
 var LoginScreen = React.createClass({
   getInitialState: function() {
@@ -46,10 +45,10 @@ var LoginScreen = React.createClass({
         name: null,
         result: null,
       } 
-    };
+    }
   },
   onPress: function () {
-    var value = this.refs.form.getValue();
+    var value = this.refs.form.getValue()
     if (value) { 
       this.fetchData(value['userName'],value['password'],value['name'])
     }
@@ -117,12 +116,12 @@ var LoginScreen = React.createClass({
         ToastAndroid.show('注册失败', ToastAndroid.SHORT)
       }
     })
-    .done();
+    .done()
   },
   responseData: function(response){
-    return response.result.data;
+    return response.result.data
   }
-});
+})
 
 let styles = StyleSheet.create({
   container: {
@@ -215,6 +214,6 @@ let styles = StyleSheet.create({
     fontSize: 15,
     textDecorationLine: 'underline'
   }
-});
+})
 
 module.exports = LoginScreen

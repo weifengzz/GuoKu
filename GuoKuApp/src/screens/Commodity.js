@@ -144,3 +144,4 @@ var styles = StyleSheet.create({
 })
 
 module.exports = Commodity
+

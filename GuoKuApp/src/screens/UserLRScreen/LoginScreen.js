@@ -1,32 +1,31 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
-var FileUpload = require('NativeModules').FileUpload;
+var React = require('react-native')
 var Icon = require('react-native-vector-icons/FontAwesome')
-var t = require('tcomb-form-native');
+var t = require('tcomb-form-native')
 
-const REQUEST_URL = 'http://192.168.6.5:8888/getUser';
+const REQUEST_URL = 'http://192.168.6.5:8888/getUser'
 
 var {
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
-  Animated,
   Image,
   ToastAndroid
-} = React;
+} = React
 
-var Form = t.form.Form;
+var Form = t.form.Form
 var Person = t.struct({
-  userName: t.String,              
-  password: t.String,  
-});
+  userName: t.String,
+  password: t.String
+})
 
 var options = {
   fields: {
     password: {
       placeholder: '密码',
+      lable: '密码',
       password: true,
     },
     userName: {
@@ -34,7 +33,7 @@ var options = {
       label: '邮箱',
     }
   }
-};
+}
 
 var LoginScreen = React.createClass({
   getInitialState: function() {
@@ -44,10 +43,10 @@ var LoginScreen = React.createClass({
         password: null,
         result: null,
       } 
-    };
+    }
   },
   onPress: function () {
-    var value = this.refs.form.getValue();
+    var value = this.refs.form.getValue()
     if (value) { 
       this.fetchData(value['userName'],value['password'])
     }
@@ -93,7 +92,7 @@ var LoginScreen = React.createClass({
           </View>
         </Image>
       </View>
-    );
+    )
   },
   fetchData: function(un,pw) {
     fetch(REQUEST_URL, {
@@ -115,12 +114,12 @@ var LoginScreen = React.createClass({
         ToastAndroid.show('登录失败', ToastAndroid.SHORT)
       }
     })
-    .done();
+    .done()
   },
   responseData: function(response){
-    return response.result.data;
+    return response.result.data
   }
-});
+})
 
 let styles = StyleSheet.create({
   container: {
@@ -213,6 +212,6 @@ let styles = StyleSheet.create({
     borderRadius: 30,
     margin: 5
   }
-});
+})
 
 module.exports = LoginScreen
