@@ -75,7 +75,8 @@ function search(response,request){
   var info ="";
   if(request.method != 'POST'){
     var query = url.parse(request.url).query;
-    var key = querystring.parse(query)["key"];
+    var key = querystring.parse(query)["title"];
+    console.log(key)
     Search.search(response,request,key);
   }else{
     request.addListener('data', function(chunk){  
@@ -84,7 +85,6 @@ function search(response,request){
     .addListener('end', function(){
         var result = JSON.parse(info);
         var key = result['key'];
-        console.log(userName+"-------------"+passWord);
         Search.search(response,request,key);
     })
   }
