@@ -7,6 +7,7 @@ import MainScreen from './MainScreen'
 import LoginScreen from './UserLRScreen/LoginScreen'
 import RecommendScreen from './RecommendScreen'
 import SettingScreen from './SettingScreen'
+import RegisterScreen from './UserLRScreen/RegisterScreen'
 
 var {
   Image,
@@ -29,6 +30,7 @@ class MainRoute extends React.Component {
     }
   }
   render () {
+
      return (
       <View style={styles.container}>
         <View style={styles.viewShow}>
@@ -52,18 +54,18 @@ class MainRoute extends React.Component {
     )
   }
   tabColor(num){
-    
+    var  navigator = this.props.navigator
     if(num === 1){
-      this.setState({choice:1, screen: <MainScreen/>})
+      this.setState({choice:1, screen: <MainScreen navigator={navigator}/>})
     }
     if(num===2){
-       this.setState({choice:2, screen: <RecommendScreen/>})
+       this.setState({choice:2, screen: <RecommendScreen navigator={navigator}/> })
     }
     if(num===3){
-       this.setState({choice:3, screen: <LoginScreen/>})
+      this.setState({choice:3, screen: <LoginScreen navigator={navigator}/>})
     }
     if(num===4){
-       this.setState({choice:4, screen: <SettingScreen/>})
+       this.setState({choice:4, screen: <SettingScreen navigator={navigator}/>})
     }
   }
 }

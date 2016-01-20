@@ -3,7 +3,7 @@
 var React = require('react-native')
 var Icon = require('react-native-vector-icons/FontAwesome')
 var t = require('tcomb-form-native')
-
+import NavBar from 'rn-navbar'
 const REQUEST_URL = 'http://192.168.6.5:8888/getUser'
 
 var {
@@ -12,7 +12,8 @@ var {
   View,
   TouchableHighlight,
   Image,
-  ToastAndroid
+  ToastAndroid,
+  PropTypes
 } = React
 
 var Form = t.form.Form
@@ -47,21 +48,31 @@ var LoginScreen = React.createClass({
   },
   onPress: function () {
     var value = this.refs.form.getValue()
-    if (value) { 
+    if (value) {
       this.fetchData(value['userName'],value['password'])
     }
   },
   render: function() {
     return (
       <View style={styles.container}>
+        <NavBar
+          navigator={this.props.navigator}
+          title='applean'
+          backHidden
+          actionName='账户'
+          renderScene={this.renderScene}
+          backFunc={() => { this.props.navigator.pop() }}
+          actionFunc ={() => { this.props.navigator.push({id: 'RegisterScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump}) }} />
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose}>
               <Icon name='times' size={30} style={styles.icon}/>
             </View>
-            <View style={styles.viewRegisterleft}>
-              <Text style={styles.textRegister}>注册</Text>
-            </View>
+            <TouchableHighlight onPress= {() => this.registerClick()}>
+              <View style={styles.viewRegisterleft} >
+                <Text style={styles.textRegister}>注册</Text>
+              </View>
+              </TouchableHighlight>
             <View style={styles.viewRegisterRight}>
               <Icon name='chevron-right' size={30} style={styles.icon}/>
             </View>
@@ -93,6 +104,13 @@ var LoginScreen = React.createClass({
         </Image>
       </View>
     )
+  },
+  registerClick: function () {
+    ToastAndroid.show('11111', ToastAndroid.SHORT)
+    var navigator = this.props.navigator
+    navigator.replace({
+        id: 'RegisterScreen'
+      })
   },
   fetchData: function(un,pw) {
     fetch(REQUEST_URL, {

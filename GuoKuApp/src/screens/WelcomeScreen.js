@@ -7,8 +7,7 @@ var {
   Image,
   StyleSheet,
   View,
-  Text,
-  PropTypes
+  Text
 } = React
 
 class WelcomePage extends React.Component {

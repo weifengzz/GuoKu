@@ -1,6 +1,8 @@
 import React from 'react-native'
 import WelcomeScreen from './screens/WelcomeScreen'
 import MainRoute from './screens/MainRoute'
+import RegisterScreen from './screens/UserLRScreen/RegisterScreen'
+import LoginScreen from './screens/UserLRScreen/LoginScreen'
 
 var {
   Text,
@@ -40,15 +42,9 @@ class Route extends React.Component {
           navigator={navigator} />
       )
     }
-    if (routeId === 'LoginScreen') {
+    if (routeId === 'RegisterScreen') {
       return (
-        <LoginScreen
-          navigator={navigator} />
-      )
-    }
-    if (routeId === 'PersonScreen') {
-      return (
-        <PersonScreen
+        <RegisterScreen
           navigator={navigator} />
       )
     }
