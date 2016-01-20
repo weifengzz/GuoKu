@@ -72,19 +72,20 @@ function register(response,request){
 }
 //搜索功能
 function search(response,request){
-  var info ="";
   if(request.method != 'POST'){
     var query = url.parse(request.url).query;
-    var key = querystring.parse(query)["title"];
+    var key = querystring.parse(query)['title'];
     console.log(key)
     Search.search(response,request,key);
   }else{
+    var info = "";
     request.addListener('data', function(chunk){  
         info += chunk;
+        console.log(info.toString());
     })  
     .addListener('end', function(){
         var result = JSON.parse(info);
-        var key = result['key'];
+        var key = result['title'];
         Search.search(response,request,key);
     })
   }

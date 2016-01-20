@@ -26,7 +26,6 @@ let {
   TouchableHighlight
 } = React;
 
-
 class RecommendScreen extends React.Component{
   constructor (props) {
     super(props)

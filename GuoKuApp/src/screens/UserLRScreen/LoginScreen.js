@@ -26,11 +26,11 @@ var options = {
     password: {
       placeholder: '密码',
       lable: '密码',
-      password: true,
+      password: true
     },
     userName: {
       placeholder: 'example@xx.com',
-      label: '邮箱',
+      label: '邮箱'
     }
   }
 }
@@ -41,8 +41,8 @@ var LoginScreen = React.createClass({
       value: {
         userName: null,
         password: null,
-        result: null,
-      } 
+        result: null
+      }
     }
   },
   onPress: function () {
@@ -98,12 +98,12 @@ var LoginScreen = React.createClass({
     fetch(REQUEST_URL, {
     method: 'POST',
     headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       email: un,
-      password: pw,
+      password: pw
     })
   })
     .then((response) => response.json())

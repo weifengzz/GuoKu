@@ -4,7 +4,6 @@ var React = require('react-native')
 import Icon from 'react-native-vector-icons/Ionicons'
 
 let {
-  AppRegistry,
   Image,
   ListView,
   StyleSheet,
@@ -15,13 +14,12 @@ let {
   ToastAndroid
 } = React
 
-let REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
+let REQUEST_URL = 'http://192.168.6.5:8888/search'
 
 class SearchScreen extends React.Component{
   constructor (props) {
     super (props)
     this.state = {
-      screen: this.initScreen(),
       txtValue: null,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
@@ -30,34 +28,70 @@ class SearchScreen extends React.Component{
     }
   }
   render () {
-    var textValue=this.state.txtValue;
-    return (
-      <View style={styles.container}>
-        <View style={styles.viewSearch}>
-          <View style={styles.viewIcon}>
-            <Icon name='search' size={30}/>
+    var textValue = this.state.txtValue
+    if (textValue === null || textValue === ''){
+      return (
+        <View style={styles.container}>
+          <View style={styles.viewSearch}>
+            <View style={styles.viewIcon}>
+              <Icon name='search' size={30}/>
+            </View>
+            <View style={styles.viewText}>
+              <TextInput
+                selectTextOnFocus = {true}
+                onChangeText={(text) => {
+                  this.state.txtValue = text
+                  this.getContent()
+                }
+              }
+              value={textValue}
+              onBlur = {this.getContent}
+              />
+            </View>
+            <View style={styles.viewCancel}>
+              <Text >取消</Text>
+            </View>
           </View>
-          <View style={styles.viewText}>
-            <TextInput
-            selectTextOnFocus = {true}
-            onChangeText={(text) => {
-              this.state.txtValue = text
-              this.getContent()
-            }}
-            value={textValue}
-            onBlur = {this.getContent}
-            />
-          </View>
-          <View style={styles.viewCancel}>
-            <Text >取消</Text>
-          </View>
+          {
+            this.contentScreen()
+          }
         </View>
-        {this.state.screen}
-      </View>
-    )
+      )
+    }else{
+      return(
+        <View style={styles.container}>
+          <View style={styles.viewSearch}>
+            <View style={styles.viewIcon}>
+              <Icon name='search' size={30}/>
+            </View>
+            <View style={styles.viewText}>
+              <TextInput
+                selectTextOnFocus = {true}
+                onChangeText={(text) => {
+                  this.state.txtValue = text
+                  this.getContent()
+                }
+              }
+              value={textValue}
+              />
+            </View>
+            <View style={styles.viewCancel}>
+              <Text >取消</Text>
+            </View>
+          </View>
+          {
+            <ListView
+              initialListSize={5}
+              dataSource={this.state.dataSource}
+              renderRow={this.renderCommidity}
+              style={styles.listView}/>
+          }
+        </View>
+      )
+    }
   }
 
-  initScreen () {
+  contentScreen () {
     return (
       <View style={styles.viewContent}>
         <View style={styles.viewContentTop}>
@@ -82,34 +116,51 @@ class SearchScreen extends React.Component{
   }
 
   getContent () {
-    ToastAndroid.show(this.state.txtValue, ToastAndroid.LONG)
+    this.fetchData()
+    this.setState({})
   }
 
-  fetchData (un, pw) {
+  fetchData () {
     fetch(REQUEST_URL, {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      email: un,
-      password: pw
+      title: this.state.txtValue
     })
   })
     .then((response) => response.json())
     .then((responseData) => {
-      if (responseData['isOK']==='ok') {
-        ToastAndroid.show('登录成功', ToastAndroid.SHORT)
-      } else {
-        ToastAndroid.show('登录失败', ToastAndroid.SHORT)
-      }
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
+        loaded: true
+      })
     })
     .done()
   }
 
   responseData (response) {
     return response.result.data
+  }
+
+  renderCommidity (commidities) {
+    return (
+       <View style={styles.itemContainer}>
+        <View style={styles.viewItemLeft}>
+          <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+        </View>
+        <View style={styles.viewItemRight}>
+          <Text style={styles.txtItemTitle}>{commidities.title}</Text>
+          <Text style={styles.txtItemPrice}>¥{commidities.price}</Text>
+          <View style={styles.viewTxtItemLove}>
+            <Icon name="ios-heart-outline" style={styles.iconItem} size={15}/>
+            <Text style={styles.txtItemLove}>{commidities.love}</Text>
+          </View>
+        </View>
+      </View>
+    )
   }
 }
 
@@ -168,6 +219,49 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  itemContainer: {
+    height: 100,
+    flexDirection: 'row',
+    borderBottomWidth: 1
+  },
+  viewItemLeft: {
+    margin: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  viewItemRight: {
+    flex: 3,
+    flexDirection: 'column',
+    marginRight: 10
+  },
+  imgItem: {
+    height: 90,
+    width: 90,
+    resizeMode: 'stretch'
+  },
+  txtItemTitle: {
+    height: 50,
+    marginTop: 5,
+    fontSize: 16
+  },
+  txtItemPrice: {
+    height: 20,
+    fontSize: 15
+  },
+  viewTxtItemLove: {
+    height: 20,
+    width: 50,
+    alignSelf: 'flex-end',
+    flexDirection: 'row'
+  },
+  txtItemLove: {
+    fontSize: 15,
+    marginLeft: 5
+  },
+  iconItem: {
+    marginTop: 5
   }
 })
 

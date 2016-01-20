@@ -57,7 +57,7 @@ var Commodity = React.createClass({
     return (
       <View style={styles.txtContainer}>
         <Text>
-          正 在加载图文。。。
+          正在加载图文。。。
         </Text>
       </View>
     )
