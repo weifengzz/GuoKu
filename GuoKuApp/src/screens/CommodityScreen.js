@@ -11,7 +11,8 @@ let {
   StyleSheet,
   View,
   ScrollView,
-  ListView
+  ListView,
+  TouchableOpacity
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
@@ -59,16 +60,21 @@ class CommodityScreen extends React.Component {
         <View style={styles.item}>
           <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
         </View>
-    );
+    )
   }
-
+  returnback () {
+    var navigator = this.props.navigator
+    navigator.pop()
+  }
   render () {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.viewTop}>
-          <View style={styles.viewTopLeft}>
-            <Icon name='angle-left' size={30}/>
-          </View>
+          <TouchableOpacity onPress={() => { this.returnback() }}>
+            <View style={styles.viewTopLeft}>
+              <Icon name='angle-left' size={30}/>
+            </View>
+          </TouchableOpacity>
           <View style={styles.viewTopRight}>
             <Text style={styles.txtTitle}>商品</Text>
           </View>
@@ -138,7 +144,7 @@ class CommodityScreen extends React.Component {
         <View style={styles.viewRecommend}>
           <View style={styles.viewRecommendTitle}>
             <View style={styles.viewRecommendTitleLeft}>
-              <Text>来自［酒杯］</Text>
+              <Text> 来自［酒杯］</Text>
             </View>
             <View style={styles.viewRecommendTitleRight}>
               <Icon name='angle-right' size={20} />

@@ -11,4 +11,4 @@ var SearchScreen = require('./src/screens/SearchScreen')
 var MainRoute = require('./src/screens/MainRoute')
 var CommodityScreen = require('./src/screens/CommodityScreen')
 
-React.AppRegistry.registerComponent('GuoKuApp', () => CommodityScreen)
+React.AppRegistry.registerComponent('GuoKuApp', () => GuoKuRunner)

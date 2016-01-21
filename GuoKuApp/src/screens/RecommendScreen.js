@@ -40,6 +40,15 @@ class RecommendScreen extends React.Component{
       loaded: false,
     }
   }
+  renderLoadingView() {
+    return (
+      <View style={styles.txtContainer}>
+        <Text>
+          正在加载内容。。。
+        </Text>
+      </View>
+    )
+  }
 
   componentDidMount() {
     this.fetchData();
@@ -58,6 +67,9 @@ class RecommendScreen extends React.Component{
   }
 
   render () {
+    if (!this.state.loaded) {
+      return this.renderLoadingView()
+    }
     return(
       <ScrollView contentContainerStyle={styles.container}>
         <TouchableHighlight onPress={() => {this.toSearchScreen()}}>
@@ -161,23 +173,28 @@ var styles = StyleSheet.create({
   container: {
     flexDirection: 'column'
   },
+  txtContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   viewSearch: {
     flexDirection: 'row',
     height: 50,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 5,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#F0F0F0'
   },
   viewIcon: {
-    flex:1,
+    flex: 1,
     height: 50,
     marginLeft: 10,
     alignItems: 'center',
     justifyContent: 'center'
   },
   viewText: {
-    flex:5,
+    flex: 5,
     height: 50,
     justifyContent: 'center'
   },
@@ -197,7 +214,7 @@ var styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 10
   },
-  svRecommend:{
+  svRecommend: {
     height: 120,
     flexDirection: 'row'
   },
@@ -222,7 +239,7 @@ var styles = StyleSheet.create({
   },
   viewGraphicRight: {
     margin: 10,
-    flex: 1,
+    flex: 1
   },
   textGraphic: {
     fontSize: 17,
@@ -258,6 +275,6 @@ var styles = StyleSheet.create({
     width: 110,
     resizeMode: 'cover'
   },
-});
+})
 
 module.exports = RecommendScreen

@@ -4,32 +4,21 @@ import React from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Commodity from './Commodity'
 import Graphic from './Graphic'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import RecommendScreen from './RecommendScreen'
 
 var {
-  Image,
   StyleSheet,
-  View,
-  PropTypes,
-  Text,
-  TouchableHighlight
+  View
 } = React
 
 class MainScreen extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-       component:RecommendScreen,
-    }
-  }
   render () {
+    var navigator = this.props.navigator
      return (
       <View style={styles.container}>
         <View style={styles.content}>
           <ScrollableTabView>
-            <Commodity tabLabel='商品' />
-            <Graphic tabLabel='图文' />
+            <Commodity tabLabel='商品' navigator={navigator}/>
+            <Graphic tabLabel='图文' navigator={navigator}/>
           </ScrollableTabView>
         </View>
       </View>

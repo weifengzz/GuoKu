@@ -1,32 +1,26 @@
 'use strict'
 
 import React from 'react-native'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import MainScreen from './MainScreen'
 import LoginScreen from './UserLRScreen/LoginScreen'
 import RecommendScreen from './RecommendScreen'
 import SettingScreen from './SettingScreen'
-import RegisterScreen from './UserLRScreen/RegisterScreen'
 
 var {
-  Image,
   StyleSheet,
   View,
-  PropTypes,
-  Text,
   TouchableOpacity
 } = React
 
-var choice = 1
-const COLOR = ['gray','#ffffff']
+const COLOR = ['gray', '#ffffff']
 
 class MainRoute extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
        choice: 1,
-       screen: <MainScreen/>
+       screen: <MainScreen navigator={props.navigator}/>
     }
   }
   render () {
@@ -55,16 +49,16 @@ class MainRoute extends React.Component {
   }
   tabColor(num){
     var  navigator = this.props.navigator
-    if(num === 1){
+    if (num === 1){
       this.setState({choice:1, screen: <MainScreen navigator={navigator}/>})
     }
-    if(num===2){
+    if (num ===2){
        this.setState({choice:2, screen: <RecommendScreen navigator={navigator}/> })
     }
-    if(num===3){
+    if (num ===3){
       this.setState({choice:3, screen: <LoginScreen navigator={navigator}/>})
     }
-    if(num===4){
+    if (num ===4){
        this.setState({choice:4, screen: <SettingScreen navigator={navigator}/>})
     }
   }
@@ -72,17 +66,17 @@ class MainRoute extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     flexDirection: 'column'
   },
-  viewShow:{
+  viewShow: {
     flex: 1
   },
   content: {
     flex: 8
   },
   bottom: {
-    height:50,
+    height: 50,
     backgroundColor: 'black',
     flexDirection: 'row'
   },
@@ -96,7 +90,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   Icon: {
-    color: 'white',
+    color: 'white'
   }
 })
 

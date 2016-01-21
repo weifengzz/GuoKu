@@ -8,7 +8,9 @@ var {
   ListView,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
+  Navigator
 } = React
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
@@ -66,8 +68,16 @@ var Commodity = React.createClass({
   renderCommidity: function (commidities) {
     return (
       <View style={styles.container}>
-        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
-        <Text style={styles.txtContent}>{commidities.title}</Text>
+        <View style={styles.viewTopImage}>
+          <TouchableOpacity onPress={() => {this.toCommodityScreen()}}>
+            <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.viewTxtContent}>
+          <TouchableOpacity>
+            <Text style={styles.txtContent}>{commidities.title}</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.viewBottom}>
           <View style={styles.viewBottomLeft}>
             <Icon name='heart-o' size={20} />
@@ -83,8 +93,12 @@ var Commodity = React.createClass({
         <Image source={require('../assets/splite.png')} style={styles.imageSplit}/>
       </View>
     )
-  }
+  },
 
+  toCommodityScreen: function () {
+    navigator = this.props.navigator 
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+  }
 })
 
 var styles = StyleSheet.create({
@@ -99,16 +113,21 @@ var styles = StyleSheet.create({
   },
   topImage: {
     height: 300,
+    resizeMode: 'cover'
+  },
+  viewTopImage: {
+    height: 300,
     flex: 1,
-    margin: 10,
-    resizeMode: 'contain'
+    margin: 10
   },
   txtContent: {
+    fontSize: 16
+  },
+  viewTxtContent: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex: 1,
-    fontSize: 16
+    flex: 1
   },
   txtBottom: {
     flex: 1,

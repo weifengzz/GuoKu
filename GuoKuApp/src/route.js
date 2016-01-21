@@ -4,6 +4,7 @@ import MainRoute from './screens/MainRoute'
 import RegisterScreen from './screens/UserLRScreen/RegisterScreen'
 import LoginScreen from './screens/UserLRScreen/LoginScreen'
 import SearchScreen from './screens/SearchScreen'
+import CommodityScreen from './screens/CommodityScreen'
 
 var {
   Text,
@@ -58,6 +59,12 @@ class Route extends React.Component {
     if(routeId === 'SearchScreen'){
       return(
         <SearchScreen
+          navigator={navigator} />
+      )
+    }
+    if(routeId === 'CommodityScreen'){
+      return(
+        <CommodityScreen
           navigator={navigator} />
       )
     }
