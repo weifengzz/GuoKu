@@ -53,19 +53,23 @@ var LoginScreen = React.createClass({
       this.fetchData(value['userName'],value['password'],value['name'])
     }
   },
-  render: function() {
+  render: function () {
     return (
       <View style={styles.container}>
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose}>
-              <Icon name='times' size={30} style={styles.icon}/>
+              <TouchableHighlight onPress={() => {this.returnLogin()}} underlayColor='#99d9f4'>
+                <Icon name='times' size={30} style={styles.icon} />
+              </TouchableHighlight>
             </View>
-            <View style={styles.viewRegisterleft}>
-              <Text style={styles.textRegister}>去登录</Text>
-            </View>
+            <TouchableHighlight onPress={() => {this.returnLogin()}} underlayColor='#99d9f4'>
+              <View style={styles.viewRegisterleft}>
+                <Text style={styles.textRegister}>去登录</Text>
+              </View>
+            </TouchableHighlight>
             <View style={styles.viewRegisterRight}>
-              <Icon name='chevron-right' size={30} style={styles.icon}/>
+              <Icon name='chevron-right' size={30} style={styles.icon} />
             </View>
           </View>
           <View style={styles.viewTitle}>
@@ -118,8 +122,12 @@ var LoginScreen = React.createClass({
     })
     .done()
   },
-  responseData: function(response){
+  responseData: function (response) {
     return response.result.data
+  },
+  returnLogin: function () {
+    var navigator = this.props.navigator
+    navigator.pop()
   }
 })
 

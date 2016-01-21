@@ -48,6 +48,12 @@ class Route extends React.Component {
           navigator={navigator} />
       )
     }
+    if(routeId === 'LoginScreen'){
+      return(
+        <LoginScreen
+          navigator={navigator} />
+      )
+    }
     return this.noRoute(navigator)
   }
 

@@ -13,7 +13,8 @@ var {
   TouchableHighlight,
   Image,
   ToastAndroid,
-  PropTypes
+  PropTypes,
+  Navigator
 } = React
 
 var Form = t.form.Form
@@ -26,8 +27,8 @@ var options = {
   fields: {
     password: {
       placeholder: '密码',
-      lable: '密码',
-      password: true
+      password: true,
+      label: '密码'
     },
     userName: {
       placeholder: 'example@xx.com',
@@ -55,14 +56,6 @@ var LoginScreen = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <NavBar
-          navigator={this.props.navigator}
-          title='applean'
-          backHidden
-          actionName='账户'
-          renderScene={this.renderScene}
-          backFunc={() => { this.props.navigator.pop() }}
-          actionFunc ={() => { this.props.navigator.push({id: 'RegisterScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump}) }} />
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose}>
@@ -106,11 +99,8 @@ var LoginScreen = React.createClass({
     )
   },
   registerClick: function () {
-    ToastAndroid.show('11111', ToastAndroid.SHORT)
     var navigator = this.props.navigator
-    navigator.replace({
-        id: 'RegisterScreen'
-      })
+    navigator.push({id: 'RegisterScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
   },
   fetchData: function(un,pw) {
     fetch(REQUEST_URL, {
