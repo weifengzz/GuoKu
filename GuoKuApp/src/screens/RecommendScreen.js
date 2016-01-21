@@ -12,8 +12,7 @@ let SCREENS = [
  ReacommendViewPager
 ].map((Page, index) => <Page />)
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
-var Image_URL = 'http://192.168.6.5:8888/getImage?imgName=';
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
 
 let {
   AppRegistry,
@@ -252,7 +251,7 @@ var styles = StyleSheet.create({
   viewList: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
    imgList: {
     height: 110,
