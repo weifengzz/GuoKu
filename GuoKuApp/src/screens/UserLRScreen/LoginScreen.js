@@ -38,7 +38,7 @@ var options = {
 }
 
 var LoginScreen = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       value: {
         userName: null,
@@ -59,7 +59,6 @@ var LoginScreen = React.createClass({
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose}>
-              <Icon name='times' size={30} style={styles.icon}/>
             </View>
             <TouchableHighlight onPress= {() => this.registerClick()}>
               <View style={styles.viewRegisterleft} >
@@ -75,7 +74,7 @@ var LoginScreen = React.createClass({
           </View>
           <View style={styles.viewLogin}>
            <Form
-            ref="form"
+            ref='form'
             type={Person}
             value={this.state.value}
             options={options} />

@@ -48,9 +48,11 @@ class SearchScreen extends React.Component{
               onBlur = {this.getContent}
               />
             </View>
-            <View style={styles.viewCancel}>
-              <Text >取消</Text>
-            </View>
+            <TouchableHighlight onPress={() => { this.returnBack() }}>
+              <View style={styles.viewCancel}>
+                <Text >取消</Text>
+              </View>
+            </TouchableHighlight>
           </View>
           {
             this.contentScreen()
@@ -75,9 +77,11 @@ class SearchScreen extends React.Component{
               value={textValue}
               />
             </View>
-            <View style={styles.viewCancel}>
-              <Text >取消</Text>
-            </View>
+            <TouchableHighlight onPress={() => { this.returnBack() }}>
+              <View style={styles.viewCancel}>
+                <Text >取消</Text>
+              </View>
+            </TouchableHighlight>
           </View>
           {
             <ListView
@@ -119,7 +123,10 @@ class SearchScreen extends React.Component{
     this.fetchData()
     this.setState({})
   }
-
+  returnBack () {
+    var navigator = this.props.navigator
+    navigator.pop()
+  }
   fetchData () {
     fetch(REQUEST_URL, {
       method: 'POST',

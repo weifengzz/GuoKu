@@ -3,13 +3,13 @@
 var React = require('react-native');
 import Icon from 'react-native-vector-icons/Ionicons'
 import ViewPager from 'react-native-viewpager'
-import ReacoomendViewPager from './ReacoomendViewPager'
+import ReacommendViewPager from './ReacommendViewPager'
 
 let SCREENS = [
- ReacoomendViewPager,
- ReacoomendViewPager,
- ReacoomendViewPager,
- ReacoomendViewPager
+ ReacommendViewPager,
+ ReacommendViewPager,
+ ReacommendViewPager,
+ ReacommendViewPager
 ].map((Page, index) => <Page />)
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic';
@@ -22,6 +22,7 @@ let {
   StyleSheet,
   Text,
   View,
+  Navigator,
   ScrollView,
   TouchableHighlight
 } = React;
@@ -60,7 +61,7 @@ class RecommendScreen extends React.Component{
   render () {
     return(
       <ScrollView contentContainerStyle={styles.container}>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={() => {this.toSearchScreen()}}>
           <View style={styles.viewSearch}>
             <View style={styles.viewIcon}>
               <Icon name='search' size={20}/>
@@ -142,7 +143,7 @@ class RecommendScreen extends React.Component{
     );
   }
 
-   _renderPage (
+  _renderPage (
     data: Object,
     pageID: number | string) {
     return (
@@ -150,6 +151,10 @@ class RecommendScreen extends React.Component{
         {data}
       </View>
     )
+  }
+  toSearchScreen (){
+    var navigator = this.props.navigator
+    navigator.push({id: 'SearchScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
   }
 }
 

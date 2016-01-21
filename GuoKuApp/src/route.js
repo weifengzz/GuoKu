@@ -3,6 +3,7 @@ import WelcomeScreen from './screens/WelcomeScreen'
 import MainRoute from './screens/MainRoute'
 import RegisterScreen from './screens/UserLRScreen/RegisterScreen'
 import LoginScreen from './screens/UserLRScreen/LoginScreen'
+import SearchScreen from './screens/SearchScreen'
 
 var {
   Text,
@@ -51,6 +52,12 @@ class Route extends React.Component {
     if(routeId === 'LoginScreen'){
       return(
         <LoginScreen
+          navigator={navigator} />
+      )
+    }
+    if(routeId === 'SearchScreen'){
+      return(
+        <SearchScreen
           navigator={navigator} />
       )
     }
