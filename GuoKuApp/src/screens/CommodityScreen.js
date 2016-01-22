@@ -13,7 +13,8 @@ let {
   ScrollView,
   ListView,
   TouchableOpacity,
-  Navigator
+  Navigator,
+  ToastAndroid
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
@@ -69,7 +70,7 @@ class CommodityScreen extends React.Component {
   }
 
   toCommodityScreen () {
-    navigator = this.props.navigator 
+    navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
   }
 
@@ -88,6 +89,7 @@ class CommodityScreen extends React.Component {
     )
   }
   render () {
+    var commodity = this.props.commodity
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
@@ -111,7 +113,7 @@ class CommodityScreen extends React.Component {
             autoPlay={true} />
         </View>
         <View style={styles.viewTxtTitle}>
-          <Text style={styles.txtCommodityTitle}>Godinger-无铅水晶玻璃花杯</Text>
+          <Text style={styles.txtCommodityTitle}>{commodity.title}</Text>
         </View>
         <View style={styles.viewEvaluationContent}>
           <Icon name='heart-o' size={20}/>
@@ -121,11 +123,11 @@ class CommodityScreen extends React.Component {
           <Icon name='share-square-o' size={20}/>
         </View>
         <View style={styles.btnBuy}>
-          <Text style={styles.txtLogin}>¥ 220.00 去购买</Text>
+          <Text style={styles.txtLogin}>¥ {commodity.price} 去购买</Text>
         </View>
         <View style={styles.viewLove}>
           <View style={styles.viewLoveTop}>
-            <Text style={styles.txtLove}>9人喜爱</Text>
+            <Text style={styles.txtLove}>{commodity.love}人喜爱</Text>
             <View style={styles.viewLoveTopRight}>
               <Icon name='angle-right' size={20} style={styles.iconLove}/>
             </View>
@@ -141,14 +143,14 @@ class CommodityScreen extends React.Component {
           </View>
           <View style={styles.viewCommentRight}>
             <View style={styles.viewCommentRightTop}>
-              <Text style={styles.txtName}>呈祥</Text>
+              <Text style={styles.txtName}>{commodity.commentAuthor[0]}</Text>
               <View style={styles.viewIconStar}>
                 <Icon name='star' style={styles.iconStar} size={20}/>
               </View>
             </View>
             <View style={styles.viewCommentRightCenter}>
               <Text>
-                撒娇克服恐惧刷卡机翻看手机啊打开附近，阿萨德和飞机撒谎地方就是大法好。
+                {commodity.comment[0]}
               </Text>
             </View>
             <View style={styles.viewCommentRightBottom}>
@@ -160,7 +162,7 @@ class CommodityScreen extends React.Component {
               </View>
               <View style={styles.viewIconTime}>
                 <Icon name='clock-o' size={15}/>
-                <Text>2015-12-7</Text>
+                <Text>{commodity.date}</Text>
               </View>
             </View>
           </View>
@@ -168,7 +170,7 @@ class CommodityScreen extends React.Component {
         <View style={styles.viewRecommend}>
           <View style={styles.viewRecommendTitle}>
             <View style={styles.viewRecommendTitleLeft}>
-              <Text> 来自［酒杯］</Text>
+              <Text> 来自［{commodity.category}］</Text>
             </View>
             <View style={styles.viewRecommendTitleRight}>
               <Icon name='angle-right' size={20} />

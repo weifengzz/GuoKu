@@ -20,7 +20,7 @@ class MainRoute extends React.Component {
     super(props)
     this.state = {
        choice: 1,
-       screen: <MainScreen navigator={props.navigator}/>
+       screen: <MainScreen navigator={props.navigator} commodity={props.commodity}/>
     }
   }
   render () {
@@ -49,8 +49,9 @@ class MainRoute extends React.Component {
   }
   tabColor(num){
     var  navigator = this.props.navigator
+    var commodity = this.props.commodity
     if (num === 1){
-      this.setState({choice:1, screen: <MainScreen navigator={navigator}/>})
+      this.setState({choice:1, screen: <MainScreen navigator={navigator} commodity={commodity}/>})
     }
     if (num ===2){
        this.setState({choice:2, screen: <RecommendScreen navigator={navigator}/> })

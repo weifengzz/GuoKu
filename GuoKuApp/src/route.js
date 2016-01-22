@@ -17,13 +17,28 @@ var {
 
 class Route extends React.Component {
   static propTypes = {
-    navigator: PropTypes.object
+    navigator: PropTypes.object,
+    commodity: PropTypes.string
+    // title: PropTypes.string,
+    // content: PropTypes.string,
+    // price: PropTypes.string,
+    // date: PropTypes.string,
+    // comment: PropTypes.array,
+    // commentAuthor: PropTypes.array,
+    // commentImg: PropTypes.array,
+    // imgPath1: PropTypes.string,
+    // imgPath2: PropTypes.string,
+    // imgPath3: PropTypes.string,
+    // category: PropTypes.string,
+    // categoryImg: PropTypes.string,
+    // love: PropTypes.number,
+    // loveHeadImg: PropTypes.array
   };
   render () {
     return (
       <Navigator
         initialRoute={{id: Platform.OS === 'ios' ? 'MainRoute' : 'WelcomeScreen', name: 'Index'}}
-        renderScene={ this.renderScene }
+        renderScene={ this.renderScene.bind(this) }
         configureScene={(route) => {
           return Navigator.SceneConfigs.FloatFromRight
         }} />
@@ -41,7 +56,7 @@ class Route extends React.Component {
     if (routeId === 'MainRoute') {
       return (
         <MainRoute
-          navigator={navigator} />
+          navigator={navigator}/>
       )
     }
     if (routeId === 'RegisterScreen') {
@@ -65,7 +80,8 @@ class Route extends React.Component {
     if(routeId === 'CommodityScreen'){
       return(
         <CommodityScreen
-          navigator={navigator} />
+          route={route}
+          navigator={navigator} {...route.passProp}/>
       )
     }
     return this.noRoute(navigator)
