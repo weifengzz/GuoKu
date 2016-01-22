@@ -17,7 +17,7 @@ let {
   ToastAndroid
 } = React
 
-const REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
+const REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
 let SCREENS = [
  CommodityViewPager,
@@ -59,19 +59,19 @@ class CommodityScreen extends React.Component {
       .done();
   }
 
-  renderGraphic(graphics) {
+  renderGraphic(commodity) {
     return (
-      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this,commodity)}>
         <View style={styles.item}>
-          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.imgPath1)}}/>
         </View>
       </TouchableOpacity>
     )
   }
 
-  toCommodityScreen () {
+  toCommodityScreen (commodity) {
     navigator = this.props.navigator
-    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 
   returnback () {
@@ -139,7 +139,7 @@ class CommodityScreen extends React.Component {
         </View>
         <View style={styles.viewComment}>
           <View style={styles.viewCommentLeft}>
-            <Image style={styles.imgComment} source={require('../assets/recommend2.png')}/>
+            <Image style={styles.imgComment} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.commentImg[0])}}/>
           </View>
           <View style={styles.viewCommentRight}>
             <View style={styles.viewCommentRightTop}>

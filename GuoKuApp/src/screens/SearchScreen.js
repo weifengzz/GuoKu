@@ -155,7 +155,7 @@ class SearchScreen extends React.Component{
 
   renderCommidity (commidities) {
     return (
-      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
         <View style={styles.itemContainer}>
           <View style={styles.viewItemLeft}>
             <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
@@ -173,9 +173,10 @@ class SearchScreen extends React.Component{
     )
   }
 
-  toCommodityScreen () {
+  toCommodityScreen (commidities) {
+    var commodity = commidities
     navigator = this.props.navigator
-    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 }
 

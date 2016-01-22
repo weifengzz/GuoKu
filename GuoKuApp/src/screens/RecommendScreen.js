@@ -12,7 +12,7 @@ let SCREENS = [
  ReacommendViewPager
 ].map((Page, index) => <Page />)
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
+var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
 let {
   Image,
@@ -145,19 +145,22 @@ class RecommendScreen extends React.Component{
     )
   }
 
-  renderGraphic(graphics) {
+  renderGraphic(commodity) {
     return (
-      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this,commodity)}>
         <View style={styles.item}>
-          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.imgPath1)}}/>
         </View>
       </TouchableOpacity>
     )
   }
-  toCommodityScreen () {
-    navigator = this.props.navigator 
-    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+
+  toCommodityScreen (commodity) {
+    var commodity = commodity
+    navigator = this.props.navigator
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
+
   _renderPage (
     data: Object,
     pageID: number | string) {
@@ -167,6 +170,7 @@ class RecommendScreen extends React.Component{
       </View>
     )
   }
+  
   toSearchScreen (){
     var navigator = this.props.navigator
     navigator.push({id: 'SearchScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
