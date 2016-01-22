@@ -1,17 +1,16 @@
 'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 
 let {
   Image,
   StyleSheet,
-  View,
+  View
 } = React
 
-
-class CommodityViewPager extends React.Component{
+class CommodityViewPager extends React.Component {
   render () {
-    return(
+    return (
       <View style={styles.container}>
         <Image style={styles.image} source={require('../assets/vp8.png')}/>
       </View>
@@ -21,7 +20,7 @@ class CommodityViewPager extends React.Component{
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   image: {
     flex: 1,
@@ -29,6 +28,6 @@ var styles = StyleSheet.create({
     height: null,
     resizeMode: 'cover'
   }
-});
+})
 
 module.exports = CommodityViewPager

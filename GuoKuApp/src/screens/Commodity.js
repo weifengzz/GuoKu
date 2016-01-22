@@ -31,7 +31,7 @@ var Commodity = React.createClass({
   },
 
   fetchData: function () {
-    fetch(REQUEST_URL)
+    fetch (REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
@@ -49,7 +49,7 @@ var Commodity = React.createClass({
 
     return (
       <ListView
-        initialListSize={5}
+        initialListSize={3}
         dataSource={this.state.dataSource}
         renderRow={this.renderCommidity}
         style={styles.listView}/>
@@ -70,8 +70,8 @@ var Commodity = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.viewTopImage}>
-          <TouchableOpacity onPress={() => {this.toCommodityScreen(commidities)}}>
-            <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+          <TouchableOpacity onPress={() => { this.toCommodityScreen(commidities) }}>
+            <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1)}}/>
           </TouchableOpacity>
         </View>
         <View style={styles.viewTxtContent}>
@@ -97,10 +97,9 @@ var Commodity = React.createClass({
   },
 
   toCommodityScreen: function (commidities) {
-    var commodity = commidities;
-    //var commodity = "{title: '方形木质托盘 多款', content: '采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。',price: '558.00',date: '2015-12-3',comment : ['采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。','hehehe','什么东西啊这是'],commentAuthor: ['小李','一行为光','你瞅啥'],commentImg: ['tx03.png','tx06.png','tx05.png'],imgPath1: 'c01.png',imgPath2: 'c02.png',imgPath3: 'c03.png',category: '家具',categoryImg: 'jj01.png',love: 5,loveHeadImg: ['tx02.png','tx03.png','tx06.png','tx05.png','tx07.png']}"
+    var commodity = commidities
     navigator = this.props.navigator
-    navigator.push({ id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 })
 
@@ -115,11 +114,11 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   topImage: {
-    height: 300,
+    height: 330,
     resizeMode: 'cover'
   },
   viewTopImage: {
-    height: 300,
+    height: 330,
     flex: 1,
     margin: 10
   },
