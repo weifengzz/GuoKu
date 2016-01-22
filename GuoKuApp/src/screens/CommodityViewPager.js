@@ -1,17 +1,12 @@
-'use strict';
+'use strict'
 
 var React = require('react-native');
 
 let {
-  AppRegistry,
   Image,
-  ListView,
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  TouchableHighlight
-} = React;
+} = React
 
 
 class CommodityViewPager extends React.Component{

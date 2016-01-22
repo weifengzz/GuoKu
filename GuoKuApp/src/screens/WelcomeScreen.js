@@ -14,8 +14,7 @@ class WelcomePage extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>果库</Text>
-        <Image source={{uri: 'http://192.168.6.5:8888/getImage?imgName=welcome.png'}} style={styles.img} />
+        <Image source={{uri: 'http://192.168.6.5:8888/getImage?imgName=welcome.jpg'}} style={styles.img} />
       </View>
     )
   }
@@ -58,12 +57,14 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   img: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain'
+    flex: 1,
+    width: null,
+    height: null,
+    alignSelf: 'stretch',
+    resizeMode: 'cover'
   }
 })
 

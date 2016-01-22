@@ -10,8 +10,8 @@ let {
   Text,
   View,
   TextInput,
-  TouchableHighlight,
-  ToastAndroid
+  TouchableOpacity,
+  Navigator
 } = React
 
 let REQUEST_URL = 'http://192.168.6.5:8888/search'
@@ -48,11 +48,11 @@ class SearchScreen extends React.Component{
               onBlur = {this.getContent}
               />
             </View>
-            <TouchableHighlight onPress={() => { this.returnBack() }}>
+            <TouchableOpacity onPress={() => { this.returnBack() }}>
               <View style={styles.viewCancel}>
                 <Text >取消</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
           {
             this.contentScreen()
@@ -77,17 +77,17 @@ class SearchScreen extends React.Component{
               value={textValue}
               />
             </View>
-            <TouchableHighlight onPress={() => { this.returnBack() }}>
+            <TouchableOpacity onPress={() => { this.returnBack() }}>
               <View style={styles.viewCancel}>
                 <Text >取消</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
           {
             <ListView
               initialListSize={5}
               dataSource={this.state.dataSource}
-              renderRow={this.renderCommidity}
+              renderRow={this.renderCommidity.bind(this)}
               style={styles.listView}/>
           }
         </View>
@@ -120,9 +120,10 @@ class SearchScreen extends React.Component{
   }
 
   getContent () {
-    this.fetchData()
     this.setState({})
+    this.fetchData()
   }
+
   returnBack () {
     var navigator = this.props.navigator
     navigator.pop()
@@ -154,20 +155,27 @@ class SearchScreen extends React.Component{
 
   renderCommidity (commidities) {
     return (
-       <View style={styles.itemContainer}>
-        <View style={styles.viewItemLeft}>
-          <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
-        </View>
-        <View style={styles.viewItemRight}>
-          <Text style={styles.txtItemTitle}>{commidities.title}</Text>
-          <Text style={styles.txtItemPrice}>¥{commidities.price}</Text>
-          <View style={styles.viewTxtItemLove}>
-            <Icon name="ios-heart-outline" style={styles.iconItem} size={15}/>
-            <Text style={styles.txtItemLove}>{commidities.love}</Text>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
+        <View style={styles.itemContainer}>
+          <View style={styles.viewItemLeft}>
+            <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+          </View>
+          <View style={styles.viewItemRight}>
+            <Text style={styles.txtItemTitle}>{commidities.title}</Text>
+            <Text style={styles.txtItemPrice}>¥{commidities.price}</Text>
+            <View style={styles.viewTxtItemLove}>
+              <Icon name='ios-heart-outline' style={styles.iconItem} size={15}/>
+              <Text style={styles.txtItemLove}>{commidities.love}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
+  }
+
+  toCommodityScreen () {
+    navigator = this.props.navigator
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
   }
 }
 

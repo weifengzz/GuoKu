@@ -12,7 +12,8 @@ let {
   View,
   ScrollView,
   ListView,
-  TouchableOpacity
+  TouchableOpacity,
+  Navigator
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
@@ -40,7 +41,9 @@ class CommodityScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    setTimeout(() => {
+      this.fetchData()
+    }, 500)
   }
 
   fetchData() {
@@ -57,16 +60,37 @@ class CommodityScreen extends React.Component {
 
   renderGraphic(graphics) {
     return (
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
         <View style={styles.item}>
           <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
         </View>
+      </TouchableOpacity>
     )
   }
+
+  toCommodityScreen () {
+    navigator = this.props.navigator 
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+  }
+
   returnback () {
     var navigator = this.props.navigator
     navigator.pop()
   }
+
+  renderLoadingView() {
+    return (
+      <View style={styles.txtContainer}>
+        <Text>
+          正在加载内容。。。
+        </Text>
+      </View>
+    )
+  }
   render () {
+    if (!this.state.loaded) {
+      return this.renderLoadingView()
+    }
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.viewTop}>
@@ -154,7 +178,7 @@ class CommodityScreen extends React.Component {
             <ListView
               initialListSize={20}
               dataSource={this.state.dataSource1}
-              renderRow={this.renderGraphic}
+              renderRow={this.renderGraphic.bind(this)}
               contentContainerStyle={styles.listView}/>
           </View>
         </View>
@@ -176,6 +200,11 @@ class CommodityScreen extends React.Component {
 let styles = StyleSheet.create({
   container: {
     flexDirection: 'column'
+  },
+  txtContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   viewTop: {
     height: 50,

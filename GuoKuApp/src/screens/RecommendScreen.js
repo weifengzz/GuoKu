@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 import Icon from 'react-native-vector-icons/Ionicons'
 import ViewPager from 'react-native-viewpager'
 import ReacommendViewPager from './ReacommendViewPager'
@@ -15,7 +15,6 @@ let SCREENS = [
 var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
 
 let {
-  AppRegistry,
   Image,
   ListView,
   StyleSheet,
@@ -23,8 +22,8 @@ let {
   View,
   Navigator,
   ScrollView,
-  TouchableHighlight
-} = React;
+  TouchableOpacity
+} = React
 
 class RecommendScreen extends React.Component{
   constructor (props) {
@@ -51,7 +50,7 @@ class RecommendScreen extends React.Component{
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.fetchData()
   }
 
   fetchData() {
@@ -61,9 +60,9 @@ class RecommendScreen extends React.Component{
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
           loaded: true,
-        });
+        })
       })
-      .done();
+      .done()
   }
 
   render () {
@@ -72,7 +71,7 @@ class RecommendScreen extends React.Component{
     }
     return(
       <ScrollView contentContainerStyle={styles.container}>
-        <TouchableHighlight onPress={() => {this.toSearchScreen()}}>
+        <TouchableOpacity onPress={() => {this.toSearchScreen()}}>
           <View style={styles.viewSearch}>
             <View style={styles.viewIcon}>
               <Icon name='search' size={20}/>
@@ -81,7 +80,7 @@ class RecommendScreen extends React.Component{
               <Text >搜索</Text>
             </View>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <View style={styles.viewViewPager}>
           <ViewPager
             dataSource={this.state.dataSource}
@@ -139,7 +138,7 @@ class RecommendScreen extends React.Component{
           <ListView
             initialListSize={20}
             dataSource={this.state.dataSource1}
-            renderRow={this.renderGraphic}
+            renderRow={this.renderGraphic.bind(this)}
             contentContainerStyle={styles.listView}/>
         </View>
       </ScrollView>
@@ -148,12 +147,17 @@ class RecommendScreen extends React.Component{
 
   renderGraphic(graphics) {
     return (
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this)}>
         <View style={styles.item}>
           <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
         </View>
-    );
+      </TouchableOpacity>
+    )
   }
-
+  toCommodityScreen () {
+    navigator = this.props.navigator 
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
+  }
   _renderPage (
     data: Object,
     pageID: number | string) {
