@@ -3,14 +3,37 @@ db.commidities.insert({
 	title: '', 
     content: '',
     price:'',
-    url: '',
     date: '',
     comment : '',
     commentAuthor: '',
-    address:'',
-    imgPath: ''
+    imgPath1: '',
+    imgPath2: '',
+    imgPath3: '',
+    category: '',
+    love: 0, 
+    loveHeadImg: ''
 })
 
+
+db.commidities.insert({
+    title: '方形木质托盘 多款', 
+    content: '采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。',
+    price: '558.00',
+    date: '2015-12-3',
+    comment : ['采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。','hehehe','什么东西啊这是'],
+    commentAuthor: ['小李','一行为光','你瞅啥'],
+    commentImg: ['tx03.png','tx06.png','tx05.png'],
+    imgPath1: 'c01.png',
+    imgPath2: 'c02.png',
+    imgPath3: 'c03.png',
+    category: '家具',
+    categoryImg: 'jj01.png',
+    love: 5,
+    loveHeadImg: ['tx02.png','tx03.png','tx06.png','tx05.png','tx07.png']
+})
+
+
+-----------------------------------------------------------
 
 
 
