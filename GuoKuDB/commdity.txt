@@ -17,12 +17,12 @@ db.commidities.insert({
 
 db.commidities.insert({
     title: '方形木质托盘 多款', 
-    content: '采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。',
     price: '558.00',
     date: '2015-12-3',
     comment : ['采用橡木底和橡木框架制成，正面为菱形色块拼接，可储存物品或盛装下午茶、早晚餐。','hehehe','什么东西啊这是'],
     commentAuthor: ['小李','一行为光','你瞅啥'],
     commentImg: ['tx03.png','tx06.png','tx05.png'],
+    comemntDate:['2016-1-2','2015-12-3','2016-1-22'],
     imgPath1: 'c01.png',
     imgPath2: 'c02.png',
     imgPath3: 'c03.png',
@@ -31,6 +31,41 @@ db.commidities.insert({
     love: 5,
     loveHeadImg: ['tx02.png','tx03.png','tx06.png','tx05.png','tx07.png']
 })
+
+db.commidities.insert({
+    title: '熊本熊拖拉机',
+    price: '558.00',
+    date: '2015-12-9',
+    comment : ['田宫 TAMIYA Kumamon 熊本熊遥控拖拉机，驾驶员是日本熊本县吉祥物 Kumamon 熊本熊，造型非常可爱。','hehehe','什么东西啊这是'],
+    commentAuthor: ['一行为光','snake','你瞅啥'],
+    commentImg: ['tx07.png','tx05.png','tx01.png'],
+    comemntDate:['2015-12-2','2015-12-4','2016-2-22'],
+    imgPath1: 'c04.png',
+    imgPath2: 'c05.png',
+    imgPath3: 'c06.png',
+    category: '玩具',
+    categoryImg: 'wj01.png',
+    love: 99,
+    loveHeadImg: ['tx07.png','tx02.png','tx03.png','tx06.png','tx01.png']
+})
+
+db.commidities.insert({
+    title: '2016 可定制手账', 
+    price: '395.00',
+    date: '2016-1-9',
+    comment : ['一个原本比较小众的美国手账品牌 Erin Condren，但最近在 INS 上还蛮火的。产品样式很多.','hehehe','什么东西啊这是'],
+    commentAuthor: ['MiMi','snake','你瞅啥'],
+    commentImg: ['tx05.png','tx01.png','tx02.png'],
+    comemntDate:['2015-12-29','2015-12-4','2016-2-22'],
+    imgPath1: 'c07.png',
+    imgPath2: 'c08.png',
+    imgPath3: 'c09.png',
+    category: '书本',
+    categoryImg: 'sb01.png',
+    love: 100,
+    loveHeadImg: ['tx01.png','tx05.png','tx06.png','tx06.png','tx05.png']
+})
+
 
 
 -----------------------------------------------------------

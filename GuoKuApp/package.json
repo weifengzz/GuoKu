@@ -7,8 +7,6 @@
   },
   "dependencies": {
     "react-native": "^0.17.0",
-    "react-native-floating-label-text-input": "0.0.8",
-    "react-native-floating-labels": "^1.0.0",
     "react-native-scrollable-tab-view": "^0.3.4",
     "rn-navbar": "^0.2.3"
   },
