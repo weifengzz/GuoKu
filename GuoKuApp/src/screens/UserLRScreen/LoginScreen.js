@@ -62,74 +62,71 @@ var LoginScreen = React.createClass({
   */
   render: function () {
 
-    global.storage.save({
-      key: 'loginState',
-      rawData: {
-        from: 'some other site',
-        userid: 'some userid',
-        token: 'some token'
-      },
-      expires: 1000 * 3600
-    })
-
     global.storage.load({
-      key: 'loginState',
+      key: 'users',
       autoSync: true,
       syncInBackground: true
     }).then(ret => {
-      ToastAndroid.show(ret.userid + '', ToastAndroid.SHORT)
-      console.log(ret.userid)
+      if (!this.state.logined&&!this.state.loaded) {
+        this.setState({
+          logined: true
+        })
+      }
     }).catch(err => {
       console.warn(err)
     })
-
     if (!this.state.logined && !this.state.loaded) {
       return (
-        <View style={styles.container}>
-          <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
-            <View style={styles.viewTop}>
-              <View style={styles.viewClose} />
-              <TouchableHighlight onPress= {() => this.registerClick()}>
-                <View style={styles.viewRegisterleft} >
-                  <Text style={styles.textRegister}>注册</Text>
-                </View>
-                </TouchableHighlight>
-              <View style={styles.viewRegisterRight}>
-                <Icon name='chevron-right' size={30} style={styles.icon} />
-              </View>
-            </View>
-            <View style={styles.viewTitle}>
-              <Text style={styles.txtTitile}>果库</Text>
-            </View>
-            <View style={styles.viewLogin}>
-             <Form
-              ref='form'
-              type={Person}
-              value={this.state.value}
-              options={options} />
-            </View>
-            <View style={styles.viewLoginBtn}>
-              <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
-                <View style={styles.viewbtn}>
-                  <Text style={styles.txtLogin}>登录</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.viewLogin3}>
-              <View style={styles.viewLogin3Container}>
-                <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
-                <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
-                <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
-              </View>
-            </View>
-          </Image>
-        </View>
+        this.initScreen()
       )
     }
     if (this.state.loaded) {
       return <View><Text>正在登录。。。</Text></View>
     }
     return (<UserDetailScreen/>)
+  },
+  initScreen: function () {
+    return (
+      <View style={styles.container}>
+        <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
+          <View style={styles.viewTop}>
+            <View style={styles.viewClose} />
+            <TouchableHighlight onPress= {() => this.registerClick()}>
+              <View style={styles.viewRegisterleft} >
+                <Text style={styles.textRegister}>注册</Text>
+              </View>
+              </TouchableHighlight>
+            <View style={styles.viewRegisterRight}>
+              <Icon name='chevron-right' size={30} style={styles.icon} />
+            </View>
+          </View>
+          <View style={styles.viewTitle}>
+            <Text style={styles.txtTitile}>果库</Text>
+          </View>
+          <View style={styles.viewLogin}>
+           <Form
+            ref='form'
+            type={Person}
+            value={this.state.value}
+            options={options} />
+          </View>
+          <View style={styles.viewLoginBtn}>
+            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+              <View style={styles.viewbtn}>
+                <Text style={styles.txtLogin}>登录</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.viewLogin3}>
+            <View style={styles.viewLogin3Container}>
+              <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
+              <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
+              <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
+            </View>
+          </View>
+        </Image>
+      </View>
+    )
   },
   registerClick: function () {
     var navigator = this.props.navigator
@@ -153,6 +150,13 @@ var LoginScreen = React.createClass({
     .then((response) => response.json())
     .then((responseData) => {
       if (responseData['isOK'] === 'ok') {
+        global.storage.save({
+          key: 'users',
+          rawData: {
+            userName: un
+          },
+          expires: 1000 * 3600 * 24 * 7
+        })
         ToastAndroid.show('登录成功', ToastAndroid.SHORT)
         this.setState({
           logined: true,
@@ -160,6 +164,10 @@ var LoginScreen = React.createClass({
         })
       } else {
         ToastAndroid.show('登录失败', ToastAndroid.SHORT)
+        this.setState({
+          logined: false,
+          loaded: false
+        })
       }
     })
     .done()
