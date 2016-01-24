@@ -20,22 +20,25 @@ let {
 const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
 
 let SCREENS = [
- CommodityViewPager,
- CommodityViewPager,
- CommodityViewPager,
- CommodityViewPager
-].map((Page, index) => <Page />)
+].map((Page, index) => Page)
 
 class CommodityScreen extends React.Component {
   constructor (props) {
     super(props)
+
+    var commodity = props.commodity
+    SCREENS.splice(0, 3)
+    SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>)
+    SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath2)}}/>)
+    SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath3)}}/>)
+
     let dataSource = new ViewPager.DataSource({
       pageHasChanged: (p1, p2) => p1 !== p2
     })
     this.state = {
       dataSource: dataSource.cloneWithPages(SCREENS),
       dataSource1: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2
       }),
       loaded: false
     }
@@ -84,7 +87,7 @@ class CommodityScreen extends React.Component {
     return (
       <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commodity)}>
         <View style={styles.item}>
-          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.imgPath1)}}/>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>
         </View>
       </TouchableOpacity>
     )
@@ -228,6 +231,12 @@ let styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  imgviewPager: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignSelf:'stretch'
   },
   viewTop: {
     height: 50,
