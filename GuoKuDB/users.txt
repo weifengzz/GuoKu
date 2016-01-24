@@ -1,5 +1,9 @@
 db.users.insert({
 	email: '596758897@qq.com', 
     password: '123456',
-    name: 'weifengzz'
+    name: 'weifengzz',
+    headImg: 'txmr.png',
+   	attention: 1,
+   	fans: 12,
+   	love: ['c04.png','c01.png','c08.png']
 })

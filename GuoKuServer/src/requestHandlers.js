@@ -64,6 +64,11 @@ function register(response,request){
   })
   .addListener('end',function(){
     var result = JSON.parse(info);
+    // var message = {
+    //   'userName': result['email'],
+    //   'password': result['password'],
+    //   'name' : result['name'],
+    // }
     var userName = result['email'];
     var passWord = result['password'];
     var nm = result['name'];
