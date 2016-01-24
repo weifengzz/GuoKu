@@ -25,7 +25,7 @@ let {
   TouchableOpacity
 } = React
 
-class RecommendScreen extends React.Component{
+class RecommendScreen extends React.Component {
   constructor (props) {
     super(props)
     let dataSource = new ViewPager.DataSource({
@@ -34,12 +34,12 @@ class RecommendScreen extends React.Component{
     this.state = {
       dataSource: dataSource.cloneWithPages(SCREENS),
       dataSource1: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false,
+      loaded: false
     }
   }
-  renderLoadingView() {
+  renderLoadingView () {
     return (
       <View style={styles.txtContainer}>
         <Text>
@@ -49,17 +49,17 @@ class RecommendScreen extends React.Component{
     )
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.fetchData()
   }
 
-  fetchData() {
-    fetch(REQUEST_URL)
+  fetchData () {
+    fetch (REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-          loaded: true,
+          loaded: true
         })
       })
       .done()
@@ -85,12 +85,12 @@ class RecommendScreen extends React.Component{
           <ViewPager
             dataSource={this.state.dataSource}
             renderPage={this._renderPage}
-            isLoop={true}
-            autoPlay={true} />
+            isLoop = {true}
+            autoPlay = {true} />
         </View>
         <View style={styles.viewRecommendTop}/>
         <Text style={styles.txtTitle}>推荐品类</Text>
-        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal = {true}>
           <View style={styles.svRecommend}>
             <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
             <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
@@ -165,13 +165,12 @@ class RecommendScreen extends React.Component{
     data: Object,
     pageID: number | string) {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:                                                                                                                                                                                                                                                                                       1}}>
         {data}
       </View>
     )
   }
-  
-  toSearchScreen (){
+  toSearchScreen () {
     var navigator = this.props.navigator
     navigator.push({id: 'SearchScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
   }
@@ -210,7 +209,7 @@ var styles = StyleSheet.create({
     height: 200,
     marginTop: 10,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   viewRecommendTop: {
     height: 10,
@@ -243,14 +242,14 @@ var styles = StyleSheet.create({
   },
   viewGraphicLeft: {
     margin: 10,
-    flex: 2,
+    flex: 2
   },
   viewGraphicRight: {
     margin: 10,
     flex: 1
   },
   textGraphic: {
-    fontSize: 17,
+    fontSize: 17
   },
   imgGraphic: {
     resizeMode: 'stretch',

@@ -17,7 +17,7 @@ let {
   ToastAndroid
 } = React
 
-const REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
+const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
 
 let SCREENS = [
  CommodityViewPager,
@@ -41,27 +41,48 @@ class CommodityScreen extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
       this.fetchData()
     }, 500)
   }
 
-  fetchData() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-          loaded: true,
-        });
+  // fetchData() {
+  //   fetch(REQUEST_URL)
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       this.setState({
+  //         dataSource1: this.state.dataSource1.cloneWithRows(responseData),
+  //         loaded: true
+  //       });
+  //     })
+  //     .done();
+  // }
+
+  fetchData () {
+    fetch (REQUEST_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        category: this.props.commodity.category
       })
-      .done();
+    })
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({
+        dataSource1: this.state.dataSource1.cloneWithRows(responseData),
+        loaded: true
+      })
+    })
+    .done()
   }
 
-  renderGraphic(commodity) {
+  renderGraphic (commodity) {
     return (
-      <TouchableOpacity onPress={this.toCommodityScreen.bind(this,commodity)}>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commodity)}>
         <View style={styles.item}>
           <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.imgPath1)}}/>
         </View>

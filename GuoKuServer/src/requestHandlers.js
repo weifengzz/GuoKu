@@ -96,12 +96,34 @@ function search(response,request){
   }
 }
 
+//根据类别进行搜索
+function searchByCategory(response,request){
+  if(request.method != 'POST'){
+    var query = url.parse(request.url).query;
+    var category = querystring.parse(query)['category'];
+    Search.searchByCategory(response,request,category);
+  }else{
+    var info = "";
+    request.addListener('data', function(chunk){  
+        info += chunk;
+        console.log(info.toString());
+    })  
+    .addListener('end', function(){
+        var result = JSON.parse(info);
+        var category = result['category'];
+        console.log(category)
+        Search.searchByCategory(response,request,category);
+    })
+  }
+}
+
 exports.getImage = getImage;
 exports.getGraphic = getGraphic;
 exports.getUser = getUser;
 exports.register = register;
 exports.search = search;
 exports.getCommidity = getCommidity;
+exports.searchByCategory = searchByCategory;
 
 
 

@@ -13,4 +13,5 @@ handle["/getUser"] = requestHandlers.getUser;
 handle["/register"] = requestHandlers.register;
 handle["/getCommidity"] = requestHandlers.getCommidity;
 handle["/search"] = requestHandlers.search;
+handle["/searchByCategory"] = requestHandlers.searchByCategory;
 server.start(router.route, handle);
