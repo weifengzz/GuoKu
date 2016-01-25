@@ -24,7 +24,11 @@ class GraphicWebView extends Component {
             </View>
           </TouchableOpacity>
           <View style={styles.viewTitleCenter}>
-            <Text>{graphics.title}</Text>
+            <Text>
+            {
+              graphics.title.length > 10 ? graphics.title.substring(0, 10) + '...' : graphics.title
+            }
+            </Text>
           </View>
           <TouchableOpacity>
             <View style={styles.viewTitleRight}>

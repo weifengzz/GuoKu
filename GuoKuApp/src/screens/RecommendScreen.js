@@ -38,7 +38,8 @@ class RecommendScreen extends React.Component {
       dataSource1: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false,
+      cloaded: false,
+      gloaded: false,
       category: null,
       graphic: null
     }
@@ -74,7 +75,8 @@ class RecommendScreen extends React.Component {
 
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-          category: category
+          category: category,
+          gloaded: true
         })
       })
       .done()
@@ -98,13 +100,13 @@ class RecommendScreen extends React.Component {
 
         this.setState({
           graphic: graphic,
-          loaded: true
+          cloaded: true
         })
       })
       .done()
   }
   render () {
-    if (!this.state.loaded) {
+    if (!this.state.gloaded||!this.state.cloaded) {
       return this.renderLoadingView()
     }
     var categoryImgs = this.state.category
