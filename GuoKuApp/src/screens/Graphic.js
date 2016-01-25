@@ -4,44 +4,44 @@ var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 var {
-  AppRegistry,
   Image,
   ListView,
   StyleSheet,
   Text,
   View,
+  Navigator,
+  TouchableOpacity
 } = React
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
-var Image_URL = 'http://192.168.6.5:8888/getImage?imgName='
 
 var Graphic = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2
       }),
       loaded: false
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     this.fetchData()
   },
 
-  fetchData: function() {
-    fetch(REQUEST_URL)
+  fetchData: function () {
+    fetch (REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData),
-          loaded: true,
+          loaded: true
         })
       })
       .done()
   },
 
-  render: function() {
+  render: function () {
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
@@ -50,25 +50,27 @@ var Graphic = React.createClass({
       <ListView
         initialListSize={5}
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderGraphic}
         style={styles.listView}/>
     )
   },
 
-  renderLoadingView: function() {
+  renderLoadingView: function () {
     return (
       <View style={styles.txtContainer}>
         <Text>
-           正在加载图文。。。
+          正在加载图文。。。
         </Text>
       </View>
     )
   },
 
-  renderMovie: function(graphics) {
+  renderGraphic: function (graphics) {
     return (
       <View style={styles.container}>
-        <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+graphics.imgPath)}}/>
+        <TouchableOpacity onPress={this.showDetail.bind(this, graphics)}>
+          <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + graphics.imgPath)}}/>
+        </TouchableOpacity>
         <Text style={styles.txtTitle}>{graphics.title}</Text>
         <Text style={styles.txtContent}>{graphics.title}</Text>
         <View style={styles.viewBottomContent}>
@@ -81,6 +83,10 @@ var Graphic = React.createClass({
       </View>
     )
   },
+  showDetail: function (graphics) {
+    navigator = this.props.navigator
+    navigator.push({id: 'GraphicWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {graphics}})
+  }
 })
 
 var styles = StyleSheet.create({
@@ -103,34 +109,34 @@ var styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex:1,
-    fontSize: 20,
+    flex: 1,
+    fontSize: 17,
     color: 'black'
   },
   txtContent: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex:1,
-    fontSize: 16
+    flex: 1,
+    fontSize: 15
   },
   txtBottom: {
-    flex:1,
-    fontSize: 12,
+    flex: 1,
+    fontSize: 12
   },
   viewBottom: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row'
   },
   imageSplit: {
-    flex:0.3,
+    flex: 0.3,
     backgroundColor: 'gray'
   },
   viewBottomContent: {
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5,
-    flex:1,
+    flex: 1,
     alignItems: 'flex-end'
   }
 })

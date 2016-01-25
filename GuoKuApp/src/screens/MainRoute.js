@@ -51,7 +51,7 @@ class MainRoute extends React.Component {
     var  navigator = this.props.navigator
     var commodity = this.props.commodity
     if (num === 1){
-      this.setState({choice:1, screen: <MainScreen navigator={navigator} commodity={commodity}/>})
+      this.setState({choice:1, screen: <MainScreen navigator={navigator} />})
     }
     if (num ===2){
        this.setState({choice:2, screen: <RecommendScreen navigator={navigator}/> })

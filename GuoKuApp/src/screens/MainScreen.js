@@ -13,12 +13,11 @@ var {
 class MainScreen extends React.Component {
   render () {
     var navigator = this.props.navigator
-    var commodity = this.props.commodity
      return (
       <View style={styles.container}>
         <View style={styles.content}>
           <ScrollableTabView>
-            <Commodity tabLabel='商品' navigator={navigator} commodity={commodity}/>
+            <Commodity tabLabel='商品' navigator={navigator}/>
             <Graphic tabLabel='图文' navigator={navigator}/>
           </ScrollableTabView>
         </View>

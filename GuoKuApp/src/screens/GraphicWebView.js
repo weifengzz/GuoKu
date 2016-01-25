@@ -4,7 +4,9 @@ import React, {
   StyleSheet,
   Text,
   View,
-  WebView
+  TouchableOpacity,
+  WebView,
+  Navigator
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -15,15 +17,19 @@ class GraphicWebView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.viewTitle}>
-          <View style={styles.viewTitleLeft}>
-            <Text>back</Text>
-          </View>
+          <TouchableOpacity onPress={this.goBack.bind(this)}>
+            <View style={styles.viewTitleLeft}>
+              <Icon name='angle-left' size={20}/>
+            </View>
+          </TouchableOpacity>
           <View style={styles.viewTitleCenter}>
             <Text>title</Text>
           </View>
-          <View style={styles.viewTitleRight}>
-            <Text>go</Text>
-          </View>
+          <TouchableOpacity>
+            <View style={styles.viewTitleRight}>
+              <Icon name='ellipsis-h' size={20}/>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.webviewComtainer}>
           <WebView
@@ -37,11 +43,17 @@ class GraphicWebView extends Component {
       </View>
     )
   }
+
+  goBack () {
+    navigator = this.props.navigator
+    navigator.pop()
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff'
   },
   viewTitle: {
     height: 50,
