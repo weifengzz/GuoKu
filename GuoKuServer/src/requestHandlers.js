@@ -116,6 +116,10 @@ function searchByCategory(response,request){
     })
   }
 }
+//查询前number条数据
+function searchTopNumber(response,request){
+  Search.searchTopNumber(response,request,4);
+}
 
 exports.getImage = getImage;
 exports.getGraphic = getGraphic;
@@ -124,6 +128,7 @@ exports.register = register;
 exports.search = search;
 exports.getCommidity = getCommidity;
 exports.searchByCategory = searchByCategory;
+exports.searchTopNumber = searchTopNumber;
 
 
 

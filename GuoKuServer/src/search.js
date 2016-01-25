@@ -23,5 +23,16 @@ function searchByCategory(response,request,category){
   });
 }
 
+function searchTopNumber(response,request,number){
+  Commidity.find(function(err, articles) {
+    if (err) return console.error(err);
+    console.log("search");
+    response.writeHead(200, {"Content-Type": "application/json"});
+    response.write(JSON.stringify(articles));
+    response.end();
+  }).limit(number);
+}
+
 exports.search = search;
 exports.searchByCategory = searchByCategory;
+exports.searchTopNumber = searchTopNumber;
