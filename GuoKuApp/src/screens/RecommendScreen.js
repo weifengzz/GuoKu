@@ -1,18 +1,14 @@
 'use strict'
 
-var React = require('react-native')
+import React from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import ViewPager from 'react-native-viewpager'
-import ReacommendViewPager from './ReacommendViewPager'
 
 let SCREENS = [
- ReacommendViewPager,
- ReacommendViewPager,
- ReacommendViewPager,
- ReacommendViewPager
-].map((Page, index) => <Page />)
+].map((Page, index) => Page)
 
-var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
+const REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
+var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
 
 let {
   Image,
@@ -22,12 +18,18 @@ let {
   View,
   Navigator,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } = React
 
 class RecommendScreen extends React.Component {
   constructor (props) {
     super(props)
+    SCREENS.splice(0, 4)
+    SCREENS.push(<Image style={styles.imgviewPager} source={require('../assets/vp3.png')}/>)
+    SCREENS.push(<Image style={styles.imgviewPager} source={require('../assets/vp3.png')}/>)
+    SCREENS.push(<Image style={styles.imgviewPager} source={require('../assets/vp3.png')}/>)
+    SCREENS.push(<Image style={styles.imgviewPager} source={require('../assets/vp3.png')}/>)
     let dataSource = new ViewPager.DataSource({
       pageHasChanged: (p1, p2) => p1 !== p2
     })
@@ -36,7 +38,8 @@ class RecommendScreen extends React.Component {
       dataSource1: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false
+      loaded: false,
+      category: null
     }
   }
   renderLoadingView () {
@@ -54,24 +57,39 @@ class RecommendScreen extends React.Component {
   }
 
   fetchData () {
+    // 加载底部推荐界面
     fetch (REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
+        SCREENS.splice(0, 4)
+        SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[0].imgPath1)}}/>)
+        SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[1].imgPath1)}}/>)
+        SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[2].imgPath1)}}/>)
+        SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[3].imgPath1)}}/>)       
+        let category = new Array()
+        for (var i = responseData.length - 1; i >= 0; i--) {
+          category.push(<Image key={i} style={styles.imgRecommend} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].categoryImg)}} />)
+        };
+
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
+          category: category,
           loaded: true
         })
       })
       .done()
+      // 获取图文
+
   }
 
   render () {
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
-    return(
+    var imgs = this.state.category
+    return (
       <ScrollView contentContainerStyle={styles.container}>
-        <TouchableOpacity onPress={() => {this.toSearchScreen()}}>
+        <TouchableOpacity onPress={() => { this.toSearchScreen() }}>
           <View style={styles.viewSearch}>
             <View style={styles.viewIcon}>
               <Icon name='search' size={20}/>
@@ -92,18 +110,9 @@ class RecommendScreen extends React.Component {
         <Text style={styles.txtTitle}>推荐品类</Text>
         <ScrollView showsHorizontalScrollIndicator={false} horizontal = {true}>
           <View style={styles.svRecommend}>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/logo.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/logo.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend2.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend2.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/logo.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/logo.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend2.png')}></Image>
-            <Image style={styles.imgRecommend} source={require('../assets/recommend1.png')}></Image>
+            {
+              imgs.map((img) => (img))
+            }
           </View>
         </ScrollView>
         <View style={styles.viewRecommendTop}/>
@@ -145,22 +154,15 @@ class RecommendScreen extends React.Component {
     )
   }
 
-  renderGraphic(commodity) {
+  renderGraphic (commodity) {
     return (
-      <TouchableOpacity onPress={this.toCommodityScreen.bind(this,commodity)}>
+      <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commodity)}>
         <View style={styles.item}>
-          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.imgPath1)}}/>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>
         </View>
       </TouchableOpacity>
     )
   }
-
-  toCommodityScreen (commodity) {
-    var commodity = commodity
-    navigator = this.props.navigator
-    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
-  }
-
   _renderPage (
     data: Object,
     pageID: number | string) {
@@ -170,6 +172,17 @@ class RecommendScreen extends React.Component {
       </View>
     )
   }
+  /*
+    商品详情界面
+  */
+  toCommodityScreen (commodity) {
+    var commodity = commodity
+    navigator = this.props.navigator
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
+  }
+  /*
+    商品查询界面
+  */
   toSearchScreen () {
     var navigator = this.props.navigator
     navigator.push({id: 'SearchScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump})
@@ -184,6 +197,12 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  imgviewPager: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignSelf: 'stretch'
   },
   viewSearch: {
     flexDirection: 'row',
@@ -277,11 +296,11 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-   imgList: {
+  imgList: {
     height: 110,
     width: 110,
     resizeMode: 'cover'
-  },
+  }
 })
 
 module.exports = RecommendScreen
