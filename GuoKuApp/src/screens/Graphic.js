@@ -72,7 +72,7 @@ var Graphic = React.createClass({
           <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + graphics.imgPath)}}/>
         </TouchableOpacity>
         <Text style={styles.txtTitle}>{graphics.title}</Text>
-        <Text style={styles.txtContent}>{graphics.title}</Text>
+        <Text style={styles.txtContent}>{graphics.describe}</Text>
         <View style={styles.viewBottomContent}>
           <View style={styles.viewBottom}>
             <Icon name='clock-o' size={20} />
@@ -100,7 +100,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   topImage: {
-    height: 300,
+    height: 200,
     flex: 1,
     margin: 10,
     resizeMode: 'cover'

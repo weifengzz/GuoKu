@@ -14,6 +14,7 @@ var WEBVIEW_REF = 'webview'
 
 class GraphicWebView extends Component {
   render () {
+    let graphics = this.props.graphics
     return (
       <View style={styles.container}>
         <View style={styles.viewTitle}>
@@ -23,7 +24,7 @@ class GraphicWebView extends Component {
             </View>
           </TouchableOpacity>
           <View style={styles.viewTitleCenter}>
-            <Text>title</Text>
+            <Text>{graphics.title}</Text>
           </View>
           <TouchableOpacity>
             <View style={styles.viewTitleRight}>
@@ -36,7 +37,10 @@ class GraphicWebView extends Component {
             ref={WEBVIEW_REF}
             automaticallyAdjustContentInsets={false}
             style={styles.webView}
-            url={'http://www.baidu.com/'}
+            url={graphics.url}
+            renderLoading = {() => {
+              return <View><Text>正在加载...</Text></View>
+            }}
             javaScriptEnabledAndroid={true}
             startInLoadingState={true} />
         </View>
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ccc'
+    backgroundColor: '#ffffff'
   },
   viewTitleLeft: {
     height: 49,
