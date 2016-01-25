@@ -18,6 +18,49 @@ db.graphics.find().pretty
 创建图文
 －－－－－－－－－－－－－－
 
+
+
+-----------------------------------------------------------------------------------------------
+1.25
+
+db.graphics.insert({
+    title: '', 
+    describe: '',
+    url: '',
+    date: '',
+    imgPath: ''
+})
+
+db.graphics.insert({
+    title: '收纳不只做减法，Vacavaliente 教你收纳成艺术', 
+    describe: '收纳即整理和缩小空间之意，从日本的收纳女王近藤麻理惠到市场上各类整理书，教给我们的都是如何看不见杂物',
+    url: 'http://www.guoku.com/articles/1609/',
+    date: '2015-12-4',
+    imgPath: '0001.png'
+})
+db.graphics.insert({
+    title: '看欧洲人如何度过漫漫长夜…', 
+    describe: '经历一拨寒潮席卷，北方人民不得不感谢集中供暖政策这时候的雪中送碳，虽然有时候它也有点不够暖...',
+    url: 'http://www.guoku.com/articles/1610/',
+    date: '2015-11-4',
+    imgPath: '0002.png'
+})
+db.graphics.insert({
+    title: 'Habitat 开卖羽绒被前', 
+    describe: '英国女历史学家，BBC 热门节目主持人 Lucy Worsley 曾经在她《If Walls Could Talk》一书中...',
+    url: 'http://www.guoku.com/articles/1500/',
+    date: '2015-1-4',
+    imgPath: '0003.png'
+})
+db.graphics.insert({
+    title: 'IZOLA 日用品，用英文告诉你人生哲理', 
+    describe: '观念艺术兴起于上世纪 60 年代的美国，其表象是使用实物、照片、语言等方式更为直接地传达自己的观念...',
+    url: 'http://www.guoku.com/articles/1610/',
+    date: '2015-1-14',
+    imgPath: '0004.png'
+})
+
+-----------------------------------------------------------------------------------------------
 db.graphics.insert({
 	title: '', 
     content: '',
