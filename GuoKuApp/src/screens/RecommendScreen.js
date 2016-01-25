@@ -7,8 +7,8 @@ import ViewPager from 'react-native-viewpager'
 let SCREENS = [
 ].map((Page, index) => Page)
 
-const REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
-var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
+const REQUEST_URL_COMMODITY = 'http://192.168.6.5:8888/getCommidity'
+const REQUEST_URL_GRAPHIC = 'http://192.168.6.5:8888/getGraphic'
 
 let {
   Image,
@@ -39,7 +39,8 @@ class RecommendScreen extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
       loaded: false,
-      category: null
+      category: null,
+      graphic: null
     }
   }
   renderLoadingView () {
@@ -58,7 +59,7 @@ class RecommendScreen extends React.Component {
 
   fetchData () {
     // 加载底部推荐界面
-    fetch (REQUEST_URL)
+    fetch (REQUEST_URL_COMMODITY)
       .then((response) => response.json())
       .then((responseData) => {
         SCREENS.splice(0, 4)
@@ -73,20 +74,41 @@ class RecommendScreen extends React.Component {
 
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-          category: category,
-          loaded: true
+          category: category
         })
       })
       .done()
       // 获取图文
+    fetch (REQUEST_URL_GRAPHIC)
+      .then((response) => response.json())
+      .then((responseData) => {
+        let graphic = new Array()
+        for (var i = 0; i < 3; i++) {
+          graphic.push(
+            <View key={i} style={styles.graphicRecommend}>
+              <View style={styles.viewGraphicLeft}>
+                <Text style={styles.textGraphic}>{responseData[i].title}</Text>
+              </View>
+              <View style={styles.viewGraphicRight}>
+                <Image style={styles.imgGraphic} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].imgPath)}}/>
+              </View>
+            </View>
+          )
+        };
 
+        this.setState({
+          graphic: graphic,
+          loaded: true
+        })
+      })
+      .done()
   }
-
   render () {
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
-    var imgs = this.state.category
+    var categoryImgs = this.state.category
+    var graphicImgs = this.state.graphic
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <TouchableOpacity onPress={() => { this.toSearchScreen() }}>
@@ -111,36 +133,15 @@ class RecommendScreen extends React.Component {
         <ScrollView showsHorizontalScrollIndicator={false} horizontal = {true}>
           <View style={styles.svRecommend}>
             {
-              imgs.map((img) => (img))
+              categoryImgs.map((img) => (img))
             }
           </View>
         </ScrollView>
         <View style={styles.viewRecommendTop}/>
         <Text style={styles.txtTitle}>热门图文</Text>
-        <View style={styles.graphicRecommend}>
-          <View style={styles.viewGraphicLeft}>
-            <Text style={styles.textGraphic}>总结2015年度值得你用钱包去深爱的100家好店</Text>
-          </View>
-          <View style={styles.viewGraphicRight}>
-            <Image style={styles.imgGraphic} source={require('../assets/graphthj3.png')}/>
-          </View>
-        </View>
-          <View style={styles.graphicRecommend}>
-          <View style={styles.viewGraphicLeft}>
-            <Text style={styles.textGraphic}>Noritake用插画为写真Monocle年刊御用</Text>
-          </View>
-          <View style={styles.viewGraphicRight}>
-            <Image style={styles.imgGraphic} source={require('../assets/graphthj1.png')}/>
-          </View>
-        </View>
-          <View style={styles.graphicRecommend}>
-          <View style={styles.viewGraphicLeft}>
-            <Text style={styles.textGraphic}>感谢这八本2016日离，让我们把日子过成段</Text>
-          </View>
-          <View style={styles.viewGraphicRight}>
-            <Image style={styles.imgGraphic} source={require('../assets/graphthj2.png')}/>
-          </View>
-        </View>
+          {
+            graphicImgs.map((graphic) => (graphic))
+          }
         <View style={styles.viewRecommendTop}/>
         <Text style={styles.txtTitle}>热门商品</Text>
         <View style={styles.viewList}>
@@ -268,10 +269,10 @@ var styles = StyleSheet.create({
     flex: 1
   },
   textGraphic: {
-    fontSize: 17
+    fontSize: 15
   },
   imgGraphic: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: null,
     height: 100
   },
