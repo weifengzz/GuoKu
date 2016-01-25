@@ -5,7 +5,7 @@ import RegisterScreen from './screens/UserLRScreen/RegisterScreen'
 import LoginScreen from './screens/UserLRScreen/LoginScreen'
 import SearchScreen from './screens/SearchScreen'
 import CommodityScreen from './screens/CommodityScreen'
-
+import GraphicWebView from './screens/GraphicWebView'
 var {
   Text,
   View,
@@ -19,20 +19,6 @@ class Route extends React.Component {
   static propTypes = {
     navigator: PropTypes.object,
     commodity: PropTypes.string
-    // title: PropTypes.string,
-    // content: PropTypes.string,
-    // price: PropTypes.string,
-    // date: PropTypes.string,
-    // comment: PropTypes.array,
-    // commentAuthor: PropTypes.array,
-    // commentImg: PropTypes.array,
-    // imgPath1: PropTypes.string,
-    // imgPath2: PropTypes.string,
-    // imgPath3: PropTypes.string,
-    // category: PropTypes.string,
-    // categoryImg: PropTypes.string,
-    // love: PropTypes.number,
-    // loveHeadImg: PropTypes.array
   };
   render () {
     return (
@@ -65,21 +51,28 @@ class Route extends React.Component {
           navigator={navigator} />
       )
     }
-    if(routeId === 'LoginScreen'){
-      return(
+    if (routeId === 'LoginScreen') {
+      return (
         <LoginScreen
           navigator={navigator} />
       )
     }
-    if(routeId === 'SearchScreen'){
-      return(
+    if (routeId === 'SearchScreen') {
+      return (
         <SearchScreen
           navigator={navigator} />
       )
     }
-    if(routeId === 'CommodityScreen'){
-      return(
+    if (routeId === 'CommodityScreen') {
+      return (
         <CommodityScreen
+          route={route}
+          navigator={navigator} {...route.passProp}/>
+      )
+    }
+    if (routeId === 'GraphicWebView') {
+      return (
+        <GraphicWebView
           route={route}
           navigator={navigator} {...route.passProp}/>
       )
