@@ -73,7 +73,7 @@ var LoginScreen = React.createClass({
         })
       }
     }).catch(err => {
-      console.warn(err)
+      //console.warn(err)
     })
     if (!this.state.logined && !this.state.loaded) {
       return (

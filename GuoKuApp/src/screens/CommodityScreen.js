@@ -3,7 +3,6 @@
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ViewPager from 'react-native-viewpager'
-import CommodityViewPager from './CommodityViewPager'
 
 let {
   Text,
@@ -49,19 +48,6 @@ class CommodityScreen extends React.Component {
       this.fetchData()
     }, 500)
   }
-
-  // fetchData() {
-  //   fetch(REQUEST_URL)
-  //     .then((response) => response.json())
-  //     .then((responseData) => {
-  //       this.setState({
-  //         dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-  //         loaded: true
-  //       });
-  //     })
-  //     .done();
-  // }
-
   fetchData () {
     fetch (REQUEST_URL, {
       method: 'POST',
