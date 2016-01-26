@@ -143,6 +143,11 @@ function searchTopNumber(response,request){
   Search.searchTopNumber(response,request,4);
 }
 
+// 查询商品的类别
+function getCategory(response,request){
+  Search.getCategory(response,request);
+}
+
 exports.getImage = getImage;
 exports.getGraphic = getGraphic;
 exports.getUser = getUser;
@@ -152,7 +157,7 @@ exports.getCommidity = getCommidity;
 exports.searchByCategory = searchByCategory;
 exports.searchTopNumber = searchTopNumber;
 exports.sortByCategory = sortByCategory;
-
+exports.getCategory = getCategory
 
 
 
