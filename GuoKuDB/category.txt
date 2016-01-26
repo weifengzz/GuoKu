@@ -1,0 +1,31 @@
+
+db.categorys.insert({
+	category: '', 
+    imgPath1: '',
+    smallCategory: ['','','','','']
+})
+
+
+db.categories.insert({
+    category: '化妆品', 
+    imgPath1: 'hzp01.png',
+    smallCategory: ['洗面奶','护手霜','大宝']
+})
+
+db.categories.insert({
+    category: '书本', 
+    imgPath1: 'sb01.png',
+    smallCategory: ['小说','笔记本','科技','杂志']
+})
+
+db.categories.insert({
+    category: '玩具', 
+    imgPath1: 'wj01.png',
+    smallCategory: ['汽车','无人机','娃娃','手枪']
+})
+
+db.categories.insert({
+    category: ' 家具', 
+    imgPath1: 'jj01.png',
+    smallCategory: ['台灯','电脑桌','橱柜','床']
+})
