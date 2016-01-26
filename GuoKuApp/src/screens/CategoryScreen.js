@@ -24,8 +24,12 @@ class CategoryScreen extends Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false
-
+      dataSource1: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      }),
+      loaded: false,
+      iconList: true,
+      iconListName: 'align-justify'
     }
   }
   responseData (response) {
@@ -54,12 +58,26 @@ class CategoryScreen extends Component {
     .then((responseData) => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(responseData),
-        loaded: true
+        loaded: true,
+        dataSource1: this.state.dataSource1.cloneWithRows(responseData)
       })
     })
     .done()
   }
-
+  changeListStyle () {
+    this.fetchData.bind(this)
+    if (this.state.iconList) {
+      this.setState({
+        iconList: false,
+        iconListName: 'th'
+      })
+    } else {
+      this.setState({
+        iconList: true,
+        iconListName: 'align-justify'
+      })
+    }
+  }
   render () {
     var category = this.props.category
     if (!this.state.loaded) {
@@ -78,7 +96,9 @@ class CategoryScreen extends Component {
           <Text style={styles.txtTitle}>{this.props.category.category}</Text>
           <Icon name='heart-o' size={20}/>
           <Icon name='angle-down' size={15}/>
-          <Icon name='align-justify' size={20} style={styles.iconListStyle}/>
+          <TouchableOpacity onPress={this.changeListStyle.bind(this)}>
+            <Icon name={this.state.iconListName} size={20} style={styles.iconListStyle}/>
+          </TouchableOpacity>
         </View>
         <View style={styles.viewSmallContent}>
           <View style={styles.viewLableContent}>
@@ -90,11 +110,17 @@ class CategoryScreen extends Component {
           <Icon name='angle-right' style={styles.colors} size={20} />
         </View>
         <View style={styles.viewContent}>
-          <ListView
-            initialListSize={5}
-            dataSource={this.state.dataSource}
-            renderRow={this.lvColumnItem.bind(this)}
-            style={styles.listView}/>
+          {
+            this.state.iconList ? (<ListView
+              initialListSize={5}
+              dataSource={this.state.dataSource}
+              renderRow={this.lvColumnItem.bind(this)}/>)
+            : (<ListView
+              initialListSize={5}
+              dataSource={this.state.dataSource1}
+              renderRow={this.lvRowItem.bind(this)}
+              contentContainerStyle={styles.listView}/>)
+          }
         </View>
       </View>
     )
@@ -118,8 +144,15 @@ class CategoryScreen extends Component {
       </TouchableOpacity>
     )
   }
-  lvRowItem () {
 
+  lvRowItem (commodity) {
+    return (
+      <TouchableOpacity onPress={this.gotoCommidityScreen.bind(this, commodity)}>
+        <View style={styles.item}>
+          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>
+        </View>
+      </TouchableOpacity>
+    )
   }
   goBack () {
     navigator = this.props.navigator
@@ -134,9 +167,20 @@ class CategoryScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#ffffff'
+    flex: 1
+  },
+  listView: {
+    width: 380,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#F0F0F0'
+  },
+  imgList: {
+    height: 110,
+    width: 110,
+    resizeMode: 'cover',
+    margin: 5
   },
   viewTop: {
     height: 60,

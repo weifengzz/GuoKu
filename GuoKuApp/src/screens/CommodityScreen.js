@@ -69,12 +69,10 @@ class CommodityScreen extends React.Component {
     .done()
   }
 
-  renderGraphic (commodity) {
+  renderCommidity (commodity) {
     return (
       <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commodity)}>
-        <View style={styles.item}>
-          <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>
-        </View>
+        <Image style={styles.imgList} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>
       </TouchableOpacity>
     )
   }
@@ -192,7 +190,7 @@ class CommodityScreen extends React.Component {
             <ListView
               initialListSize={20}
               dataSource={this.state.dataSource1}
-              renderRow={this.renderGraphic.bind(this)}
+              renderRow={this.renderCommidity.bind(this)}
               contentContainerStyle={styles.listView}/>
           </View>
         </View>
