@@ -123,7 +123,8 @@ var styles = StyleSheet.create({
     margin: 10
   },
   txtContent: {
-    fontSize: 16
+    fontSize: 16,
+    marginLeft: 5
   },
   viewTxtContent: {
     marginLeft: 10,

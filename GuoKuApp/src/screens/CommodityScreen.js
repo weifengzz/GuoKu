@@ -132,9 +132,11 @@ class CommodityScreen extends React.Component {
           </View>
           <Icon name='share-square-o' size={20}/>
         </View>
-        <View style={styles.btnBuy}>
-          <Text style={styles.txtLogin}>¥ {commodity.price} 去购买</Text>
-        </View>
+        <TouchableOpacity onPress={this.gotoBuy.bind(this, commodity)}>
+          <View style={styles.btnBuy}>
+            <Text style={styles.txtLogin}>¥ {commodity.price} 去购买</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.viewLove}>
           <View style={styles.viewLoveTop}>
             <Text style={styles.txtLove}>{commodity.love}人喜爱</Text>
@@ -207,6 +209,13 @@ class CommodityScreen extends React.Component {
       </View>
     )
   }
+  /*
+    购买
+  */
+  gotoBuy (commodity) {
+    navigator = this.props.navigator
+    navigator.push({id: 'BuyWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
+  }
 }
 
 let styles = StyleSheet.create({
@@ -222,7 +231,7 @@ let styles = StyleSheet.create({
     flex: 1,
     width: null,
     height: null,
-    alignSelf:'stretch'
+    alignSelf: 'stretch'
   },
   viewTop: {
     height: 50,

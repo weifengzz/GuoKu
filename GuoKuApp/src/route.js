@@ -6,6 +6,8 @@ import LoginScreen from './screens/UserLRScreen/LoginScreen'
 import SearchScreen from './screens/SearchScreen'
 import CommodityScreen from './screens/CommodityScreen'
 import GraphicWebView from './screens/GraphicWebView'
+import BuyWebView from './screens/BuyWebView'
+
 var {
   Text,
   View,
@@ -73,6 +75,13 @@ class Route extends React.Component {
     if (routeId === 'GraphicWebView') {
       return (
         <GraphicWebView
+          route={route}
+          navigator={navigator} {...route.passProp}/>
+      )
+    }
+    if (routeId === 'BuyWebView') {
+      return (
+        <BuyWebView
           route={route}
           navigator={navigator} {...route.passProp}/>
       )
