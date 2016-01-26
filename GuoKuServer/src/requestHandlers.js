@@ -116,6 +116,28 @@ function searchByCategory(response,request){
     })
   }
 }
+//根据类别进行搜索并且排序
+function sortByCategory(response,request){
+  if(request.method != 'POST'){
+    var query = url.parse(request.url).query;
+    var category = querystring.parse(query)['category'];
+    var sort = querystring.parse(query)['sort'];
+    Search.sortByCategory(response,request,category,sort);
+  }else{
+    var info = "";
+    request.addListener('data', function(chunk){  
+        info += chunk;
+        console.log(info.toString());
+    })  
+    .addListener('end', function(){
+        var result = JSON.parse(info);
+        var category = result['category'];
+        var sort = result['sort'];
+        console.log(category)
+        Search.sortByCategory(response,request,category,sort);
+    })
+  }
+}
 //查询前number条数据
 function searchTopNumber(response,request){
   Search.searchTopNumber(response,request,4);
@@ -129,6 +151,8 @@ exports.search = search;
 exports.getCommidity = getCommidity;
 exports.searchByCategory = searchByCategory;
 exports.searchTopNumber = searchTopNumber;
+exports.sortByCategory = sortByCategory;
+
 
 
 

@@ -15,5 +15,5 @@ handle["/getCommidity"] = requestHandlers.getCommidity;
 handle["/search"] = requestHandlers.search;
 handle["/searchByCategory"] = requestHandlers.searchByCategory;
 handle["/searchTopNumber"] = requestHandlers.searchTopNumber;
-
+handle["/sortByCategory"] = requestHandlers.sortByCategory;
 server.start(router.route, handle);
