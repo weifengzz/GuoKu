@@ -25,7 +25,7 @@ db.categories.insert({
 })
 
 db.categories.insert({
-    category: ' 家具', 
+    category: '家具', 
     imgPath1: 'jj01.png',
     smallCategory: ['台灯','电脑桌','橱柜','床']
 })

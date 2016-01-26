@@ -9,6 +9,7 @@ let SCREENS = [
 
 const REQUEST_URL_COMMODITY = 'http://192.168.6.5:8888/getCommidity'
 const REQUEST_URL_GRAPHIC = 'http://192.168.6.5:8888/getGraphic'
+const REQUEST_URL_CATEGORY = 'http://192.168.6.5:8888/getCategory'
 
 let {
   Image,
@@ -40,6 +41,7 @@ class RecommendScreen extends React.Component {
       }),
       cloaded: false,
       gloaded: false,
+      ctloaded: false,
       category: null,
       graphic: null
     }
@@ -59,8 +61,8 @@ class RecommendScreen extends React.Component {
   }
 
   // 跳转到CategoryScreen界面
-  gotoCategoryScreen (commodity) {
-    var category = commodity.category
+  gotoCategoryScreen (category) {
+    var category = category
     navigator = this.props.navigator
     navigator.push({id: 'CategoryScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {category}})
   }
@@ -75,18 +77,8 @@ class RecommendScreen extends React.Component {
         SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[1].imgPath1)}}/>)
         SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[2].imgPath1)}}/>)
         SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[3].imgPath1)}}/>)
-        let category = new Array()
-        for (var i = responseData.length - 1; i >= 0; i--) {
-          category.push(
-            <TouchableOpacity onPress={this.gotoCategoryScreen.bind(this, responseData[i])} key={i}>
-              <Image style={styles.imgRecommend} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].categoryImg)}} />
-            </TouchableOpacity>
-          )
-        };
-
         this.setState({
           dataSource1: this.state.dataSource1.cloneWithRows(responseData),
-          category: category,
           gloaded: true
         })
       })
@@ -108,16 +100,33 @@ class RecommendScreen extends React.Component {
             </View>
           )
         };
-
         this.setState({
           graphic: graphic,
           cloaded: true
         })
       })
       .done()
+      // 获取类别
+      fetch (REQUEST_URL_CATEGORY)
+      .then((response) => response.json())
+      .then((responseData) => {
+        let category = new Array()
+        for (var i = responseData.length - 1; i >= 0; i--) {
+          category.push(
+            <TouchableOpacity onPress={this.gotoCategoryScreen.bind(this, responseData[i])} key={i}>
+              <Image style={styles.imgRecommend} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].imgPath1)}} />
+            </TouchableOpacity>
+          )
+        }
+        this.setState({
+          category: category,
+          ctloaded: true
+        })
+      })
+      .done()
   }
   render () {
-    if (!this.state.gloaded||!this.state.cloaded) {
+    if (!this.state.gloaded||!this.state.cloaded||!this.state.ctloaded) {
       return this.renderLoadingView()
     }
     var categoryImgs = this.state.category

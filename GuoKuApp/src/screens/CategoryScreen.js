@@ -45,8 +45,8 @@ class CategoryScreen extends Component {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      category: category,
-      sort: 1
+      category: category.category,
+      sort: -1
     })
   })
     .then((response) => response.json())
@@ -73,7 +73,7 @@ class CategoryScreen extends Component {
               <Icon name='angle-left' size={25} />
             </View>
           </TouchableOpacity>
-          <Text style={styles.txtTitle}>{this.props.category}</Text>
+          <Text style={styles.txtTitle}>{this.props.category.category}</Text>
           <Icon name='heart-o' size={20}/>
           <Icon name='angle-down' size={15}/>
           <Icon name='align-justify' size={20} style={styles.iconListStyle}/>
@@ -219,6 +219,9 @@ const styles = StyleSheet.create({
   },
   iconItem: {
     marginTop: 5
+  },
+  viewContent: {
+    flex: 1
   }
 })
 
