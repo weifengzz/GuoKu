@@ -32,14 +32,14 @@ var Commodity = React.createClass({
 
   fetchData: function () {
     fetch (REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData),
-          loaded: true
-        })
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
+        loaded: true
       })
-      .done()
+    })
+    .done()
   },
 
   render: function () {
@@ -106,12 +106,14 @@ var Commodity = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ffffff'
   },
   txtContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#fffff'
   },
   topImage: {
     height: 330,
@@ -145,7 +147,7 @@ var styles = StyleSheet.create({
   },
   imageSplit: {
     flex: 0.3,
-    backgroundColor: 'gray'
+    backgroundColor: '#F0F0F0'
   },
   numberText: {
     fontSize: 15,

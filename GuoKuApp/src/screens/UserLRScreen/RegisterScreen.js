@@ -8,7 +8,7 @@ let {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   ToastAndroid
 } = React
 
@@ -37,20 +37,20 @@ var options = {
 }
 
 var LoginScreen = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       value: {
         userName: null,
         password: null,
         name: null,
-        result: null,
-      } 
+        result: null
+      }
     }
   },
   onPress: function () {
     var value = this.refs.form.getValue()
-    if (value) { 
-      this.fetchData(value['userName'],value['password'],value['name'])
+    if (value) {
+      this.fetchData(value['userName'], value['password'], value['name'])
     }
   },
   render: function () {
@@ -59,17 +59,17 @@ var LoginScreen = React.createClass({
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose}>
-              <TouchableHighlight onPress={() => {this.returnLogin()}} underlayColor='#99d9f4'>
-                <Icon name='times' size={30} style={styles.icon} />
-              </TouchableHighlight>
+              <TouchableOpacity onPress={() => { this.returnLogin() }} underlayColor='#99d9f4'>
+                <Icon name='times' size={20} style={styles.icon} />
+              </TouchableOpacity>
             </View>
-            <TouchableHighlight onPress={() => {this.returnLogin()}} underlayColor='#99d9f4'>
+            <TouchableOpacity onPress={() => { this.returnLogin() }} underlayColor='#99d9f4'>
               <View style={styles.viewRegisterleft}>
                 <Text style={styles.textRegister}>去登录</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
             <View style={styles.viewRegisterRight}>
-              <Icon name='chevron-right' size={30} style={styles.icon} />
+              <Icon name='angle-right' size={20} style={styles.icon} />
             </View>
           </View>
           <View style={styles.viewTitle}>
@@ -77,17 +77,17 @@ var LoginScreen = React.createClass({
           </View>
           <View style={styles.viewRegister}>
             <Form
-              ref="form"
+              ref='form'
               type={Person}
               value={this.state.value}
               options={options} />
           </View>
           <View style={styles.viewRegisterBtn}>
-            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+            <TouchableOpacity style={styles.button} onPress={this.onPress}>
               <View style={styles.viewbtn}>
                 <Text style={styles.txtRegister}>注册</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
           <View style={styles.viewTxtBottom}>
             <View style={styles.viewText}>
@@ -99,24 +99,24 @@ var LoginScreen = React.createClass({
       </View>
     )
   },
-  fetchData: function(un,pw,nm) {
-    fetch(REQUEST_URL, {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: un,
-      password: pw,
-      name: nm,
+  fetchData: function (un, pw, nm) {
+    fetch (REQUEST_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: un,
+        password: pw,
+        name: nm
+      })
     })
-  })
     .then((response) => response.json())
     .then((responseData) => {
-      if(responseData['isOK']==='ok'){
+      if (responseData['isOK'] === 'ok') {
         ToastAndroid.show('注册成功', ToastAndroid.SHORT)
-      }else{
+      } else {
         ToastAndroid.show('注册失败', ToastAndroid.SHORT)
       }
     })
@@ -133,7 +133,8 @@ var LoginScreen = React.createClass({
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff'
   },
   imgBg: {
     flex: 1,
@@ -153,7 +154,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center'
   },
   viewRegisterRight: {
-    flex: 1,
+    flex: 0.5,
     marginRight: 10,
     alignItems: 'flex-end',
     justifyContent: 'center'
@@ -164,13 +165,14 @@ let styles = StyleSheet.create({
     color: '#ffffff'
   },
   viewRegisterLeft: {
-    flex: 1,
+    flex: 0.5,
     marginRight: 10,
     justifyContent: 'center',
-    alignItems: 'flex-end'
+    alignItems: 'flex-start'
   },
   icon: {
-    color: '#ffffff'
+    color: '#ffffff',
+    marginBottom: 5
   },
   viewTitle: {
     height: 100,
@@ -187,7 +189,7 @@ let styles = StyleSheet.create({
     marginRight: 10
   },
   viewRegisterBtn: {
-    height:100,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -201,7 +203,7 @@ let styles = StyleSheet.create({
     opacity: 0.5
   },
   txtRegister: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#ffffff'
   },
   viewTxtBottom: {
@@ -215,7 +217,7 @@ let styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  txtBottomLeft:{
+  txtBottomLeft: {
     fontSize: 15
   },
   txtBottomRight: {

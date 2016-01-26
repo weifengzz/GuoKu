@@ -168,7 +168,8 @@ class CategoryScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff'
   },
   listView: {
     width: 380,
@@ -185,7 +186,8 @@ const styles = StyleSheet.create({
   viewTop: {
     height: 60,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5'
   },
   viewSmallContent: {
     borderTopWidth: 1,
@@ -194,14 +196,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    borderColor: '#E6E6E6'
   },
   viewIconBack: {
     height: 60,
     width: 59,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRightWidth: 1
+    borderRightWidth: 1,
+    borderColor: '#E6E6E6'
   },
   txtTitle: {
     flex: 1,
@@ -227,12 +231,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderLeftWidth: 10,
     borderRightWidth: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#E6E6E6'
   },
   itemContainer: {
     height: 100,
     flexDirection: 'row',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderColor: '#E6E6E6'
   },
   viewItemLeft: {
     margin: 10,
@@ -257,7 +263,8 @@ const styles = StyleSheet.create({
   },
   txtItemPrice: {
     height: 20,
-    fontSize: 15
+    fontSize: 15,
+    color: '#6587C1'
   },
   viewTxtItemLove: {
     height: 20,

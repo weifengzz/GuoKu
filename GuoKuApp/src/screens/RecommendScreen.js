@@ -19,8 +19,7 @@ let {
   View,
   Navigator,
   ScrollView,
-  TouchableOpacity,
-  ToastAndroid
+  TouchableOpacity
 } = React
 
 class RecommendScreen extends React.Component {
@@ -221,12 +220,14 @@ class RecommendScreen extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ffffff'
   },
   txtContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#ffffff'
   },
   imgviewPager: {
     flex: 1,

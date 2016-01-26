@@ -87,7 +87,7 @@ class CommodityScreen extends React.Component {
     navigator.pop()
   }
 
-  renderLoadingView() {
+  renderLoadingView () {
     return (
       <View style={styles.txtContainer}>
         <Text>
@@ -218,12 +218,14 @@ class CommodityScreen extends React.Component {
 
 let styles = StyleSheet.create({
   container: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ffffff'
   },
   txtContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#ffffff'
   },
   imgviewPager: {
     flex: 1,
@@ -234,7 +236,7 @@ let styles = StyleSheet.create({
   viewTop: {
     height: 50,
     flexDirection: 'row',
-    backgroundColor: '#ccc'
+    backgroundColor: '#F5F5F5'
   },
   viewTopLeft: {
     height: 49,
@@ -243,7 +245,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    borderColor: 'green'
+    borderColor: '#E6E6E6'
   },
   viewTopRight: {
     height: 50,
@@ -282,7 +284,7 @@ let styles = StyleSheet.create({
     height: 40,
     margin: 10,
     marginTop: 0,
-    backgroundColor: 'blue',
+    backgroundColor: '#78A9F3',
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center'
@@ -293,7 +295,8 @@ let styles = StyleSheet.create({
   viewLove: {
     height: 129,
     borderTopWidth: 1,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderColor: '#E6E6E6'
   },
   viewLoveTop: {
     height: 40,
@@ -315,13 +318,15 @@ let styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 30,
-    margin: 10
+    margin: 10,
+    borderColor: '#E6E6E6'
   },
   viewComment: {
     height: 160,
     margin: 10,
     flexDirection: 'row',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderColor: '#E6E6E6'
   },
   viewCommentLeft: {
     height: 160,
@@ -357,12 +362,13 @@ let styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   txtName: {
-    color: 'blue'
+    color: '#5482C4'
   },
   viewIconThumbs: {
     width: 50,
     borderRightWidth: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: '#E6E6E6'
   },
   viewIconComment: {
     flex: 1,
@@ -389,12 +395,14 @@ let styles = StyleSheet.create({
   },
   viewRecommendTitleLeft: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#F0F0F0'
   },
   viewRecommendTitleRight: {
     width: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0'
   },
   imgList: {
     height: 110,

@@ -13,7 +13,7 @@ var {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   ToastAndroid,
   Navigator
@@ -91,13 +91,13 @@ var LoginScreen = React.createClass({
         <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
           <View style={styles.viewTop}>
             <View style={styles.viewClose} />
-            <TouchableHighlight onPress= {() => this.registerClick()}>
+            <TouchableOpacity onPress= {() => this.registerClick()}>
               <View style={styles.viewRegisterleft} >
                 <Text style={styles.textRegister}>注册</Text>
               </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             <View style={styles.viewRegisterRight}>
-              <Icon name='chevron-right' size={30} style={styles.icon} />
+              <Icon name='angle-right' size={20} style={styles.icon} />
             </View>
           </View>
           <View style={styles.viewTitle}>
@@ -111,11 +111,11 @@ var LoginScreen = React.createClass({
             options={options} />
           </View>
           <View style={styles.viewLoginBtn}>
-            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+            <TouchableOpacity style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
               <View style={styles.viewbtn}>
                 <Text style={styles.txtLogin}>登录</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
           <View style={styles.viewLogin3}>
             <View style={styles.viewLogin3Container}>
@@ -179,7 +179,8 @@ var LoginScreen = React.createClass({
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff'
   },
   imgBg: {
     flex: 1,
@@ -199,24 +200,25 @@ let styles = StyleSheet.create({
     justifyContent: 'center'
   },
   viewRegisterRight: {
-    flex: 1,
+    flex: 0.5,
     marginRight: 10,
     alignItems: 'flex-end',
     justifyContent: 'center'
   },
   textRegister: {
-    fontSize: 20,
+    fontSize: 16,
     marginTop: 5,
     color: '#ffffff'
   },
   viewRegisterLeft: {
-    flex: 1,
+    flex: 0.5,
     marginRight: 10,
     justifyContent: 'center',
     alignItems: 'flex-end'
   },
   icon: {
-    color: '#ffffff'
+    color: '#ffffff',
+    marginBottom: 15
   },
   viewTitle: {
     height: 100,

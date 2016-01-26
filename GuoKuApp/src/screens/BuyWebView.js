@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#F5F5F5'
   },
   viewTitleLeft: {
     height: 49,
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRightWidth: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: '#E6E6E6'
   },
   viewTitleCenter: {
     flex: 1,
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderBottomWidth: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: '#E6E6E6'
   },
   webviewComtainer: {
     flex: 1

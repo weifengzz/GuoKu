@@ -27,7 +27,7 @@ class WelcomePage extends React.Component {
     }, 1000)
   }
 
-  fetchData(un,pw) {
+  fetchData(un, pw) {
     fetch(REQUEST_URL, {
     method: 'POST',
     headers: {
@@ -42,13 +42,12 @@ class WelcomePage extends React.Component {
     .then((response) => response.json())
     .then((responseData) => {
         this.setState({
-          result: responseData,
+          result: responseData
         })
     })
     .done()
   }
-  
-  responseData(response){
+  responseData (response) {
     return response.result.data
   }
 }
@@ -57,7 +56,8 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ffffff'
   },
   img: {
     flex: 1,

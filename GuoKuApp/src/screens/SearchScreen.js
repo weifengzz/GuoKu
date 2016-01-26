@@ -16,7 +16,7 @@ let {
 
 let REQUEST_URL = 'http://192.168.6.5:8888/search'
 
-class SearchScreen extends React.Component{
+class SearchScreen extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
@@ -59,12 +59,12 @@ class SearchScreen extends React.Component{
           }
         </View>
       )
-    }else{
-      return(
+    } else {
+      return (
         <View style={styles.container}>
           <View style={styles.viewSearch}>
             <View style={styles.viewIcon}>
-              <Icon name='search' size={30}/>
+              <Icon name='search' size={18}/>
             </View>
             <View style={styles.viewText}>
               <TextInput
@@ -72,10 +72,8 @@ class SearchScreen extends React.Component{
                 onChangeText={(text) => {
                   this.state.txtValue = text
                   this.getContent()
-                }
-              }
-              value={textValue}
-              />
+                }}
+                value={textValue}/>
             </View>
             <TouchableOpacity onPress={() => { this.returnBack() }}>
               <View style={styles.viewCancel}>
@@ -129,16 +127,16 @@ class SearchScreen extends React.Component{
     navigator.pop()
   }
   fetchData () {
-    fetch(REQUEST_URL, {
+    fetch (REQUEST_URL, {
       method: 'POST',
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      title: this.state.txtValue
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: this.state.txtValue
+      })
     })
-  })
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({
@@ -158,7 +156,7 @@ class SearchScreen extends React.Component{
       <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
         <View style={styles.itemContainer}>
           <View style={styles.viewItemLeft}>
-            <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commidities.imgPath1)}}/>
+            <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1)}}/>
           </View>
           <View style={styles.viewItemRight}>
             <Text style={styles.txtItemTitle}>{commidities.title}</Text>
@@ -183,7 +181,8 @@ class SearchScreen extends React.Component{
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ffffff'
   },
   viewSearch: {
     flexDirection: 'row',
@@ -239,7 +238,8 @@ var styles = StyleSheet.create({
   itemContainer: {
     height: 100,
     flexDirection: 'row',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0'
   },
   viewItemLeft: {
     margin: 10,
@@ -260,11 +260,13 @@ var styles = StyleSheet.create({
   txtItemTitle: {
     height: 50,
     marginTop: 5,
-    fontSize: 16
+    fontSize: 16,
+    color: '#444444'
   },
   txtItemPrice: {
     height: 20,
-    fontSize: 15
+    fontSize: 15,
+    color: '#5180C3'
   },
   viewTxtItemLove: {
     height: 20,
