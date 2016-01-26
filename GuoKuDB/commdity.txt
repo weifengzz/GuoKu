@@ -82,10 +82,74 @@ db.commidities.insert({
     love: 100,
     loveHeadImg: ['tx04.png','tx06.png','tx05.png','tx01.png','tx02.png','tx04.png','tx06.png','tx05.png','tx01.png','tx02.png']
 })
+---------------------------------
+db.commidities.insert({
+    title: '樱草保湿面霜 60ml', 
+    price: '326.00',
+    date: '2016-1-9',
+    comment : ['专为中性至干性以及受压肌肤设计的保湿面霜。蕴含丰富维生素，可滋养及软化肌肤。','hehehe','什么东西啊这是'],
+    commentAuthor: ['平野绫','snake','你瞅啥'],
+    commentImg: ['tx05.png','tx02.png','tx07.png'],
+    comemntDate:['2016-1-1','2015-12-14','2015-12-22'],
+    imgPath1: 'c13.png',
+    imgPath2: 'c13.png',
+    imgPath3: 'c13.png',
+    category: '化妆品',
+    categoryImg: 'hzp01.png',
+    love: 80,
+    loveHeadImg: ['tx03.png','tx07.png','tx02.png','tx01.png','tx02.png','tx04.png','tx06.png','tx05.png','tx01.png','tx02.png']
+})
+db.commidities.insert({
+    title: '咖啡天然植物润肤霜', 
+    price: '240.00',
+    date: '2016-1-19',
+    comment : ['Instagram 爆红的有机护肤品牌 frank body，超模和时尚博主推荐，纯天然材质打造，淡淡咖啡香。','hehehe','什么东西啊这是'],
+    commentAuthor: ['成濑爱美','snake','你瞅啥'],
+    commentImg: ['tx03.png','tx02.png','tx07.png'],
+    comemntDate:['2015-12-19','2015-12-14','2015-12-22'],
+    imgPath1: 'c10.png',
+    imgPath2: 'c11.png',
+    imgPath3: 'c12.png',
+    category: '化妆品',
+    categoryImg: 'hzp01.png',
+    love: 999,
+    loveHeadImg: ['tx04.png','tx06.png','tx05.png','tx01.png','tx02.png','tx04.png','tx06.png','tx05.png','tx01.png','tx02.png']
+})
 
+db.commidities.insert({
+    title: '樱草保湿面霜 60ml', 
+    price: '326.00',
+    date: '2016-1-9',
+    comment : ['专为中性至干性以及受压肌肤设计的保湿面霜。蕴含丰富维生素，可滋养及软化肌肤。','hehehe','什么东西啊这是'],
+    commentAuthor: ['平野绫','snake','你瞅啥'],
+    commentImg: ['tx05.png','tx02.png','tx07.png'],
+    comemntDate:['2016-1-1','2015-12-14','2015-12-22'],
+    imgPath1: 'c13.png',
+    imgPath2: 'c13.png',
+    imgPath3: 'c13.png',
+    category: '化妆品',
+    categoryImg: 'hzp01.png',
+    love: 801,
+    loveHeadImg: ['tx03.png','tx07.png','tx02.png','tx01.png','tx02.png','tx04.png','tx06.png','tx05.png','tx01.png','tx02.png']
+})
 
-
-
+db.commidities.insert({
+    title: '咖啡天然植物润肤霜', 
+    price: '240.00',
+    date: '2016-1-19',
+    comment : ['Instagram 爆红的有机护肤品牌 frank body，超模和时尚博主推荐，纯天然材质打造，淡淡咖啡香。','hehehe','什么东西啊这是'],
+    commentAuthor: ['成濑爱美','snake','你瞅啥'],
+    commentImg: ['tx03.png','tx02.png','tx07.png'],
+    comemntDate:['2015-12-19','2015-12-14','2015-12-22'],
+    imgPath1: 'c10.png',
+    imgPath2: 'c11.png',
+    imgPath3: 'c12.png',
+    category: '化妆品',
+    categoryImg: 'hzp01.png',
+    love: 99,
+    loveHeadImg: ['tx04.png','tx06.png','tx05.png','tx01.png','tx02.png','tx04.png','tx06.png','tx05.png','tx01.png','tx02.png']
+})
+---------------------------------
 db.commidities.remove(
    {"title":"咖啡天然植物润肤霜"},
    {
