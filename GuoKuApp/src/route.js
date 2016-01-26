@@ -7,6 +7,7 @@ import SearchScreen from './screens/SearchScreen'
 import CommodityScreen from './screens/CommodityScreen'
 import GraphicWebView from './screens/GraphicWebView'
 import BuyWebView from './screens/BuyWebView'
+import CategoryScreen from './screens/CategoryScreen'
 
 var {
   Text,
@@ -86,6 +87,14 @@ class Route extends React.Component {
           navigator={navigator} {...route.passProp}/>
       )
     }
+    if (routeId === 'CategoryScreen') {
+      return (
+        <CategoryScreen
+          route={route}
+          navigator={navigator} {...route.passProp}/>
+      )
+    }
+    
     return this.noRoute(navigator)
   }
 

@@ -58,6 +58,13 @@ class RecommendScreen extends React.Component {
     this.fetchData()
   }
 
+  // 跳转到CategoryScreen界面
+  gotoCategoryScreen (commodity) {
+    var category = commodity.category
+    navigator = this.props.navigator
+    navigator.push({id: 'CategoryScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {category}})
+  }
+
   fetchData () {
     // 加载底部推荐界面
     fetch (REQUEST_URL_COMMODITY)
@@ -71,7 +78,7 @@ class RecommendScreen extends React.Component {
         let category = new Array()
         for (var i = responseData.length - 1; i >= 0; i--) {
           category.push(
-            <TouchableOpacity key={i}>
+            <TouchableOpacity onPress={this.gotoCategoryScreen.bind(this, responseData[i])} key={i}>
               <Image style={styles.imgRecommend} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].categoryImg)}} />
             </TouchableOpacity>
           )
