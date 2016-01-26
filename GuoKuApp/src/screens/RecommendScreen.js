@@ -66,7 +66,12 @@ class RecommendScreen extends React.Component {
     navigator = this.props.navigator
     navigator.push({id: 'CategoryScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {category}})
   }
-
+  // 跳转到图文webview界面
+  gotoGraphicWebView (graphics) {
+    var graphics = graphics
+    navigator = this.props.navigator
+    navigator.push({id: 'GraphicWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {graphics}})
+  }
   fetchData () {
     // 加载底部推荐界面
     fetch (REQUEST_URL_COMMODITY)
@@ -90,14 +95,16 @@ class RecommendScreen extends React.Component {
         let graphic = new Array()
         for (var i = 0; i < 3; i++) {
           graphic.push(
-            <View key={i} style={styles.graphicRecommend}>
-              <View style={styles.viewGraphicLeft}>
-                <Text style={styles.textGraphic}>{responseData[i].title}</Text>
+            <TouchableOpacity key={i} onPress={this.gotoGraphicWebView.bind(this, responseData[i])}>
+              <View style={styles.graphicRecommend}>
+                <View style={styles.viewGraphicLeft}>
+                  <Text style={styles.textGraphic}>{responseData[i].title}</Text>
+                </View>
+                <View style={styles.viewGraphicRight}>
+                  <Image style={styles.imgGraphic} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].imgPath)}}/>
+                </View>
               </View>
-              <View style={styles.viewGraphicRight}>
-                <Image style={styles.imgGraphic} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + responseData[i].imgPath)}}/>
-              </View>
-            </View>
+            </TouchableOpacity>
           )
         };
         this.setState({
