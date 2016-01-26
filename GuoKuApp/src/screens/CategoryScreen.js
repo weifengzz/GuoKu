@@ -8,6 +8,7 @@ import React, {
   ToastAndroid,
   ListView,
   Image,
+  Navigator,
   TouchableOpacity
 } from 'react-native'
 
@@ -41,14 +42,14 @@ class CategoryScreen extends Component {
     fetch (REQUEST_URL, {
       method: 'POST',
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      category: category.category,
-      sort: -1
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        category: category.category,
+        sort: -1
+      })
     })
-  })
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({
@@ -60,6 +61,7 @@ class CategoryScreen extends Component {
   }
 
   render () {
+    var category = this.props.category
     if (!this.state.loaded) {
       return (
         <View style={styles.container}><Text>正在加载。。。</Text></View>
@@ -80,8 +82,9 @@ class CategoryScreen extends Component {
         </View>
         <View style={styles.viewSmallContent}>
           <View style={styles.viewLableContent}>
-            <Text style={styles.txtItems}>台灯</Text>
-            <Text style={styles.txtItems}>马克杯</Text>
+            {
+              category.smallCategory.map((smallCategory) => (<Text key={smallCategory} style={styles.txtItems}>{smallCategory}</Text>))
+            }
           </View>
           <Text style={styles.colors}>更多</Text>
           <Icon name='angle-right' style={styles.colors} size={20} />
@@ -98,7 +101,7 @@ class CategoryScreen extends Component {
   }
   lvColumnItem (commidities) {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={this.gotoCommidityScreen.bind(this, commidities)}>
         <View style={styles.itemContainer}>
           <View style={styles.viewItemLeft}>
             <Image style={styles.imgItem} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1)}}/>
@@ -121,6 +124,11 @@ class CategoryScreen extends Component {
   goBack () {
     navigator = this.props.navigator
     navigator.pop()
+  }
+  gotoCommidityScreen (commidities) {
+    var commodity = commidities
+    navigator = this.props.navigator
+    navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 }
 
