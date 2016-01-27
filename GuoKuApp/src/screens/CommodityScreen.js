@@ -13,7 +13,8 @@ let {
   ScrollView,
   ListView,
   TouchableOpacity,
-  Navigator
+  Navigator,
+  ToastAndroid
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
@@ -78,7 +79,7 @@ class CommodityScreen extends React.Component {
   }
 
   toCommodityScreen (commodity) {
-    navigator = this.props.navigator
+    let navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 
@@ -96,13 +97,16 @@ class CommodityScreen extends React.Component {
       </View>
     )
   }
+  alert () {
+    ToastAndroid.show('200', ToastAndroid.SHORT)
+  }
   render () {
     var commodity = this.props.commodity
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={{flex: 1}}>
         <View style={styles.viewTop}>
           <TouchableOpacity onPress={() => { this.returnback() }}>
             <View style={styles.viewTopLeft}>
@@ -113,88 +117,90 @@ class CommodityScreen extends React.Component {
             <Text style={styles.txtTitle}>商品</Text>
           </View>
         </View>
-        <View style={styles.viewViewPager}>
-          <ViewPager
-            dataSource={this.state.dataSource}
-            renderPage={this._renderPage}
-            isLoop={true}
-            autoPlay={true} />
-        </View>
-        <View style={styles.viewTxtTitle}>
-          <Text style={styles.txtCommodityTitle}>{commodity.title}</Text>
-        </View>
-        <View style={styles.viewEvaluationContent}>
-          <Icon name='heart-o' size={20}/>
-          <View style={styles.viewWrite}>
-            <Icon name='pencil-square-o' size={20} />
+        <ScrollView contentContainerStyle={styles.container} stickyHeaderIndices = {[3]}  onScroll= {null}>
+          <View style={styles.viewViewPager}>
+            <ViewPager
+              dataSource={this.state.dataSource}
+              renderPage={this._renderPage}
+              isLoop={true}
+              autoPlay={true} />
           </View>
-          <Icon name='share-square-o' size={20}/>
-        </View>
-        <TouchableOpacity onPress={this.gotoBuy.bind(this, commodity)}>
-          <View style={styles.btnBuy}>
-            <Text style={styles.txtLogin}>¥ {commodity.price} 去购买</Text>
+          <View style={styles.viewTxtTitle}>
+            <Text style={styles.txtCommodityTitle}>{commodity.title}</Text>
           </View>
-        </TouchableOpacity>
-        <View style={styles.viewLove}>
-          <View style={styles.viewLoveTop}>
-            <Text style={styles.txtLove}>{commodity.love}人喜爱</Text>
-            <View style={styles.viewLoveTopRight}>
-              <Icon name='angle-right' size={20} style={styles.iconLove}/>
+          <View style={styles.viewEvaluationContent}>
+            <Icon name='heart-o' size={20}/>
+            <View style={styles.viewWrite}>
+              <Icon name='pencil-square-o' size={20} />
             </View>
+            <Icon name='share-square-o' size={20}/>
           </View>
-          <View style={styles.viewLoveBottom}>
-            <Image style={styles.imgHead} source={require('../assets/recommend1.png')}/>
-            <Image style={styles.imgHead} source={require('../assets/recommend1.png')}/>
-          </View>
-        </View>
-        <View style={styles.viewComment}>
-          <View style={styles.viewCommentLeft}>
-            <Image style={styles.imgComment} source={{uri: ('http://192.168.6.5:8888/getImage?imgName='+commodity.commentImg[0])}}/>
-          </View>
-          <View style={styles.viewCommentRight}>
-            <View style={styles.viewCommentRightTop}>
-              <Text style={styles.txtName}>{commodity.commentAuthor[0]}</Text>
-              <View style={styles.viewIconStar}>
-                <Icon name='star' style={styles.iconStar} size={20}/>
+          <TouchableOpacity onPress={this.gotoBuy.bind(this, commodity)}>
+            <View style={styles.btnBuy}>
+              <Text style={styles.txtLogin}>¥ {commodity.price} 去购买</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.viewLove}>
+            <View style={styles.viewLoveTop}>
+              <Text style={styles.txtLove}>{commodity.love}人喜爱</Text>
+              <View style={styles.viewLoveTopRight}>
+                <Icon name='angle-right' size={20} style={styles.iconLove}/>
               </View>
             </View>
-            <View style={styles.viewCommentRightCenter}>
-              <Text>
-                {commodity.comment[0]}
-              </Text>
+            <View style={styles.viewLoveBottom}>
+              <Image style={styles.imgHead} source={require('../assets/recommend1.png')}/>
+              <Image style={styles.imgHead} source={require('../assets/recommend1.png')}/>
             </View>
-            <View style={styles.viewCommentRightBottom}>
-              <View style={styles.viewIconThumbs}>
-                <Icon name='thumbs-o-up' size={20} />
+          </View>
+          <View style={styles.viewComment}>
+            <View style={styles.viewCommentLeft}>
+              <Image style={styles.imgComment} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.commentImg[0])}}/>
+            </View>
+            <View style={styles.viewCommentRight}>
+              <View style={styles.viewCommentRightTop}>
+                <Text style={styles.txtName}>{commodity.commentAuthor[0]}</Text>
+                <View style={styles.viewIconStar}>
+                  <Icon name='star' style={styles.iconStar} size={20}/>
+                </View>
               </View>
-              <View style={styles.viewIconComment}>
-                <Icon name='comment-o' size={20} />
+              <View style={styles.viewCommentRightCenter}>
+                <Text>
+                  {commodity.comment[0]}
+                </Text>
               </View>
-              <View style={styles.viewIconTime}>
-                <Icon name='clock-o' size={15}/>
-                <Text>{commodity.date}</Text>
+              <View style={styles.viewCommentRightBottom}>
+                <View style={styles.viewIconThumbs}>
+                  <Icon name='thumbs-o-up' size={20} />
+                </View>
+                <View style={styles.viewIconComment}>
+                  <Icon name='comment-o' size={20} />
+                </View>
+                <View style={styles.viewIconTime}>
+                  <Icon name='clock-o' size={15}/>
+                  <Text>{commodity.date}</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.viewRecommend}>
-          <View style={styles.viewRecommendTitle}>
-            <View style={styles.viewRecommendTitleLeft}>
-              <Text> 来自［{commodity.category}］</Text>
+          <View style={styles.viewRecommend}>
+            <View style={styles.viewRecommendTitle}>
+              <View style={styles.viewRecommendTitleLeft}>
+                <Text> 来自［{commodity.category}］</Text>
+              </View>
+              <View style={styles.viewRecommendTitleRight}>
+                <Icon name='angle-right' size={20} />
+              </View>
             </View>
-            <View style={styles.viewRecommendTitleRight}>
-              <Icon name='angle-right' size={20} />
+            <View style={styles.viewRecommendContent}>
+              <ListView
+                initialListSize={20}
+                dataSource={this.state.dataSource1}
+                renderRow={this.renderCommidity.bind(this)}
+                contentContainerStyle={styles.listView}/>
             </View>
           </View>
-          <View style={styles.viewRecommendContent}>
-            <ListView
-              initialListSize={20}
-              dataSource={this.state.dataSource1}
-              renderRow={this.renderCommidity.bind(this)}
-              contentContainerStyle={styles.listView}/>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     )
   }
 

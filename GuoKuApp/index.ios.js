@@ -13,4 +13,4 @@ var CommodityScreen = require('./src/screens/CommodityScreen')
 var UserDetailScreen = require('./src/screens/UserLRScreen/UserDetailScreen')
 var CategoryScreen = require('./src/screens/CategoryScreen')
 
-React.AppRegistry.registerComponent('GuoKuApp', () => CategoryScreen)
+React.AppRegistry.registerComponent('GuoKuApp', () => GuoKuRunner)
