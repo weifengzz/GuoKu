@@ -8,10 +8,14 @@ import React, {
   WebView
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import BackPress from '../components/back'
 var WEBVIEW_REF = 'webview'
 
 class GraphicWebView extends Component {
+  constructor (props) {
+    super(props)
+    BackPress.back(false, props)
+  }
   render () {
     let graphics = this.props.graphics
     return (

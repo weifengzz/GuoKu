@@ -3,6 +3,7 @@
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ViewPager from 'react-native-viewpager'
+import BackPress from '../components/back'
 
 let {
   Text,
@@ -12,8 +13,7 @@ let {
   ScrollView,
   ListView,
   TouchableOpacity,
-  Navigator,
-  ToastAndroid
+  Navigator
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
@@ -24,7 +24,7 @@ let SCREENS = [
 class CommodityScreen extends React.Component {
   constructor (props) {
     super(props)
-
+    BackPress.back(false, props)
     var commodity = props.commodity
     SCREENS.splice(0, 3)
     SCREENS.push(<Image style={styles.imgviewPager} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commodity.imgPath1)}}/>)

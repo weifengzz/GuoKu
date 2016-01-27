@@ -4,13 +4,19 @@ import React from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Commodity from './Commodity'
 import Graphic from './Graphic'
+import BackPress from '../components/back'
 
 var {
   StyleSheet,
-  View,
+  View
 } = React
 
 class MainScreen extends React.Component {
+  constructor (props) {
+    super(props)
+    BackPress.back(true)
+  }
+
   render () {
     var navigator = this.props.navigator
      return (
