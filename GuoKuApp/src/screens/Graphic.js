@@ -89,7 +89,7 @@ var Graphic = React.createClass({
     )
   },
   showDetail: function (graphics) {
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'GraphicWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {graphics}})
   }
 })

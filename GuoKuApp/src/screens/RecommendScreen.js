@@ -62,13 +62,13 @@ class RecommendScreen extends React.Component {
   // 跳转到CategoryScreen界面
   gotoCategoryScreen (category) {
     var category = category
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'CategoryScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {category}})
   }
   // 跳转到图文webview界面
   gotoGraphicWebView (graphics) {
     var graphics = graphics
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'GraphicWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {graphics}})
   }
   fetchData () {
@@ -206,7 +206,7 @@ class RecommendScreen extends React.Component {
   */
   toCommodityScreen (commodity) {
     var commodity = commodity
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
   /*

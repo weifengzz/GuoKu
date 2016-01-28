@@ -155,12 +155,12 @@ class CategoryScreen extends Component {
     )
   }
   goBack () {
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.pop()
   }
   gotoCommidityScreen (commidities) {
     var commodity = commidities
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 }

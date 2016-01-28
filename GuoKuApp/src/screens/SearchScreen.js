@@ -173,7 +173,7 @@ class SearchScreen extends React.Component {
 
   toCommodityScreen (commidities) {
     var commodity = commidities
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 }

@@ -21,8 +21,8 @@ class AniRoll extends React.Component {
       outputRange: outputRange
     })
     Animated.timing(this._animatedValue, {
-      toValue: 100,
-      duration: 100000
+      toValue: 0,
+      duration: 10000
     }).start()
     return (
       <Animated.Image

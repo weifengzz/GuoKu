@@ -56,7 +56,7 @@ class GraphicWebView extends Component {
   }
 
   goBack () {
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.pop()
   }
 }

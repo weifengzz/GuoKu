@@ -18,9 +18,10 @@ const COLOR = ['gray', '#ffffff']
 class MainRoute extends React.Component {
   constructor (props) {
     super(props)
+    var navigator = props.navigator
     this.state = {
       choice: 1,
-      screen: <MainScreen inputRange={[0, 100]} outputRange={[0, 1]}/>
+      screen: <MainScreen navigator={navigator} />
     }
   }
   render () {
@@ -48,7 +49,6 @@ class MainRoute extends React.Component {
   }
   tabColor (num) {
     var navigator = this.props.navigator
-    var commodity = this.props.commodity
     if (num === 1) {
       this.setState({choice: 1, screen: <MainScreen navigator={navigator} />})
     }
