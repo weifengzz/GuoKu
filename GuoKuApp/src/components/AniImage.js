@@ -7,16 +7,14 @@ var {
   PropTypes
 } = React
 
-class CommidityListImage extends React.Component {
+class AniImage extends React.Component {
   static propTypes = {
     url: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
     inputRange: PropTypes.array,
     outputRange: PropTypes.array
   };
   render () {
-    var { style, url, height, width, inputRange, outputRange } = this.props
+    var { style, url, inputRange, outputRange } = this.props
     this._animatedValue = new Animated.Value(0)
     let interpolatedColorAnimation = this._animatedValue.interpolate({
       inputRange: inputRange,
@@ -31,10 +29,10 @@ class CommidityListImage extends React.Component {
           }).start()
         }}
         source={{uri: url}}
-        style={[style, { width: width }, {opacity: interpolatedColorAnimation}, {height: height}]} />
+        style={[style, {opacity: interpolatedColorAnimation}]} />
     )
   }
 }
 
-module.exports = CommidityListImage
+module.exports = AniImage
 

@@ -2,7 +2,7 @@
 
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
-import CommidityListImage from '../components/CommidityListImage'
+import AniImage from '../components/AniImage'
 var {
   Image,
   ListView,
@@ -70,11 +70,10 @@ class Commodity extends React.Component {
       <View style={styles.container} >
         <Image style={styles.viewTopImage} source={require('../assets/listbg.png')}>
           <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
-            <CommidityListImage
-            width={null}
-            height={330}
+            <AniImage
             inputRange={[0, 100]}
             outputRange={[0, 1]}
+            style={styles.aniImage}
             url={'http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1} />
           </TouchableOpacity>
         </Image>
@@ -118,6 +117,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fffff'
+  },
+  aniImage: {
+    height: 330,
+    width: null
   },
   viewTopImage: {
     height: 330,

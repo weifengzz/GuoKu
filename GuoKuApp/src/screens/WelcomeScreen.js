@@ -1,7 +1,6 @@
 'use strict'
 
 import React from 'react-native'
-import MainRoute from './MainRoute'
 
 var {
   Image,
