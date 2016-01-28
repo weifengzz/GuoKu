@@ -2,7 +2,7 @@
 
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import CommidityListImage from '../components/CommidityListImage'
 var {
   Image,
   ListView,
@@ -10,27 +10,27 @@ var {
   Text,
   View,
   TouchableOpacity,
-  Navigator
+  Navigator,
+  Animated
 } = React
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
-var Commodity = React.createClass({
-
-  getInitialState: function () {
-    return {
+class Commodity extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
       loaded: false
     }
-  },
-
-  componentDidMount: function () {
+  }
+  componentDidMount () {
     this.fetchData()
-  },
+  }
 
-  fetchData: function () {
+  fetchData () {
     fetch (REQUEST_URL)
     .then((response) => response.json())
     .then((responseData) => {
@@ -40,9 +40,9 @@ var Commodity = React.createClass({
       })
     })
     .done()
-  },
+  }
 
-  render: function () {
+  render () {
     if (!this.state.loaded) {
       return this.renderLoadingView()
     }
@@ -51,12 +51,12 @@ var Commodity = React.createClass({
       <ListView
         initialListSize={3}
         dataSource={this.state.dataSource}
-        renderRow={this.renderCommidity}
+        renderRow={this.renderCommidity.bind(this)}
         style={styles.listView}/>
     )
-  },
+  }
 
-  renderLoadingView: function () {
+  renderLoadingView () {
     return (
       <View style={styles.txtContainer}>
         <Text>
@@ -64,14 +64,14 @@ var Commodity = React.createClass({
         </Text>
       </View>
     )
-  },
+  }
 
-  renderCommidity: function (commidities) {
+  renderCommidity (commidities) {
     return (
       <View style={styles.container}>
         <View style={styles.viewTopImage}>
-          <TouchableOpacity onPress={() => { this.toCommodityScreen(commidities) }}>
-            <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1)}}/>
+          <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
+            <CommidityListImage width={null} height={300} url={'http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1} />
           </TouchableOpacity>
         </View>
         <View style={styles.viewTxtContent}>
@@ -94,14 +94,14 @@ var Commodity = React.createClass({
         <Image source={require('../assets/splite.png')} style={styles.imageSplit}/>
       </View>
     )
-  },
+  }
 
-  toCommodityScreen: function (commidities) {
+  toCommodityScreen (commidities) {
     var commodity = commidities
     navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
-})
+}
 
 var styles = StyleSheet.create({
   container: {

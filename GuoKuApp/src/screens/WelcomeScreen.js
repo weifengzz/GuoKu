@@ -7,14 +7,26 @@ var {
   Image,
   StyleSheet,
   View,
-  Text
+  Animated
 } = React
 
 class WelcomePage extends React.Component {
   render () {
+    this._animatedValue = new Animated.Value(0)
+    let interpolatedColorAnimation = this._animatedValue.interpolate({
+      inputRange: [10, 100],
+      outputRange: [0, 1]
+    })
     return (
       <View style={styles.container}>
-        <Image source={{uri: 'http://192.168.6.5:8888/getImage?imgName=welcome.jpg'}} style={styles.img} />
+        <Animated.Image
+        onLoadEnd={() => {
+          Animated.timing(this._animatedValue, {
+            toValue: 100,
+            duration: 1000
+          }).start()
+        }}
+        source={{uri: 'http://192.168.6.5:8888/getImage?imgName=welcome.jpg'}} style={[styles.img, {opacity: interpolatedColorAnimation}]}/>
       </View>
     )
   }
@@ -24,7 +36,7 @@ class WelcomePage extends React.Component {
       navigator.replace({
         id: 'MainRoute'
       })
-    }, 1000)
+    }, 2000)
   }
 
   fetchData(un, pw) {
