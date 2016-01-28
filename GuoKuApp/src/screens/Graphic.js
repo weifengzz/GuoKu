@@ -70,6 +70,7 @@ var Graphic = React.createClass({
       <View style={styles.container}>
         <TouchableOpacity onPress={this.showDetail.bind(this, graphics)}>
           <AniImage
+          type={'image'}
             inputRange={[0, 100]}
             outputRange={[0, 1]}
             style={styles.topImage}

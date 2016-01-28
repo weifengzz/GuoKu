@@ -3,6 +3,7 @@
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AniImage from '../components/AniImage'
+import AniRoll from '../components/AniRoll'
 var {
   Image,
   ListView,
@@ -58,6 +59,7 @@ class Commodity extends React.Component {
   renderLoadingView () {
     return (
       <View style={styles.txtContainer}>
+       <AniRoll img={'./tx05.jpg'} inputRange={[0, 1]} outputRange={['0deg', '10000deg']} style={{width: 50, height: 50}} />
         <Text>
           正在加载图文。。。
         </Text>
@@ -71,6 +73,7 @@ class Commodity extends React.Component {
         <Image style={styles.viewTopImage} source={require('../assets/listbg.png')}>
           <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
             <AniImage
+            type={'image'}
             inputRange={[0, 100]}
             outputRange={[0, 1]}
             style={styles.aniImage}

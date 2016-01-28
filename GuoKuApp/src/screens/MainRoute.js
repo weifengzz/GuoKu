@@ -6,7 +6,7 @@ import MainScreen from './MainScreen'
 import LoginScreen from './UserLRScreen/LoginScreen'
 import RecommendScreen from './RecommendScreen'
 import SettingScreen from './SettingScreen'
-
+import AniImage from '../components/AniImage'
 var {
   StyleSheet,
   View,
@@ -20,7 +20,7 @@ class MainRoute extends React.Component {
     super(props)
     this.state = {
       choice: 1,
-      screen: <MainScreen navigator={props.navigator} commodity={props.commodity}/>
+      screen: <MainScreen inputRange={[0, 100]} outputRange={[0, 1]}/>
     }
   }
   render () {
@@ -68,7 +68,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fffff'
+    backgroundColor: 'black'
   },
   viewShow: {
     flex: 1
