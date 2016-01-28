@@ -94,7 +94,6 @@ class Route extends React.Component {
           navigator={navigator} {...route.passProp}/>
       )
     }
-    
     return this.noRoute(navigator)
   }
 

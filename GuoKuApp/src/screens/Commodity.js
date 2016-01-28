@@ -10,8 +10,7 @@ var {
   Text,
   View,
   TouchableOpacity,
-  Navigator,
-  Animated
+  Navigator
 } = React
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
@@ -68,12 +67,17 @@ class Commodity extends React.Component {
 
   renderCommidity (commidities) {
     return (
-      <View style={styles.container}>
-        <View style={styles.viewTopImage}>
+      <View style={styles.container} >
+        <Image style={styles.viewTopImage} source={require('../assets/listbg.png')}>
           <TouchableOpacity onPress={this.toCommodityScreen.bind(this, commidities)}>
-            <CommidityListImage width={null} height={300} url={'http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1} />
+            <CommidityListImage
+            width={null}
+            height={330}
+            inputRange={[0, 100]}
+            outputRange={[0, 1]}
+            url={'http://192.168.6.5:8888/getImage?imgName=' + commidities.imgPath1} />
           </TouchableOpacity>
-        </View>
+        </Image>
         <View style={styles.viewTxtContent}>
           <TouchableOpacity>
             <Text style={styles.txtContent}>{commidities.title}</Text>
@@ -115,13 +119,9 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fffff'
   },
-  topImage: {
-    height: 330,
-    resizeMode: 'cover'
-  },
   viewTopImage: {
     height: 330,
-    flex: 1,
+    width: null,
     margin: 10
   },
   txtContent: {

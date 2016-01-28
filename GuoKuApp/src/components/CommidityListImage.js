@@ -1,12 +1,8 @@
 'use strict'
 
 import React from 'react-native'
-var MyImage = require('react-native-image-progress')
-var ProgressBar = require('react-native-progress/Bar')
 
 var {
-  StyleSheet,
-  View,
   Animated,
   PropTypes
 } = React
@@ -15,18 +11,18 @@ class CommidityListImage extends React.Component {
   static propTypes = {
     url: PropTypes.string,
     height: PropTypes.number,
-    width: PropTypes.number
+    width: PropTypes.number,
+    inputRange: PropTypes.array,
+    outputRange: PropTypes.array
   };
   render () {
     this._animatedValue = new Animated.Value(0)
     let interpolatedColorAnimation = this._animatedValue.interpolate({
-      inputRange: [10, 100],
-      outputRange: [0, 1]
+      inputRange: this.props.inputRange,
+      outputRange: this.props.outputRange
     })
     return (
-      <View style={styles.container}>
-        <Animated.Image
-        indicator={ProgressBar}
+      <Animated.Image
         onLoadEnd={() => {
           Animated.timing(this._animatedValue, {
             toValue: 100,
@@ -34,22 +30,10 @@ class CommidityListImage extends React.Component {
           }).start()
         }}
         source={{uri: this.props.url}}
-        style={[styles.img, {opacity: interpolatedColorAnimation}, { width: this.props.width }, {height: this.props.height}]} />
-      </View>
+        style={[{ width: this.props.width }, {opacity: interpolatedColorAnimation}, {height: this.props.height}]} />
     )
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  img: {
-    flex: 1,
-    alignSelf: 'stretch',
-    resizeMode: 'cover'
-  }
-})
 
 module.exports = CommidityListImage
 
