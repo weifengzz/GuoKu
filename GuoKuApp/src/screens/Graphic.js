@@ -2,7 +2,7 @@
 
 var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import CommidityListImage from '../components/CommidityListImage'
 var {
   Image,
   ListView,
@@ -69,7 +69,13 @@ var Graphic = React.createClass({
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.showDetail.bind(this, graphics)}>
-          <Image style={styles.topImage} source={{uri: ('http://192.168.6.5:8888/getImage?imgName=' + graphics.imgPath)}}/>
+          <CommidityListImage
+            width={null}
+            height={200}
+            inputRange={[0, 100]}
+            outputRange={[0, 1]}
+            style={styles.topImage}
+            url={'http://192.168.6.5:8888/getImage?imgName=' + graphics.imgPath} />
         </TouchableOpacity>
         <Text style={styles.txtTitle}>{graphics.title}</Text>
         <Text style={styles.txtContent}>{graphics.describe}</Text>
@@ -102,10 +108,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#fffff'
   },
   topImage: {
-    height: 200,
-    flex: 1,
-    margin: 10,
-    resizeMode: 'cover'
+    margin: 10
   },
   txtTitle: {
     marginLeft: 10,

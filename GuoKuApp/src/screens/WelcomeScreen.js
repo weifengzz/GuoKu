@@ -73,10 +73,9 @@ var styles = StyleSheet.create({
   },
   img: {
     flex: 1,
-    width: null,
-    height: null,
-    alignSelf: 'stretch',
-    resizeMode: 'cover'
+    width: 400,
+    height: 200,
+    resizeMode: 'contain'
   }
 })
 

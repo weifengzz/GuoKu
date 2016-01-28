@@ -16,21 +16,22 @@ class CommidityListImage extends React.Component {
     outputRange: PropTypes.array
   };
   render () {
+    var { style, url, height, width, inputRange, outputRange } = this.props
     this._animatedValue = new Animated.Value(0)
     let interpolatedColorAnimation = this._animatedValue.interpolate({
-      inputRange: this.props.inputRange,
-      outputRange: this.props.outputRange
+      inputRange: inputRange,
+      outputRange: outputRange
     })
     return (
       <Animated.Image
         onLoadEnd={() => {
           Animated.timing(this._animatedValue, {
             toValue: 100,
-            duration: 1000
+            duration: 500
           }).start()
         }}
-        source={{uri: this.props.url}}
-        style={[{ width: this.props.width }, {opacity: interpolatedColorAnimation}, {height: this.props.height}]} />
+        source={{uri: url}}
+        style={[style, { width: width }, {opacity: interpolatedColorAnimation}, {height: height}]} />
     )
   }
 }
