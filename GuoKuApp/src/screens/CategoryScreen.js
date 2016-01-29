@@ -1,11 +1,10 @@
 'use strict'
-//th down
 import React, {
   Component,
   StyleSheet,
   Text,
   View,
-  ToastAndroid,
+  PropTypes,
   ListView,
   Image,
   Navigator,
@@ -17,6 +16,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 let REQUEST_URL = 'http://192.168.6.5:8888/sortByCategory'
 
 class CategoryScreen extends Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    category: PropTypes.object
+  };
   constructor (props) {
     super (props)
     this.state = {

@@ -4,8 +4,7 @@ import React from 'react-native'
 
 var {
   Animated,
-  PropTypes,
-  ToastAndroid
+  PropTypes
 } = React
 
 class AniImage extends React.Component {
@@ -13,7 +12,8 @@ class AniImage extends React.Component {
     url: PropTypes.string,
     inputRange: PropTypes.array,
     outputRange: PropTypes.array,
-    type: PropTypes.string
+    type: PropTypes.string,
+    style: PropTypes.number
   };
   render () {
     var { style, url, inputRange, outputRange, type } = this.props

@@ -9,12 +9,12 @@ var {
 
 class AniRoll extends React.Component {
   static propTypes = {
-    img: PropTypes.string,
+    style: PropTypes.object,
     inputRange: PropTypes.array,
     outputRange: PropTypes.array
   };
   render () {
-    var { style, img, inputRange, outputRange } = this.props
+    var { style, inputRange, outputRange } = this.props
     this._animatedValue = new Animated.Value(0)
     var interpolatedRotateAnimation = this._animatedValue.interpolate({
       inputRange: inputRange,

@@ -6,16 +6,21 @@ import MainScreen from './MainScreen'
 import LoginScreen from './UserLRScreen/LoginScreen'
 import RecommendScreen from './RecommendScreen'
 import SettingScreen from './SettingScreen'
-import AniImage from '../components/AniImage'
+
 var {
   StyleSheet,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  PropTypes
 } = React
 
 const COLOR = ['gray', '#ffffff']
 
 class MainRoute extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    graphics: PropTypes.object
+  };
   constructor (props) {
     super(props)
     var navigator = props.navigator
@@ -66,6 +71,7 @@ class MainRoute extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black'

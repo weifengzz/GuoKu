@@ -6,10 +6,14 @@ var {
   Image,
   StyleSheet,
   View,
-  Animated
+  Animated,
+  PropTypes
 } = React
 
 class WelcomePage extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object
+  };
   render () {
     this._animatedValue = new Animated.Value(0)
     let interpolatedColorAnimation = this._animatedValue.interpolate({
@@ -36,30 +40,6 @@ class WelcomePage extends React.Component {
         id: 'MainRoute'
       })
     }, 2000)
-  }
-
-  fetchData(un, pw) {
-    fetch(REQUEST_URL, {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      userName: un,
-      password: pw
-    })
-  })
-    .then((response) => response.json())
-    .then((responseData) => {
-        this.setState({
-          result: responseData
-        })
-    })
-    .done()
-  }
-  responseData (response) {
-    return response.result.data
   }
 }
 

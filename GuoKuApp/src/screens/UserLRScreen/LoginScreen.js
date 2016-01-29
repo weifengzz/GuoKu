@@ -16,7 +16,8 @@ var {
   TouchableOpacity,
   Image,
   ToastAndroid,
-  Navigator
+  Navigator,
+  PropTypes
 } = React
 
 var Form = t.form.Form
@@ -40,6 +41,9 @@ var options = {
 }
 
 var LoginScreen = React.createClass({
+  propTypes: {
+    navigator: PropTypes.object
+  },
   getInitialState: function () {
     return {
       value: {
@@ -61,19 +65,18 @@ var LoginScreen = React.createClass({
     判断加载哪一个界面
   */
   render: function () {
-
     global.storage.load({
       key: 'users',
       autoSync: true,
       syncInBackground: true
     }).then(ret => {
-      if (!this.state.logined&&!this.state.loaded) {
+      if (!this.state.logined && !this.state.loaded) {
         this.setState({
           logined: true
         })
       }
     }).catch(err => {
-      //console.warn(err)
+      console.warn(err)
     })
     if (!this.state.logined && !this.state.loaded) {
       return (

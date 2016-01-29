@@ -14,7 +14,8 @@ let {
   ListView,
   TouchableOpacity,
   Navigator,
-  ToastAndroid
+  ToastAndroid,
+  PropTypes
 } = React
 
 const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
@@ -23,6 +24,10 @@ let SCREENS = [
 ].map((Page, index) => Page)
 
 class CommodityScreen extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    commodity: PropTypes.object
+  };
   constructor (props) {
     super(props)
     BackPress.back(false, props)
@@ -217,7 +222,7 @@ class CommodityScreen extends React.Component {
     购买
   */
   gotoBuy (commodity) {
-    navigator = this.props.navigator
+    var navigator = this.props.navigator
     navigator.push({id: 'BuyWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }
 }

@@ -1,22 +1,16 @@
-'use strict';
-
-var React = require('react-native');
+'use strict'
+var React = require('react-native')
 import Icon from 'react-native-vector-icons/FontAwesome'
-
 var {
-  AppRegistry,
-  Image,
-  ListView,
   StyleSheet,
   Text,
-  View,
-} = React;
-
+  View
+} = React
 
 var SettingScreen = React.createClass({
 
-  render: function() {
-    return(
+  render: function () {
+    return (
       <View style={styles.container}>
         <View style={styles.viewCommon}>
           <View style={styles.viewCommonLeft}>
@@ -67,7 +61,7 @@ var SettingScreen = React.createClass({
       </View>
     )
   }
-});
+})
 
 var styles = StyleSheet.create({
   container: {
@@ -116,6 +110,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: '#ffffff'
   }
-});
+})
 
 module.exports = SettingScreen

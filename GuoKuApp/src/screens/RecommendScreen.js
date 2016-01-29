@@ -19,10 +19,16 @@ let {
   View,
   Navigator,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  PropTypes
 } = React
 
 class RecommendScreen extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    graphics: PropTypes.object,
+    commodity: PropTypes.object
+  };
   constructor (props) {
     super(props)
     SCREENS.splice(0, 4)
@@ -61,13 +67,11 @@ class RecommendScreen extends React.Component {
 
   // 跳转到CategoryScreen界面
   gotoCategoryScreen (category) {
-    var category = category
     var navigator = this.props.navigator
     navigator.push({id: 'CategoryScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {category}})
   }
   // 跳转到图文webview界面
   gotoGraphicWebView (graphics) {
-    var graphics = graphics
     var navigator = this.props.navigator
     navigator.push({id: 'GraphicWebView', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {graphics}})
   }
@@ -132,7 +136,7 @@ class RecommendScreen extends React.Component {
       .done()
   }
   render () {
-    if (!this.state.gloaded||!this.state.cloaded||!this.state.ctloaded) {
+    if (!this.state.gloaded || !this.state.cloaded || !this.state.ctloaded) {
       return this.renderLoadingView()
     }
     var categoryImgs = this.state.category
@@ -205,7 +209,6 @@ class RecommendScreen extends React.Component {
     商品详情界面
   */
   toCommodityScreen (commodity) {
-    var commodity = commodity
     var navigator = this.props.navigator
     navigator.push({id: 'CommodityScreen', sceneConfig: Navigator.SceneConfigs.HorizontalSwipeJump, passProp: {commodity}})
   }

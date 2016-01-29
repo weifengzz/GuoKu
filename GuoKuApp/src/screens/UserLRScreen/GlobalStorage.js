@@ -11,4 +11,4 @@ var storage = new Storage({
 
 var global = {storage: storage}
 
-module.exports =  global
+module.exports = global

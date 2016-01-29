@@ -55,19 +55,3 @@ var styles = StyleSheet.create({
 })
 
 module.exports = ProgressImage
-
-/**
-
-   <View style={styles.container}>
-        <Animated.Image
-        indicator={ProgressBar}
-        onLoadEnd={() => {
-          Animated.timing(this._animatedValue, {
-            toValue: 100,
-            duration: 1000
-          }).start()
-        }}
-        source={{uri: this.props.url}}
-        style={[styles.img, {opacity: interpolatedColorAnimation}, { width: this.props.width }, {height: this.props.height}]} />
-      </View>
-*/

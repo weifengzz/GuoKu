@@ -11,12 +11,17 @@ var {
   Text,
   View,
   TouchableOpacity,
-  Navigator
+  Navigator,
+  PropTypes
 } = React
 
 var REQUEST_URL = 'http://192.168.6.5:8888/getCommidity'
 
 class Commodity extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    fetch: PropTypes.func
+  };
   constructor (props) {
     super(props)
     this.state = {
@@ -59,7 +64,7 @@ class Commodity extends React.Component {
   renderLoadingView () {
     return (
       <View style={styles.txtContainer}>
-       <AniRoll img={'./tx05.jpg'} inputRange={[0, 1]} outputRange={['0deg', '10000deg']} style={{width: 50, height: 50}} />
+       <AniRoll inputRange={[0, 1]} outputRange={['0deg', '10000deg']} style={{width: 50, height: 50}} />
         <Text>
           正在加载图文。。。
         </Text>

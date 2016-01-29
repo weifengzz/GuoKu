@@ -6,13 +6,17 @@ import React, {
   View,
   TouchableOpacity,
   WebView,
-  Navigator
+  PropTypes
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 var WEBVIEW_REF = 'webview'
 
 class GraphicWebView extends Component {
+  static propTypes = {
+    commodity: PropTypes.object,
+    navigator: PropTypes.object
+  };
   render () {
     let commodity = this.props.commodity
     return (
@@ -45,8 +49,8 @@ class GraphicWebView extends Component {
             renderLoading = {() => {
               return <View><Text>正在加载...</Text></View>
             }}
-            javaScriptEnabledAndroid={true}
-            startInLoadingState={true} />
+            javaScriptEnabledAndroid = {true}
+            startInLoadingState = {true} />
         </View>
       </View>
     )

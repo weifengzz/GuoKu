@@ -5,13 +5,18 @@ import React, {
   Text,
   View,
   TouchableOpacity,
-  WebView
+  WebView,
+  PropTypes
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import BackPress from '../components/back'
 var WEBVIEW_REF = 'webview'
 
 class GraphicWebView extends Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    graphics: PropTypes.object
+  };
   constructor (props) {
     super(props)
     BackPress.back(false, props)

@@ -8,10 +8,15 @@ import BackPress from '../components/back'
 
 var {
   StyleSheet,
-  View
+  View,
+  PropTypes
 } = React
 
 class MainScreen extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object,
+    graphics: PropTypes.object
+  };
   constructor (props) {
     super(props)
     BackPress.back(true)
@@ -19,7 +24,7 @@ class MainScreen extends React.Component {
 
   render () {
     var navigator = this.props.navigator
-     return (
+    return (
       <View style={styles.container}>
         <View style={styles.content}>
           <ScrollableTabView>

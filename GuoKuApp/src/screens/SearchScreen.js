@@ -11,12 +11,16 @@ let {
   View,
   TextInput,
   TouchableOpacity,
-  Navigator
+  Navigator,
+  PropTypes
 } = React
 
 let REQUEST_URL = 'http://192.168.6.5:8888/search'
 
 class SearchScreen extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object
+  };
   constructor (props) {
     super (props)
     this.state = {

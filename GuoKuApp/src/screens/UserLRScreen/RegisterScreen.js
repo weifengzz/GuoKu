@@ -9,7 +9,8 @@ let {
   View,
   Text,
   TouchableOpacity,
-  ToastAndroid
+  ToastAndroid,
+  PropTypes
 } = React
 
 var Form = t.form.Form
@@ -37,6 +38,9 @@ var options = {
 }
 
 var LoginScreen = React.createClass({
+  propTypes: {
+    navigator: PropTypes.object
+  },
   getInitialState: function () {
     return {
       value: {

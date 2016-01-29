@@ -9,6 +9,7 @@ var {
   StyleSheet,
   Text,
   View,
+  PropTypes,
   Navigator,
   TouchableOpacity
 } = React
@@ -16,6 +17,9 @@ var {
 var REQUEST_URL = 'http://192.168.6.5:8888/getGraphic'
 
 var Graphic = React.createClass({
+  propTypes: {
+    navigator: PropTypes.object
+  },
   getInitialState: function () {
     return {
       dataSource: new ListView.DataSource({

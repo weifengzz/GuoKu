@@ -45,7 +45,7 @@
                                                       moduleName:@"GuoKuApp"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-
+  rootView.frame = CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
