@@ -16,7 +16,7 @@ let {
 } = React
 
 let REQUEST_URL = 'http://192.168.6.5:8888/search'
-
+let {Platform} = React
 class SearchScreen extends React.Component {
   static propTypes = {
     navigator: PropTypes.object
@@ -33,7 +33,7 @@ class SearchScreen extends React.Component {
   }
   render () {
     var textValue = this.state.txtValue
-    if (textValue === null || textValue === ''){
+    if (textValue === null || textValue === '') {
       return (
         <View style={styles.container}>
           <View style={styles.viewSearch}>
@@ -42,15 +42,14 @@ class SearchScreen extends React.Component {
             </View>
             <View style={styles.viewText}>
               <TextInput
-                selectTextOnFocus = {true}
+                style={{height: 30, width: 200}}
                 onChangeText={(text) => {
                   this.state.txtValue = text
                   this.getContent()
                 }
               }
               value={textValue}
-              onBlur = {this.getContent}
-              />
+              onBlur = {this.getContent}/>
             </View>
             <TouchableOpacity onPress={() => { this.returnBack() }}>
               <View style={styles.viewCancel}>
@@ -72,7 +71,7 @@ class SearchScreen extends React.Component {
             </View>
             <View style={styles.viewText}>
               <TextInput
-                selectTextOnFocus = {true}
+                style={{height: 30, width: 200}}
                 onChangeText={(text) => {
                   this.state.txtValue = text
                   this.getContent()
@@ -122,8 +121,8 @@ class SearchScreen extends React.Component {
   }
 
   getContent () {
-    this.setState({})
     this.fetchData()
+    this.setState({})
   }
 
   returnBack () {
@@ -184,6 +183,7 @@ class SearchScreen extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff'

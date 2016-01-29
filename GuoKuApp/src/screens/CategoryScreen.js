@@ -14,6 +14,7 @@ import React, {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 let REQUEST_URL = 'http://192.168.6.5:8888/sortByCategory'
+let {Platform} = React
 
 class CategoryScreen extends Component {
   static propTypes = {
@@ -112,19 +113,24 @@ class CategoryScreen extends Component {
           <Text style={styles.colors}>更多</Text>
           <Icon name='angle-right' style={styles.colors} size={20} />
         </View>
-        <View style={styles.viewContent}>
           {
-            this.state.iconList ? (<ListView
-              initialListSize={5}
-              dataSource={this.state.dataSource}
-              renderRow={this.lvColumnItem.bind(this)}/>)
-            : (<ListView
-              initialListSize={5}
-              dataSource={this.state.dataSource1}
-              renderRow={this.lvRowItem.bind(this)}
-              contentContainerStyle={styles.listView}/>)
+            this.state.iconList ? (
+              <View style={styles.viewContent}>
+                <ListView
+                initialListSize={5}
+                dataSource={this.state.dataSource}
+                renderRow={this.lvColumnItem.bind(this)}/>
+              </View>)
+            : (
+              <View style={styles.viewContent1}>
+                <ListView
+                initialListSize={5}
+                dataSource={this.state.dataSource1}
+                renderRow={this.lvRowItem.bind(this)}
+                contentContainerStyle={styles.listView}/>
+              </View>)
           }
-        </View>
+
       </View>
     )
   }
@@ -170,12 +176,13 @@ class CategoryScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
     flexDirection: 'column',
     flex: 1,
     backgroundColor: '#ffffff'
   },
   listView: {
-    width: 380,
+    width: 365,
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: '#F0F0F0'
@@ -284,6 +291,9 @@ const styles = StyleSheet.create({
   },
   viewContent: {
     flex: 1
+  },
+  viewContent1: {
+    alignItems: 'center'
   }
 })
 

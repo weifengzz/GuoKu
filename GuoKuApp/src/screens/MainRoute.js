@@ -6,6 +6,7 @@ import MainScreen from './MainScreen'
 import LoginScreen from './UserLRScreen/LoginScreen'
 import RecommendScreen from './RecommendScreen'
 import SettingScreen from './SettingScreen'
+var {Platform} = React
 
 var {
   StyleSheet,
@@ -71,6 +72,7 @@ class MainRoute extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black'

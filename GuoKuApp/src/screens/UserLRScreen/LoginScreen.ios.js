@@ -91,43 +91,41 @@ var LoginScreen = React.createClass({
   initScreen: function () {
     return (
       <View style={styles.container}>
-        <Image style={styles.imgBg} source={require('../../assets/RegisterLoginbg.jpg')}>
-          <View style={styles.viewTop}>
-            <View style={styles.viewClose} />
-            <TouchableOpacity onPress= {() => this.registerClick()}>
-              <View style={styles.viewRegisterleft} >
-                <Text style={styles.textRegister}>注册</Text>
-              </View>
-              </TouchableOpacity>
-            <View style={styles.viewRegisterRight}>
-              <Icon name='angle-right' size={20} style={styles.icon} />
+        <View style={styles.viewTop}>
+          <View style={styles.viewClose} />
+          <TouchableOpacity onPress= {() => this.registerClick()}>
+            <View style={styles.viewRegisterleft} >
+              <Text style={styles.textRegister}>注册</Text>
             </View>
-          </View>
-          <View style={styles.viewTitle}>
-            <Text style={styles.txtTitile}>果库</Text>
-          </View>
-          <View style={styles.viewLogin}>
-           <Form
-            ref='form'
-            type={Person}
-            value={this.state.value}
-            options={options} />
-          </View>
-          <View style={styles.viewLoginBtn}>
-            <TouchableOpacity style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
-              <View style={styles.viewbtn}>
-                <Text style={styles.txtLogin}>登录</Text>
-              </View>
             </TouchableOpacity>
+          <View style={styles.viewRegisterRight}>
+            <Icon name='angle-right' size={20} style={styles.icon} />
           </View>
-          <View style={styles.viewLogin3}>
-            <View style={styles.viewLogin3Container}>
-              <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
-              <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
-              <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
+        </View>
+        <View style={styles.viewTitle}>
+          <Text style={styles.txtTitile}>果库</Text>
+        </View>
+        <View style={styles.viewLogin}>
+         <Form
+          ref='form'
+          type={Person}
+          value={this.state.value}
+          options={options} />
+        </View>
+        <View style={styles.viewLoginBtn}>
+          <TouchableOpacity style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+            <View style={styles.viewbtn}>
+              <Text style={styles.txtLogin}>登录</Text>
             </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.viewLogin3}>
+          <View style={styles.viewLogin3Container}>
+            <Image source={require('../../assets/login3_1.png')} style={styles.img3Login} />
+            <Image source={require('../../assets/login3_2.png')} style={styles.img3Login} />
+            <Image source={require('../../assets/login3_3.png')} style={styles.img3Login} />
           </View>
-        </Image>
+        </View>
       </View>
     )
   },
@@ -211,7 +209,7 @@ let styles = StyleSheet.create({
   textRegister: {
     fontSize: 16,
     marginTop: 5,
-    color: '#ffffff'
+    color: '#000000'
   },
   viewRegisterLeft: {
     flex: 0.5,
@@ -220,8 +218,8 @@ let styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   icon: {
-    color: '#ffffff',
-    marginBottom: 15
+    color: '#000000',
+    marginBottom: 25
   },
   viewTitle: {
     height: 100,
@@ -230,7 +228,7 @@ let styles = StyleSheet.create({
   },
   txtTitile: {
     fontSize: 50,
-    color: '#ffffff'
+    color: '#587DC4'
   },
   viewLogin: {
     marginLeft: 10,

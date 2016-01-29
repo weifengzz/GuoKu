@@ -17,7 +17,7 @@ let {
   ToastAndroid,
   PropTypes
 } = React
-
+var {Platform} = React
 const REQUEST_URL = 'http://192.168.6.5:8888/searchByCategory'
 
 let SCREENS = [
@@ -111,7 +111,7 @@ class CommodityScreen extends React.Component {
       return this.renderLoadingView()
     }
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, marginTop: (Platform.OS === 'ios') ? 20 : 0}}>
         <View style={styles.viewTop}>
           <TouchableOpacity onPress={() => { this.returnback() }}>
             <View style={styles.viewTopLeft}>
@@ -269,10 +269,7 @@ let styles = StyleSheet.create({
     marginLeft: 10
   },
   viewViewPager: {
-    height: 350,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 5
+    height: 350
   },
   viewTxtTitle: {
     height: 50,
@@ -393,7 +390,7 @@ let styles = StyleSheet.create({
   },
   viewRecommend: {
     flex: 1,
-    backgroundColor: 'gray'
+    backgroundColor: '#F0F0F0'
   },
   viewRecommendTitle: {
     height: 50,

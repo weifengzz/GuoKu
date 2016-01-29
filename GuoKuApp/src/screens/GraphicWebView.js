@@ -11,7 +11,7 @@ import React, {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import BackPress from '../components/back'
 var WEBVIEW_REF = 'webview'
-
+var {Platform} = React
 class GraphicWebView extends Component {
   static propTypes = {
     navigator: PropTypes.object,
@@ -68,6 +68,7 @@ class GraphicWebView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
     flex: 1,
     backgroundColor: '#ffffff'
   },
