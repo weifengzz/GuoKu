@@ -260,9 +260,7 @@ var styles = StyleSheet.create({
   },
   viewViewPager: {
     height: 200,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10
+    marginTop: 10
   },
   viewRecommendTop: {
     height: 10,

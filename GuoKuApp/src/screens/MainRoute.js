@@ -71,7 +71,6 @@ class MainRoute extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black'
