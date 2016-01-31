@@ -33,6 +33,9 @@ class WelcomePage extends React.Component {
       </View>
     )
   }
+  /*
+    页面加载完之后执行的方法
+  */
   componentWillMount () {
     var navigator = this.props.navigator
     setTimeout(() => {
